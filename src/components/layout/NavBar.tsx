@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
-  { href: '/services', label: 'Services' },
+  { href: '/services', label: 'The Rooms' },
   { href: '/blog', label: 'Journal' },
 ];
 
@@ -56,6 +56,13 @@ export default function NavBar() {
           >
             Begin here
           </Link>
+          <a
+            href="https://envisioned-intelligent-websites-backend.wandering-mouse-6d47.workers.dev/login"
+            className="text-[0.85rem] text-taupe hover:text-ink transition-colors tracking-[0.04em]"
+            title="Studio login"
+          >
+            Studio
+          </a>
         </div>
       </div>
     </nav>
