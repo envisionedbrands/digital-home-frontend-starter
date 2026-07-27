@@ -91,14 +91,14 @@ export default async function BlogPage() {
     return (
       <main>
         <section className="min-h-screen flex items-center justify-center px-6">
-          <div className="max-w-2xl rounded-[2rem] border border-white/10 bg-white/[0.03] p-10 text-center">
-            <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-[0.78rem] font-medium text-white/60 mb-6">
+          <div className="max-w-2xl  border border-hair bg-canvas-soft p-10 text-center">
+            <span className="inline-flex  border border-hair bg-canvas-soft px-4 py-1.5 text-[0.78rem] font-medium text-taupe mb-6">
               Publishing structure
             </span>
-            <h1 className="text-4xl md:text-5xl font-semibold tracking-[-0.06em] text-white mb-4">
+            <h1 className="text-4xl md:text-5xl font-semibold tracking-[-0.06em] text-ink mb-4">
               Your journal is ready for the first post.
             </h1>
-            <p className="text-lg text-neutral-400 leading-relaxed">
+            <p className="text-lg text-taupe leading-relaxed">
               This starter already includes the blog layout. Connect the backend publishing flow, add your
               first article, and this space becomes your live editorial archive.
             </p>
@@ -115,16 +115,16 @@ export default async function BlogPage() {
     <main>
       <section className="pt-32 pb-14 px-6">
         <div className="max-w-[1400px] mx-auto">
-          <div className="flex items-center justify-between gap-6 pb-6 mb-8 border-b border-white/10 text-[0.72rem] font-medium text-white/45">
+          <div className="flex items-center justify-between gap-6 pb-6 mb-8 border-b border-hair text-[0.72rem] font-medium text-olive">
             <span>Publishing structure</span>
             <span>{allArticles.length} live article{allArticles.length === 1 ? '' : 's'}</span>
           </div>
 
           <div className="max-w-4xl">
-            <p className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-[0.78rem] font-medium text-white/60 mb-6">
+            <p className="inline-flex  border border-hair bg-canvas-soft px-4 py-1.5 text-[0.78rem] font-medium text-taupe mb-6">
               Journal
             </p>
-            <h1 className="text-5xl md:text-7xl xl:text-[6.6rem] font-semibold tracking-[-0.075em] text-white leading-[0.95] mb-6">
+            <h1 className="text-5xl md:text-7xl xl:text-[6.6rem] font-semibold tracking-[-0.075em] text-ink leading-[0.95] mb-6">
               A publishing layer
               <br />
               ready for your voice.
@@ -143,9 +143,9 @@ export default async function BlogPage() {
         <div className="max-w-[1400px] mx-auto">
           <Link
             href={`/blog/${featured.slug}`}
-            className="grid overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05] lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]"
+            className="grid overflow-hidden  border border-hair bg-canvas-soft transition-all duration-300 hover:border-hair-olive hover:bg-canvas-soft lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]"
           >
-            <div className="border-b border-white/10 lg:border-b-0 lg:border-r lg:border-white/10">
+            <div className="border-b border-hair lg:border-b-0 lg:border-r lg:border-hair">
               {featured.image ? (
                 <Image
                   src={featured.image}
@@ -156,17 +156,17 @@ export default async function BlogPage() {
                   priority
                 />
               ) : (
-                <div className="grid h-full min-h-[320px] grid-cols-1 gap-px bg-white/10 p-px sm:grid-cols-3">
+                <div className="grid h-full min-h-[320px] grid-cols-1 gap-px bg-hair p-px sm:grid-cols-3">
                   {FEATURED_PLACEHOLDERS.map((item, index) => (
                     <div
                       key={item.label}
-                      className={`flex flex-col justify-between rounded-[1.5rem] px-6 py-6 ${
+                      className={`flex flex-col justify-between  px-6 py-6 ${
                         index === 0 ? 'bg-[linear-gradient(180deg,rgba(255,255,255,0.09),rgba(255,255,255,0.04))]' :
                         index === 1 ? 'bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.025))]' :
                         'bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.018))]'
                       }`}
                     >
-                      <span className="inline-flex w-fit rounded-full border border-white/10 bg-black/25 px-3 py-1 text-[0.68rem] font-medium text-white/45">
+                      <span className="inline-flex w-fit  border border-hair bg-canvas/80 px-3 py-1 text-[0.68rem] font-medium text-olive">
                         {item.label}
                       </span>
                       <p className="max-w-[18ch] text-sm leading-relaxed text-neutral-300">
@@ -179,23 +179,23 @@ export default async function BlogPage() {
             </div>
 
             <div className="flex flex-col justify-center p-8 md:p-10">
-              <span className="inline-flex w-fit rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[0.72rem] font-medium text-white/55">
+              <span className="inline-flex w-fit  border border-hair bg-canvas-soft px-3 py-1 text-[0.72rem] font-medium text-taupe">
                 Featured article
               </span>
-              <h2 className="mt-5 text-3xl md:text-4xl font-semibold tracking-[-0.05em] text-white">
+              <h2 className="mt-5 text-3xl md:text-4xl font-semibold tracking-[-0.05em] text-ink">
                 {featured.title}
               </h2>
-              <p className="mt-4 text-lg text-neutral-400 leading-relaxed">
+              <p className="mt-4 text-lg text-taupe leading-relaxed">
                 {featured.excerpt || 'Open this post to see how a published article sits inside the starter’s editorial structure.'}
               </p>
-              <div className="mt-6 flex flex-wrap gap-3 text-[0.75rem] font-medium text-white/45">
-                <span className="rounded-full border border-white/10 px-3 py-1.5">
+              <div className="mt-6 flex flex-wrap gap-3 text-[0.75rem] font-medium text-olive">
+                <span className=" border border-hair px-3 py-1.5">
                   {formatDate(featured.published_at)}
                 </span>
-                <span className="rounded-full border border-white/10 px-3 py-1.5">
+                <span className=" border border-hair px-3 py-1.5">
                   {featured.reading_time} min read
                 </span>
-                <span className="rounded-full border border-white/10 px-3 py-1.5 capitalize">
+                <span className=" border border-hair px-3 py-1.5 capitalize">
                   {featured.content_type}
                 </span>
               </div>
@@ -209,14 +209,14 @@ export default async function BlogPage() {
           <div className="max-w-[1400px] mx-auto">
             <div className="flex items-end justify-between gap-6 mb-8">
               <div>
-                <p className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-white/45 mb-4">
+                <p className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-olive mb-4">
                   More from the archive
                 </p>
-                <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.05em] text-white">
+                <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.05em] text-ink">
                   The rest of the journal.
                 </h2>
               </div>
-              <span className="hidden md:inline-flex rounded-full border border-white/10 px-4 py-2 text-sm text-white/45">
+              <span className="hidden md:inline-flex  border border-hair px-4 py-2 text-sm text-olive">
                 {allArticles.length} published entries
               </span>
             </div>
@@ -226,7 +226,7 @@ export default async function BlogPage() {
                 <Link
                   key={article.slug}
                   href={`/blog/${article.slug}`}
-                  className="group block overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.03] transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05]"
+                  className="group block overflow-hidden  border border-hair bg-canvas-soft transition-all duration-300 hover:border-hair-olive hover:bg-canvas-soft"
                 >
                   {article.image ? (
                     <Image
@@ -237,7 +237,7 @@ export default async function BlogPage() {
                       className="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                   ) : (
-                    <div className="flex h-52 items-end border-b border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025))] p-6">
+                    <div className="flex h-52 items-end border-b border-hair bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025))] p-6">
                       <p className="max-w-[20ch] text-sm leading-relaxed text-neutral-300">
                         {CARD_PLACEHOLDERS[index % CARD_PLACEHOLDERS.length]}
                       </p>
@@ -245,19 +245,19 @@ export default async function BlogPage() {
                   )}
 
                   <div className="p-6">
-                    <div className="flex flex-wrap gap-2 text-[0.72rem] font-medium text-white/45">
-                      <span className="rounded-full border border-white/10 px-3 py-1">
+                    <div className="flex flex-wrap gap-2 text-[0.72rem] font-medium text-olive">
+                      <span className=" border border-hair px-3 py-1">
                         {formatDate(article.published_at)}
                       </span>
-                      <span className="rounded-full border border-white/10 px-3 py-1">
+                      <span className=" border border-hair px-3 py-1">
                         {article.reading_time} min read
                       </span>
                     </div>
 
-                    <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white">
+                    <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-ink">
                       {article.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-neutral-400">
+                    <p className="mt-3 text-sm leading-relaxed text-taupe">
                       {article.excerpt || 'Use this card style for publishing ideas, essays, updates, and evergreen content.'}
                     </p>
 
@@ -265,7 +265,7 @@ export default async function BlogPage() {
                       {article.semantic_tags.slice(0, 2).map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[0.72rem] text-white/50"
+                          className=" border border-hair bg-canvas-soft px-3 py-1 text-[0.72rem] text-taupe"
                         >
                           {tag}
                         </span>
