@@ -1,22 +1,25 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Cormorant_Garamond, Italiana } from 'next/font/google';
 import NavBar from '@/components/layout/NavBar';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-sans',
+const cormorant = Cormorant_Garamond({
+  variable: '--font-body',
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-mono',
+const italiana = Italiana({
+  variable: '--font-display-var',
   subsets: ['latin'],
+  weight: '400',
 });
 
 export const metadata: Metadata = {
-  title: 'Digital Home Starter',
+  title: 'Envisioned Systems',
   description:
-    'A polished open-source starter for an owned website, blog, and AI-ready content system.',
+    'Owned, agent-native digital infrastructure for consultants and personal brands. Your website, content engine, CRM, and operator — on your own foundations.',
 };
 
 export default function RootLayout({
@@ -26,9 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${cormorant.variable} ${italiana.variable} antialiased`}>
         <NavBar />
         {children}
       </body>

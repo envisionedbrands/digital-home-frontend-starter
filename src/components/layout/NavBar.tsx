@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/services', label: 'Services' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/blog', label: 'Journal' },
 ];
 
 export default function NavBar() {
@@ -25,28 +25,26 @@ export default function NavBar() {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 px-6 transition-all duration-300 ${
-        scrolled ? 'bg-black/85 backdrop-blur-md border-b border-white/10' : ''
+        scrolled ? 'bg-canvas/95 backdrop-blur-sm border-b border-hair' : ''
       }`}
     >
-      <div className="max-w-[1400px] mx-auto flex items-center justify-between h-[72px]">
-        <Link href="/" className="flex items-center gap-3 text-white">
-          <span className="px-3 py-1 rounded-full border border-white/15 bg-white/5 text-[0.62rem] font-medium tracking-[0.02em] text-white/65">
-            Starter Template
+      <div className="max-w-[1140px] mx-auto flex items-center justify-between h-[84px]">
+        <Link href="/" className="flex items-baseline gap-3 text-ink">
+          <span className="display text-[1.45rem] tracking-[0.02em]">
+            Envisioned
           </span>
-          <span className="font-semibold text-lg tracking-tight">
-            Digital Home
-          </span>
+          <span className="kicker hidden sm:inline">Systems</span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`text-[0.95rem] font-medium transition-colors ${
+              className={`text-[1.05rem] transition-colors ${
                 (link.href === '/' ? pathname === '/' : pathname.startsWith(link.href))
-                  ? 'text-white'
-                  : 'text-white/55 hover:text-white'
+                  ? 'text-ink border-b border-olive'
+                  : 'text-taupe hover:text-ink'
               }`}
             >
               {link.label}
@@ -54,9 +52,9 @@ export default function NavBar() {
           ))}
           <Link
             href="/contact"
-            className="rounded-full text-[0.95rem] font-medium bg-white text-black px-6 py-2.5 hover:bg-transparent hover:text-white border border-white transition-all"
+            className="text-[0.95rem] bg-olive text-canvas px-7 py-2.5 hover:bg-olive-deep transition-colors tracking-[0.04em]"
           >
-            Start Here
+            Begin here
           </Link>
         </div>
       </div>
