@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, Italiana } from 'next/font/google';
+import { Inter, Courier_Prime } from 'next/font/google';
 import NavBar from '@/components/layout/NavBar';
 import './globals.css';
 
-const cormorant = Cormorant_Garamond({
+const inter = Inter({
   variable: '--font-body',
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600'],
   style: ['normal', 'italic'],
 });
 
-const italiana = Italiana({
-  variable: '--font-display-var',
+const courierPrime = Courier_Prime({
+  variable: '--font-kicker',
   subsets: ['latin'],
-  weight: '400',
+  weight: ['400', '700'],
 });
 
 export const metadata: Metadata = {
@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${cormorant.variable} ${italiana.variable} antialiased`}>
+      <body className={`${inter.variable} ${courierPrime.variable} antialiased`}>
         <NavBar />
         {children}
       </body>
