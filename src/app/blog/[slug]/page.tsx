@@ -20,6 +20,32 @@ function estimateReadingTime(body: string | null): number {
   return Math.max(1, Math.ceil(words / 200));
 }
 
+function slugifyHeading(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/[\s-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 60);
+}
+
+/* Inject ids into h2/h3 headings and collect them for the left-hand
+   "In this article" navigation */
+function buildToc(body: string): { html: string; toc: { id: string; level: number; text: string }[] } {
+  const toc: { id: string; level: number; text: string }[] = [];
+  let counter = 0;
+  const html = body.replace(/<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi, (match, lvl, attrs, inner) => {
+    const plain = inner.replace(/<[^>]+>/g, '').trim();
+    if (!plain) return match;
+    counter += 1;
+    const id = slugifyHeading(plain) || `section-${counter}`;
+    toc.push({ id, level: Number(lvl), text: plain });
+    const cleanAttrs = attrs.replace(/\s*id="[^"]*"/, '');
+    return `<h${lvl} id="${id}"${cleanAttrs}>${inner}</h${lvl}>`;
+  });
+  return { html, toc };
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -63,160 +89,149 @@ export default async function ArticlePage({
 
   const readingTime = estimateReadingTime(article.body);
   const publishedAt = article.published_at || article.created_at;
-  const articleTags = (article.semantic_tags || []).slice(0, 4);
+  const category = (article.semantic_tags?.[0] || article.content_type || 'essay').replace(/-/g, ' ');
+  const { html: bodyHtml, toc } = buildToc(article.body || '');
+
+  // Three more pieces for "Keep reading"
+  const { data: more } = await supabase
+    .from('content_objects')
+    .select('slug, title, excerpt, semantic_tags, content_type, featured_image_url')
+    .eq('status', 'published')
+    .in('content_type', ['article', 'guide'])
+    .neq('slug', slug)
+    .order('published_at', { ascending: false, nullsFirst: false })
+    .limit(3);
 
   return (
     <main>
-      <section className="pt-32 pb-10 px-6">
-        <div className="max-w-5xl mx-auto">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2  border border-hair bg-canvas-soft px-4 py-2 text-sm text-ink/70 transition-colors hover:text-ink"
-          >
-            <span aria-hidden="true">←</span>
-            Back to journal
-          </Link>
-
-          <div className="mt-8 flex flex-wrap gap-3 text-[0.75rem] font-medium text-olive">
-            <span className=" border border-hair px-3 py-1.5 capitalize">
-              {article.content_type}
-            </span>
-            <span className=" border border-hair px-3 py-1.5">
-              {formatDate(publishedAt)}
-            </span>
-            <span className=" border border-hair px-3 py-1.5">
-              {readingTime} min read
-            </span>
-          </div>
-
-          <div className="mt-6 max-w-4xl">
-            <h1 className="text-4xl md:text-6xl xl:text-[5.6rem] font-semibold tracking-[-0.07em] text-ink leading-[0.96]">
-              {article.title}
-            </h1>
-            {article.excerpt && (
-              <p className="mt-6 max-w-3xl text-lg md:text-2xl text-ink/70 leading-relaxed">
-                {article.excerpt}
-              </p>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-6 pb-10">
-        <div className="max-w-5xl mx-auto">
-          {article.featured_image_url ? (
-            <div className="overflow-hidden  border border-hair bg-canvas-soft">
-              <Image
-                src={article.featured_image_url}
-                alt={article.title}
-                width={1792}
-                height={1024}
-                className="w-full aspect-[21/9] object-cover"
-                priority
-              />
-            </div>
-          ) : (
-            <div className="grid gap-px  border border-hair bg-hair p-px md:grid-cols-[1.15fr_0.85fr]">
-              <div className="min-h-[260px]  bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] px-8 py-8 flex flex-col justify-between">
-                <span className="inline-flex w-fit  border border-hair bg-canvas/80 px-3 py-1 text-[0.68rem] font-medium text-olive">
-                  Editorial visual
-                </span>
-                <p className="max-w-[18ch] text-base leading-relaxed text-ink/70">
-                  Add a hero image, abstract texture, illustration, or brand visual here.
-                </p>
-              </div>
-              <div className="min-h-[260px]  bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.018))] px-8 py-8 flex flex-col justify-between">
-                <span className="inline-flex w-fit  border border-hair bg-canvas/80 px-3 py-1 text-[0.68rem] font-medium text-olive">
-                  Starter article
-                </span>
-                <p className="max-w-[18ch] text-base leading-relaxed text-ink/70">
-                  This layout is intentionally clean so your actual content and voice can carry the page.
-                </p>
-              </div>
-            </div>
+      {/* ── Article header ───────────────────────────────────── */}
+      <section className="pt-36 pb-10 px-6">
+        <div className="mx-auto max-w-[760px] text-center">
+          <p className="kicker text-[0.68rem] uppercase tracking-[0.28em] text-olive capitalize">
+            {category}
+          </p>
+          <h1 className="display mt-6 text-4xl md:text-5xl xl:text-6xl text-ink leading-[1.06]">
+            {article.title}
+          </h1>
+          {article.excerpt && (
+            <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-ink/70 leading-relaxed">
+              {article.excerpt}
+            </p>
           )}
+          <p className="kicker mt-8 text-[0.62rem] uppercase tracking-[0.22em] text-ink/50">
+            {formatDate(publishedAt)} · {readingTime} min read · {article.author_name}
+          </p>
         </div>
       </section>
 
-      <section className="px-6 pb-16">
-        <div className="max-w-5xl mx-auto grid gap-10 xl:grid-cols-[minmax(0,1fr)_260px]">
-          <article className=" border border-hair bg-canvas-soft px-6 py-8 md:px-10 md:py-10">
-            {article.body && (
-              <div
-                className="prose prose-lg max-w-none prose-headings:tracking-[-0.04em] prose-headings:font-semibold prose-headings:text-ink prose-p:text-ink/85 prose-p:leading-8 prose-strong:text-ink prose-a:text-ink prose-li:text-ink/85 prose-blockquote:text-ink/75"
-                dangerouslySetInnerHTML={{ __html: article.body }}
-              />
-            )}
-          </article>
+      {/* ── Hero image ───────────────────────────────────────── */}
+      {article.featured_image_url && (
+        <section className="px-6 pb-12">
+          <div className="mx-auto max-w-[900px] overflow-hidden border border-hair">
+            <Image
+              src={article.featured_image_url}
+              alt={article.title}
+              width={1792}
+              height={1024}
+              className="w-full object-cover"
+              priority
+            />
+          </div>
+        </section>
+      )}
 
-          <aside className="space-y-4">
-            <div className=" border border-hair bg-canvas-soft p-6">
-              <p className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-olive mb-4">
-                Article details
-              </p>
-              <div className="space-y-3 text-sm text-ink/70">
-                <div className="flex items-center justify-between gap-4 border-b border-hair pb-3">
-                  <span className="text-olive">Published</span>
-                  <span>{formatDate(publishedAt)}</span>
-                </div>
-                <div className="flex items-center justify-between gap-4 border-b border-hair pb-3">
-                  <span className="text-olive">Reading time</span>
-                  <span>{readingTime} min</span>
-                </div>
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-olive">Type</span>
-                  <span className="capitalize">{article.content_type}</span>
-                </div>
-              </div>
-            </div>
-
-            {articleTags.length > 0 && (
-              <div className=" border border-hair bg-canvas-soft p-6">
-                <p className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-olive mb-4">
-                  Topics
+      {/* ── Body with left navigation ────────────────────────── */}
+      <section className="px-6 pb-20">
+        <div className="mx-auto grid max-w-[1100px] gap-12 lg:grid-cols-[220px_minmax(0,1fr)]">
+          {/* In this article — sticky left nav */}
+          <aside className="hidden lg:block">
+            {toc.length > 0 && (
+              <nav className="sticky top-28">
+                <p className="kicker mb-5 text-[0.62rem] uppercase tracking-[0.24em] text-olive">
+                  In this article
                 </p>
-                <div className="flex flex-wrap gap-2">
-                  {articleTags.map((tag: string) => (
-                    <span
-                      key={tag}
-                      className=" border border-hair bg-canvas-soft px-3 py-1.5 text-[0.72rem] text-taupe"
-                    >
-                      {tag}
-                    </span>
+                <ol className="space-y-3 border-l border-hair pl-4">
+                  {toc.map((item) => (
+                    <li key={item.id} className={item.level === 3 ? 'pl-3' : ''}>
+                      <a
+                        href={`#${item.id}`}
+                        className="block text-[0.82rem] leading-snug text-ink/55 transition-colors hover:text-ink"
+                      >
+                        {item.text}
+                      </a>
+                    </li>
                   ))}
-                </div>
-              </div>
+                </ol>
+              </nav>
             )}
           </aside>
+
+          {/* Article body */}
+          <article className="mx-auto w-full max-w-[720px]">
+            {bodyHtml ? (
+              <div className="article-body" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+            ) : null}
+          </article>
         </div>
       </section>
 
-      <section className="py-24 px-6 text-center border-t border-hair">
-        <div className="max-w-3xl mx-auto">
-          <p className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-olive mb-6">
-            Keep shaping the starter
-          </p>
-          <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.05em] text-ink mb-6">
-            Publish with the structure, then make it unmistakably yours.
-          </h2>
-          <p className="text-lg text-taupe max-w-2xl mx-auto mb-10 leading-relaxed">
-            This article layout is meant to be a premium baseline. Swap in your visuals, voice, and calls
-            to action once the starter becomes your real publishing system.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/blog"
-              className="inline-flex items-center justify-center  text-base font-medium bg-olive text-canvas px-8 py-3.5 hover:bg-olive-deep border border-olive transition-all"
-            >
-              View the journal
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center  text-base font-medium bg-transparent text-ink px-8 py-3.5 hover:bg-olive hover:text-canvas border border-hair-olive transition-all"
-            >
-              Customize the starter
-            </Link>
+      {/* ── Keep reading ─────────────────────────────────────── */}
+      {more && more.length > 0 && (
+        <section className="px-6 pb-20">
+          <div className="mx-auto max-w-[1100px]">
+            <div className="mb-10 text-center">
+              <p className="kicker text-[0.68rem] uppercase tracking-[0.28em] text-olive">
+                Ready for more?
+              </p>
+            </div>
+            <div className="grid gap-10 md:grid-cols-3">
+              {more.map((item) => (
+                <Link key={item.slug} href={`/blog/${item.slug}`} className="group block text-center">
+                  <div className="overflow-hidden border border-hair">
+                    {item.featured_image_url ? (
+                      <Image
+                        src={item.featured_image_url}
+                        alt={item.title}
+                        width={896}
+                        height={672}
+                        className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                    ) : (
+                      <div className="relative aspect-[4/3] w-full bg-[linear-gradient(160deg,#F3F1EC_0%,#EDE9E3_60%,#E3DED5_100%)]">
+                        <span className="display pointer-events-none absolute inset-0 flex items-center justify-center text-[6rem] leading-none text-olive/20 select-none">
+                          {item.title.charAt(0)}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <p className="kicker mt-5 text-[0.62rem] uppercase tracking-[0.24em] text-olive capitalize">
+                    {(item.semantic_tags?.[0] || item.content_type).replace(/-/g, ' ')}
+                  </p>
+                  <h2 className="display mt-3 text-xl text-ink leading-snug transition-colors group-hover:text-olive">
+                    {item.title}
+                  </h2>
+                </Link>
+              ))}
+            </div>
           </div>
+        </section>
+      )}
+
+      {/* ── Closing band ─────────────────────────────────────── */}
+      <section className="px-6 pb-24">
+        <div className="mx-auto max-w-[1100px] bg-ink px-8 py-16 text-center md:py-20">
+          <p className="kicker mb-6 text-[0.68rem] uppercase tracking-[0.28em] text-sage">
+            Before you go
+          </p>
+          <p className="display mx-auto max-w-3xl text-3xl leading-tight text-canvas md:text-5xl">
+            Your best thinking deserves better than a browser tab of drafts.
+          </p>
+          <Link
+            href="/contact"
+            className="kicker mt-10 inline-block border border-canvas px-8 py-3.5 text-[0.68rem] uppercase tracking-[0.24em] text-canvas transition-colors hover:bg-canvas hover:text-ink"
+          >
+            Start the conversation
+          </Link>
         </div>
       </section>
     </main>

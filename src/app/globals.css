@@ -152,3 +152,81 @@ body {
     color: var(--olive);
   }
 }
+
+/* ── Article body — editorial reading typography ─────────────────────────
+   Styles the raw HTML stored in content_objects.body (no typography
+   plugin; these rules ARE the article design). */
+.article-body {
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: color-mix(in srgb, var(--ink) 88%, transparent);
+}
+.article-body p {
+  margin-bottom: 1.35rem;
+}
+.article-body h2 {
+  font-family: 'Megante', Georgia, serif;
+  font-weight: 400;
+  font-size: 1.7rem;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 3rem 0 1.1rem;
+  scroll-margin-top: 7rem;
+}
+.article-body h3 {
+  font-family: 'Megante', Georgia, serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: var(--ink);
+  margin: 2.25rem 0 0.85rem;
+  scroll-margin-top: 7rem;
+}
+.article-body strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.article-body a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--olive);
+}
+.article-body a:hover {
+  color: var(--olive);
+}
+.article-body ul,
+.article-body ol {
+  margin: 0 0 1.35rem 1.4rem;
+}
+.article-body ul {
+  list-style: disc;
+}
+.article-body ol {
+  list-style: decimal;
+}
+.article-body li {
+  margin-bottom: 0.45rem;
+}
+.article-body blockquote {
+  border-left: 2px solid var(--olive);
+  padding-left: 1.25rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
+}
+.article-body img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--hair);
+  margin: 2.5rem 0;
+}
+.article-body hr {
+  border: 0;
+  border-top: 1px solid var(--hair);
+  margin: 2.75rem auto;
+  width: 4rem;
+}
+.article-body em {
+  font-style: italic;
+}
