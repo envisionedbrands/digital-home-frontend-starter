@@ -1,5 +1,5 @@
 {
-  "name": "digital-home-frontend",
+  "name": "digital-home-frontend-starter",
   "compatibility_date": "2025-12-01",
   "compatibility_flags": ["nodejs_compat"],
   "main": ".open-next/worker.js",
