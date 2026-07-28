@@ -137,7 +137,7 @@ export async function POST(request: NextRequest) {
         keyword_cluster: body.seo?.keyword_cluster || null,
         content_object_id: data.id,
         seo_meta_id: seoMetaId,
-        created_by: body.created_by || "local_push",
+        created_by: "local_push",
         notes: body.calendar_notes || "Written locally, pushed via bridge.",
       })
       .select("id")
