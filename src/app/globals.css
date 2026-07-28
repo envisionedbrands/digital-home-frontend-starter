@@ -143,5 +143,9 @@ body {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.3em;
+}
+/* Default kicker color at zero specificity so text-* utilities can override
+   it — needed on dark bands, where olive-on-ink is unreadable */
+:where(.kicker) {
   color: var(--olive);
 }
