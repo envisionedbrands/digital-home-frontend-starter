@@ -117,5 +117,34 @@ export async function POST(request: NextRequest) {
 
   if (error) return errorResponse(error.message, 500);
 
-  return jsonResponse(data, 201);
+  // Machine-pushed articles (e.g. written locally and pushed via the bridge)
+  // also get a content_calendar card so they appear on the Backend pipeline
+  // board in the Draft/Published column, not only in the Articles list.
+  let calendarEntryId: string | null = null;
+  if (
+    auth.mode === "api-key" &&
+    (data.content_type === "article") &&
+    body.add_to_calendar !== false
+  ) {
+    const calendarStatus = data.status === "published" ? "published" : "draft";
+    const { data: calData, error: calError } = await supabase
+      .from("content_calendar")
+      .insert({
+        title: data.title,
+        status: calendarStatus,
+        priority: body.priority || "medium",
+        target_keyword: body.seo?.target_keyword || null,
+        keyword_cluster: body.seo?.keyword_cluster || null,
+        content_object_id: data.id,
+        seo_meta_id: seoMetaId,
+        created_by: body.created_by || "local_push",
+        notes: body.calendar_notes || "Written locally, pushed via bridge.",
+      })
+      .select("id")
+      .single();
+    if (!calError && calData) calendarEntryId = calData.id;
+    // A calendar failure never blocks the article itself — it's board sugar.
+  }
+
+  return jsonResponse({ ...data, calendar_entry_id: calendarEntryId }, 201);
 }
