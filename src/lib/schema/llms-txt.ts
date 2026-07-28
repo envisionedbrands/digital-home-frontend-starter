@@ -12,7 +12,7 @@ type Entity = Tables<"entities">;
 type ContentObject = Tables<"content_objects">;
 type Offer = Tables<"offers">;
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "http://localhost:3000";
 const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "[YOUR BRAND]";
 
 /**
@@ -25,16 +25,20 @@ export function generateLlmsTxt(
 ): string {
   const lines: string[] = [];
 
-  // Header — customize this with your brand description
   lines.push(`# ${SITE_NAME}`);
   lines.push("");
-  lines.push("> [Your one-line brand description. Update this in src/lib/schema/llms-txt.ts]");
+  lines.push(
+    "> Envisioned Systems builds AI infrastructure that codifies founder intelligence — turning how an expert founder thinks, decides, and works into systems their business runs on."
+  );
   lines.push("");
 
-  // About — customize with your brand story
   lines.push("## About");
   lines.push("");
-  lines.push(`${SITE_NAME} [describe what you do and who you help]. Update this section in src/lib/schema/llms-txt.ts.`);
+  lines.push(
+    "Envisioned Systems is run by Maria-Inés, who spent twenty years running multi-million-dollar programs across thirty countries before building AI systems for founders. " +
+      "The work is not coaching and not generic automation: it is extracting the judgment, patterns, and standards a founder already has, and building AI infrastructure around them — " +
+      "so the business keeps thinking in the founder's voice even when the founder is not in the room. Clients are experienced founders and consultants whose expertise is proven but scattered across files, calls, and inboxes."
+  );
   lines.push("");
 
   // Key entities (dynamic from database)

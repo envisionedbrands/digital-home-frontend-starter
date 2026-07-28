@@ -141,7 +141,7 @@ export function articleJsonLd(content: Tables<"content_objects">, seoMeta?: Tabl
   ld.publisher = {
     "@type": "Organization",
     name: process.env.NEXT_PUBLIC_SITE_NAME || "[YOUR BRAND]",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+    url: process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "http://localhost:3000",
   };
 
   return ld;
@@ -170,7 +170,7 @@ export function breadcrumbJsonLd(
  */
 export function websiteJsonLd(): JsonLdObject {
   const siteName = process.env.NEXT_PUBLIC_SITE_NAME || "[YOUR BRAND]";
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "http://localhost:3000";
 
   return {
     "@context": "https://schema.org",
