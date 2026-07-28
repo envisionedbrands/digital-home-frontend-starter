@@ -71,7 +71,7 @@ export default async function ArticlePage({
         <div className="max-w-5xl mx-auto">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2  border border-hair bg-canvas-soft px-4 py-2 text-sm text-neutral-300 transition-colors hover:text-ink"
+            className="inline-flex items-center gap-2  border border-hair bg-canvas-soft px-4 py-2 text-sm text-ink/70 transition-colors hover:text-ink"
           >
             <span aria-hidden="true">←</span>
             Back to journal
@@ -94,7 +94,7 @@ export default async function ArticlePage({
               {article.title}
             </h1>
             {article.excerpt && (
-              <p className="mt-6 max-w-3xl text-lg md:text-2xl text-neutral-300 leading-relaxed">
+              <p className="mt-6 max-w-3xl text-lg md:text-2xl text-ink/70 leading-relaxed">
                 {article.excerpt}
               </p>
             )}
@@ -121,7 +121,7 @@ export default async function ArticlePage({
                 <span className="inline-flex w-fit  border border-hair bg-canvas/80 px-3 py-1 text-[0.68rem] font-medium text-olive">
                   Editorial visual
                 </span>
-                <p className="max-w-[18ch] text-base leading-relaxed text-neutral-300">
+                <p className="max-w-[18ch] text-base leading-relaxed text-ink/70">
                   Add a hero image, abstract texture, illustration, or brand visual here.
                 </p>
               </div>
@@ -129,7 +129,7 @@ export default async function ArticlePage({
                 <span className="inline-flex w-fit  border border-hair bg-canvas/80 px-3 py-1 text-[0.68rem] font-medium text-olive">
                   Starter article
                 </span>
-                <p className="max-w-[18ch] text-base leading-relaxed text-neutral-300">
+                <p className="max-w-[18ch] text-base leading-relaxed text-ink/70">
                   This layout is intentionally clean so your actual content and voice can carry the page.
                 </p>
               </div>
@@ -143,7 +143,7 @@ export default async function ArticlePage({
           <article className=" border border-hair bg-canvas-soft px-6 py-8 md:px-10 md:py-10">
             {article.body && (
               <div
-                className="prose prose-invert prose-lg max-w-none prose-headings:tracking-[-0.04em] prose-headings:font-semibold prose-p:text-neutral-300 prose-p:leading-8 prose-strong:text-ink prose-a:text-ink prose-li:text-neutral-300"
+                className="prose prose-lg max-w-none prose-headings:tracking-[-0.04em] prose-headings:font-semibold prose-headings:text-ink prose-p:text-ink/85 prose-p:leading-8 prose-strong:text-ink prose-a:text-ink prose-li:text-ink/85 prose-blockquote:text-ink/75"
                 dangerouslySetInnerHTML={{ __html: article.body }}
               />
             )}
@@ -154,7 +154,7 @@ export default async function ArticlePage({
               <p className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-olive mb-4">
                 Article details
               </p>
-              <div className="space-y-3 text-sm text-neutral-300">
+              <div className="space-y-3 text-sm text-ink/70">
                 <div className="flex items-center justify-between gap-4 border-b border-hair pb-3">
                   <span className="text-olive">Published</span>
                   <span>{formatDate(publishedAt)}</span>

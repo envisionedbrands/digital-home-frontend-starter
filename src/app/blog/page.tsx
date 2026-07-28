@@ -129,7 +129,7 @@ export default async function BlogPage() {
               <br />
               ready for your voice.
             </h1>
-            <p className="text-lg md:text-2xl text-neutral-300 max-w-3xl leading-relaxed">
+            <p className="text-lg md:text-2xl text-ink/70 max-w-3xl leading-relaxed">
               This starter ships with a clean editorial archive for articles, essays, and guides. Keep the
               structure, then tailor the visuals, categories, and voice to match your brand.
             </p>
@@ -169,7 +169,7 @@ export default async function BlogPage() {
                       <span className="inline-flex w-fit  border border-hair bg-canvas/80 px-3 py-1 text-[0.68rem] font-medium text-olive">
                         {item.label}
                       </span>
-                      <p className="max-w-[18ch] text-sm leading-relaxed text-neutral-300">
+                      <p className="max-w-[18ch] text-sm leading-relaxed text-ink/70">
                         {item.note}
                       </p>
                     </div>
@@ -238,7 +238,7 @@ export default async function BlogPage() {
                     />
                   ) : (
                     <div className="flex h-52 items-end border-b border-hair bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025))] p-6">
-                      <p className="max-w-[20ch] text-sm leading-relaxed text-neutral-300">
+                      <p className="max-w-[20ch] text-sm leading-relaxed text-ink/70">
                         {CARD_PLACEHOLDERS[index % CARD_PLACEHOLDERS.length]}
                       </p>
                     </div>

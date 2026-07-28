@@ -14,7 +14,7 @@ export default function StarterNotice({ compact = false }: StarterNoticeProps) {
         <h2 className="text-xl md:text-2xl font-semibold tracking-[-0.04em] text-ink mb-3">
           This is your starting clay.
         </h2>
-        <p className="text-sm md:text-base leading-relaxed text-neutral-300">
+        <p className="text-sm md:text-base leading-relaxed text-ink/70">
           The structure is here. Now shape the design, copy, and visual direction to fit your brand.
         </p>
         <div className="mt-4 flex flex-wrap gap-3 text-sm">
@@ -41,7 +41,7 @@ export default function StarterNotice({ compact = false }: StarterNoticeProps) {
           <h2 className="text-2xl md:text-3xl font-semibold tracking-[-0.05em] text-ink mb-3">
             This is your starting clay.
           </h2>
-          <p className="text-base md:text-lg leading-relaxed text-neutral-300">
+          <p className="text-base md:text-lg leading-relaxed text-ink/70">
             The structure is here. Now shape the design, copy, and visual direction to fit your brand.
           </p>
         </div>
