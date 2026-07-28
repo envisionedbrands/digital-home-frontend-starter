@@ -2,14 +2,13 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { createAdminClient } from '@/lib/supabase/server';
-import StarterNotice from '@/components/layout/StarterNotice';
 
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Journal — Digital Home Starter',
+  title: 'The Journal — Envisioned',
   description:
-    'A polished blog structure for articles, essays, and guides you can adapt to your own brand and publishing system.',
+    'Essays and field notes on codifying founder intelligence: AI infrastructure, judgment, and businesses that run without their founder in every room.',
 };
 
 function formatDate(dateStr: string) {
@@ -26,38 +25,35 @@ function estimateReadingTime(body: string | null): number {
   return Math.max(1, Math.ceil(words / 200));
 }
 
-const FEATURED_PLACEHOLDERS = [
-  {
-    label: 'Featured essay',
-    note: 'Use this space for a hero image, illustration, or branded editorial visual.',
-  },
-  {
-    label: 'Publishing system',
-    note: 'The blog is already structured so new posts can slot cleanly into the site.',
-  },
-  {
-    label: 'On-brand later',
-    note: 'Swap in your own imagery and voice once the starter becomes your site.',
-  },
-];
+type JournalArticle = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  published_at: string;
+  reading_time: number;
+  image: string;
+};
 
-const CARD_PLACEHOLDERS = [
-  'Add a branded article image or abstract visual.',
-  'Use a product detail, workspace shot, or custom illustration.',
-  'Keep it simple with a neutral texture or editorial graphic.',
-];
+function categoryOf(tags: string[], contentType: string): string {
+  if (tags && tags.length > 0) return tags[0].replace(/-/g, ' ');
+  return contentType;
+}
+
+/* Editorial visual for articles without a hero image — a Meganté initial
+   on the stone palette, so the page holds its look before photos exist */
+function ImageFallback({ initial }: { initial: string }) {
+  return (
+    <div className="relative aspect-[4/3] w-full bg-[linear-gradient(160deg,#F3F1EC_0%,#EDE9E3_60%,#E3DED5_100%)]">
+      <span className="display pointer-events-none absolute inset-0 flex items-center justify-center text-[7rem] leading-none text-olive/20 select-none">
+        {initial}
+      </span>
+    </div>
+  );
+}
 
 export default async function BlogPage() {
-  let allArticles: Array<{
-    slug: string;
-    title: string;
-    excerpt: string;
-    semantic_tags: string[];
-    content_type: string;
-    published_at: string;
-    reading_time: number;
-    image: string;
-  }> = [];
+  let allArticles: JournalArticle[] = [];
 
   try {
     const supabase = createAdminClient();
@@ -76,8 +72,7 @@ export default async function BlogPage() {
       slug: a.slug,
       title: a.title,
       excerpt: a.excerpt || '',
-      semantic_tags: a.semantic_tags || [],
-      content_type: a.content_type,
+      category: categoryOf(a.semantic_tags || [], a.content_type),
       published_at: a.published_at || a.slug,
       reading_time: estimateReadingTime(a.body),
       image: a.featured_image_url || '',
@@ -86,21 +81,21 @@ export default async function BlogPage() {
     console.error('Blog page error:', err);
   }
 
-  // Empty state
+  // Empty state — first visit before anything is published
   if (allArticles.length === 0) {
     return (
       <main>
         <section className="min-h-screen flex items-center justify-center px-6">
-          <div className="max-w-2xl  border border-hair bg-canvas-soft p-10 text-center">
-            <span className="inline-flex  border border-hair bg-canvas-soft px-4 py-1.5 text-[0.78rem] font-medium text-taupe mb-6">
-              Publishing structure
-            </span>
-            <h1 className="text-4xl md:text-5xl font-semibold tracking-[-0.06em] text-ink mb-4">
-              Your journal is ready for the first post.
+          <div className="max-w-2xl border border-hair bg-canvas-soft p-12 text-center">
+            <p className="kicker text-[0.68rem] uppercase tracking-[0.24em] text-olive mb-6">
+              The Journal
+            </p>
+            <h1 className="display text-4xl md:text-5xl text-ink mb-5 leading-tight">
+              The first piece is on its way.
             </h1>
-            <p className="text-lg text-taupe leading-relaxed">
-              This starter already includes the blog layout. Connect the backend publishing flow, add your
-              first article, and this space becomes your live editorial archive.
+            <p className="text-lg text-ink/70 leading-relaxed">
+              Essays and field notes on codifying founder intelligence. Check back soon — or start
+              with <Link href="/services" className="underline underline-offset-4 text-ink">the rooms</Link>.
             </p>
           </div>
         </section>
@@ -108,168 +103,135 @@ export default async function BlogPage() {
     );
   }
 
-  const featured = allArticles[0];
-  const rest = allArticles.slice(1);
+  const trio = allArticles.slice(0, 3);
+  const rest = allArticles.slice(3);
 
   return (
     <main>
-      <section className="pt-32 pb-14 px-6">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="flex items-center justify-between gap-6 pb-6 mb-8 border-b border-hair text-[0.72rem] font-medium text-olive">
-            <span>Publishing structure</span>
-            <span>{allArticles.length} live article{allArticles.length === 1 ? '' : 's'}</span>
-          </div>
-
-          <div className="max-w-4xl">
-            <p className="inline-flex  border border-hair bg-canvas-soft px-4 py-1.5 text-[0.78rem] font-medium text-taupe mb-6">
-              Journal
-            </p>
-            <h1 className="text-5xl md:text-7xl xl:text-[6.6rem] font-semibold tracking-[-0.075em] text-ink leading-[0.95] mb-6">
-              A publishing layer
-              <br />
-              ready for your voice.
-            </h1>
-            <p className="text-lg md:text-2xl text-ink/70 max-w-3xl leading-relaxed">
-              This starter ships with a clean editorial archive for articles, essays, and guides. Keep the
-              structure, then tailor the visuals, categories, and voice to match your brand.
-            </p>
-
-            <StarterNotice compact />
-          </div>
+      {/* ── Masthead ─────────────────────────────────────────── */}
+      <section className="pt-36 pb-12 px-6">
+        <div className="max-w-[1200px] mx-auto text-center">
+          <p className="kicker text-[0.68rem] uppercase tracking-[0.28em] text-olive mb-6">
+            The Journal
+          </p>
+          <h1 className="display text-5xl md:text-7xl text-ink leading-[1.02] tracking-tight">
+            Hot off the press.
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-ink/70 leading-relaxed">
+            Essays and field notes on codifying what you know — so your business can think
+            with you, not just wait for you.
+          </p>
         </div>
       </section>
 
+      {/* ── Featured trio ────────────────────────────────────── */}
       <section className="px-6 pb-16">
-        <div className="max-w-[1400px] mx-auto">
-          <Link
-            href={`/blog/${featured.slug}`}
-            className="grid overflow-hidden  border border-hair bg-canvas-soft transition-all duration-300 hover:border-hair-olive hover:bg-canvas-soft lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]"
-          >
-            <div className="border-b border-hair lg:border-b-0 lg:border-r lg:border-hair">
-              {featured.image ? (
-                <Image
-                  src={featured.image}
-                  alt={featured.title}
-                  width={1792}
-                  height={1024}
-                  className="h-full min-h-[320px] w-full object-cover"
-                  priority
-                />
-              ) : (
-                <div className="grid h-full min-h-[320px] grid-cols-1 gap-px bg-hair p-px sm:grid-cols-3">
-                  {FEATURED_PLACEHOLDERS.map((item, index) => (
-                    <div
-                      key={item.label}
-                      className={`flex flex-col justify-between  px-6 py-6 ${
-                        index === 0 ? 'bg-[linear-gradient(180deg,rgba(255,255,255,0.09),rgba(255,255,255,0.04))]' :
-                        index === 1 ? 'bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.025))]' :
-                        'bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.018))]'
-                      }`}
-                    >
-                      <span className="inline-flex w-fit  border border-hair bg-canvas/80 px-3 py-1 text-[0.68rem] font-medium text-olive">
-                        {item.label}
-                      </span>
-                      <p className="max-w-[18ch] text-sm leading-relaxed text-ink/70">
-                        {item.note}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <div className="flex flex-col justify-center p-8 md:p-10">
-              <span className="inline-flex w-fit  border border-hair bg-canvas-soft px-3 py-1 text-[0.72rem] font-medium text-taupe">
-                Featured article
-              </span>
-              <h2 className="mt-5 text-3xl md:text-4xl font-semibold tracking-[-0.05em] text-ink">
-                {featured.title}
-              </h2>
-              <p className="mt-4 text-lg text-taupe leading-relaxed">
-                {featured.excerpt || 'Open this post to see how a published article sits inside the starter’s editorial structure.'}
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3 text-[0.75rem] font-medium text-olive">
-                <span className=" border border-hair px-3 py-1.5">
-                  {formatDate(featured.published_at)}
-                </span>
-                <span className=" border border-hair px-3 py-1.5">
-                  {featured.reading_time} min read
-                </span>
-                <span className=" border border-hair px-3 py-1.5 capitalize">
-                  {featured.content_type}
-                </span>
-              </div>
-            </div>
-          </Link>
-        </div>
-      </section>
-
-      {rest.length > 0 && (
-        <section className="px-6 pb-24">
-          <div className="max-w-[1400px] mx-auto">
-            <div className="flex items-end justify-between gap-6 mb-8">
-              <div>
-                <p className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-olive mb-4">
-                  More from the archive
-                </p>
-                <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.05em] text-ink">
-                  The rest of the journal.
-                </h2>
-              </div>
-              <span className="hidden md:inline-flex  border border-hair px-4 py-2 text-sm text-olive">
-                {allArticles.length} published entries
-              </span>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {rest.map((article, index) => (
-                <Link
-                  key={article.slug}
-                  href={`/blog/${article.slug}`}
-                  className="group block overflow-hidden  border border-hair bg-canvas-soft transition-all duration-300 hover:border-hair-olive hover:bg-canvas-soft"
-                >
+        <div className="max-w-[1200px] mx-auto">
+          <div className="grid gap-10 md:grid-cols-3">
+            {trio.map((article) => (
+              <Link key={article.slug} href={`/blog/${article.slug}`} className="group block text-center">
+                <div className="overflow-hidden border border-hair">
                   {article.image ? (
                     <Image
                       src={article.image}
                       alt={article.title}
                       width={896}
-                      height={512}
-                      className="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                      height={672}
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   ) : (
-                    <div className="flex h-52 items-end border-b border-hair bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025))] p-6">
-                      <p className="max-w-[20ch] text-sm leading-relaxed text-ink/70">
-                        {CARD_PLACEHOLDERS[index % CARD_PLACEHOLDERS.length]}
-                      </p>
-                    </div>
+                    <ImageFallback initial={article.title.charAt(0)} />
                   )}
+                </div>
+                <p className="kicker mt-6 text-[0.62rem] uppercase tracking-[0.24em] text-olive capitalize">
+                  {article.category}
+                </p>
+                <h2 className="display mt-3 text-xl md:text-2xl text-ink leading-snug transition-colors group-hover:text-olive">
+                  {article.title}
+                </h2>
+                <div className="mx-auto mt-5 h-px w-10 bg-hair transition-all duration-300 group-hover:w-16 group-hover:bg-olive/50" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                  <div className="p-6">
-                    <div className="flex flex-wrap gap-2 text-[0.72rem] font-medium text-olive">
-                      <span className=" border border-hair px-3 py-1">
-                        {formatDate(article.published_at)}
-                      </span>
-                      <span className=" border border-hair px-3 py-1">
-                        {article.reading_time} min read
-                      </span>
-                    </div>
+      {/* ── Slim CTA strip ───────────────────────────────────── */}
+      <section className="px-6 pb-20">
+        <div className="max-w-[1200px] mx-auto">
+          <Link
+            href="/services"
+            className="group flex flex-col items-center justify-between gap-4 border border-ink/60 bg-canvas-soft px-8 py-6 md:flex-row"
+          >
+            <div className="flex items-center gap-5">
+              <span className="kicker hidden text-[0.62rem] uppercase tracking-[0.24em] text-olive md:inline">
+                While you&rsquo;re here
+              </span>
+              <span className="display text-lg md:text-xl text-ink">
+                Curious what a business that thinks with you looks like?
+              </span>
+            </div>
+            <span className="kicker border border-ink px-5 py-2.5 text-[0.65rem] uppercase tracking-[0.22em] text-ink transition-colors group-hover:bg-ink group-hover:text-canvas">
+              See the rooms
+            </span>
+          </Link>
+        </div>
+      </section>
 
-                    <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-ink">
+      {/* ── The archive list ─────────────────────────────────── */}
+      {rest.length > 0 && (
+        <section className="px-6 pb-24">
+          <div className="max-w-[1000px] mx-auto">
+            <div className="flex items-center gap-6 mb-2">
+              <p className="kicker text-[0.68rem] uppercase tracking-[0.28em] text-olive whitespace-nowrap">
+                From the archive
+              </p>
+              <div className="h-px flex-1 bg-hair" />
+              <span className="kicker text-[0.62rem] uppercase tracking-[0.2em] text-ink/50 whitespace-nowrap">
+                {allArticles.length} pieces
+              </span>
+            </div>
+
+            <div>
+              {rest.map((article) => (
+                <Link
+                  key={article.slug}
+                  href={`/blog/${article.slug}`}
+                  className="group grid items-center gap-6 border-b border-hair py-10 sm:grid-cols-[220px_minmax(0,1fr)] md:gap-10"
+                >
+                  <div className="overflow-hidden border border-hair">
+                    {article.image ? (
+                      <Image
+                        src={article.image}
+                        alt={article.title}
+                        width={448}
+                        height={336}
+                        className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      />
+                    ) : (
+                      <ImageFallback initial={article.title.charAt(0)} />
+                    )}
+                  </div>
+
+                  <div>
+                    <p className="kicker text-[0.62rem] uppercase tracking-[0.24em] text-olive capitalize">
+                      {article.category}
+                    </p>
+                    <h3 className="display mt-3 text-2xl md:text-3xl text-ink leading-snug transition-colors group-hover:text-olive">
                       {article.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-taupe">
-                      {article.excerpt || 'Use this card style for publishing ideas, essays, updates, and evergreen content.'}
-                    </p>
-
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {article.semantic_tags.slice(0, 2).map((tag) => (
-                        <span
-                          key={tag}
-                          className=" border border-hair bg-canvas-soft px-3 py-1 text-[0.72rem] text-taupe"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                    {article.excerpt && (
+                      <p className="mt-3 max-w-xl text-base leading-relaxed text-ink/70">
+                        {article.excerpt}
+                      </p>
+                    )}
+                    <div className="mt-6 flex flex-wrap items-center gap-5">
+                      <span className="kicker border border-ink px-5 py-2.5 text-[0.62rem] uppercase tracking-[0.22em] text-ink transition-colors group-hover:bg-ink group-hover:text-canvas">
+                        Read the post
+                      </span>
+                      <span className="kicker text-[0.62rem] uppercase tracking-[0.18em] text-ink/50">
+                        {formatDate(article.published_at)} · {article.reading_time} min
+                      </span>
                     </div>
                   </div>
                 </Link>
@@ -278,6 +240,24 @@ export default async function BlogPage() {
           </div>
         </section>
       )}
+
+      {/* ── Closing band ─────────────────────────────────────── */}
+      <section className="px-6 pb-24">
+        <div className="max-w-[1200px] mx-auto bg-ink px-8 py-16 text-center md:py-20">
+          <p className="kicker text-[0.68rem] uppercase tracking-[0.28em] text-sage mb-6">
+            Before you go
+          </p>
+          <p className="display mx-auto max-w-3xl text-3xl md:text-5xl leading-tight text-canvas">
+            Your best thinking deserves better than a browser tab of drafts.
+          </p>
+          <Link
+            href="/contact"
+            className="kicker mt-10 inline-block border border-canvas px-8 py-3.5 text-[0.68rem] uppercase tracking-[0.24em] text-canvas transition-colors hover:bg-canvas hover:text-ink"
+          >
+            Start the conversation
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }
