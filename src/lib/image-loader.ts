@@ -1,12 +1,12 @@
 export default function cloudflareLoader({
   src,
-  width,
-  quality,
 }: {
   src: string;
   width: number;
   quality?: number;
 }) {
-  const params = [`width=${width}`, `quality=${quality || 75}`, "format=auto"];
-  return `/cdn-cgi/image/${params.join(",")}/${src}`;
+  // Cloudflare Image Resizing (/cdn-cgi/image/...) requires a paid zone
+  // feature that isn't enabled here — requests to it 404 and images break.
+  // Serve sources directly; Supabase storage URLs are already public CDN.
+  return src;
 }

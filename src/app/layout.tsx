@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Courier_Prime } from 'next/font/google';
 import NavBar from '@/components/layout/NavBar';
+import Footer from '@/components/layout/Footer';
 import './globals.css';
 
 const inter = Inter({
@@ -17,9 +18,9 @@ const courierPrime = Courier_Prime({
 });
 
 export const metadata: Metadata = {
-  title: 'Envisioned Systems',
+  title: 'Envisioned Brands | Turn Founder Intelligence Into Working Business Systems',
   description:
-    'Owned, agent-native digital infrastructure for consultants and personal brands. Your website, content engine, CRM, and operator — on your own foundations.',
+    'Maria-Ines helps established founders get their voice, judgement and methodology out of their heads and working across client delivery, team decisions and AI systems.',
 };
 
 export default function RootLayout({
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${courierPrime.variable} antialiased`}>
         <NavBar />
         {children}
+        <Footer />
       </body>
     </html>
   );
