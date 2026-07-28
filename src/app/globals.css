@@ -144,8 +144,11 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.3em;
 }
-/* Default kicker color at zero specificity so text-* utilities can override
-   it — needed on dark bands, where olive-on-ink is unreadable */
-:where(.kicker) {
-  color: var(--olive);
+/* Default kicker color lives in the components layer so Tailwind's
+   text-* utilities (utilities layer, applied later) can override it —
+   needed on dark bands, where olive-on-ink is unreadable */
+@layer components {
+  .kicker {
+    color: var(--olive);
+  }
 }
