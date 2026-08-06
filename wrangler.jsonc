@@ -1,5 +1,9 @@
 {
-  "name": "digital-home-frontend",
+  // MUST stay "digital-home-frontend-starter": that is the Worker actually
+  // serving the live site, and it is the name the backend's FRONTEND_WORKER
+  // service binding resolves by. Deploying under any other name silently
+  // creates a second, empty Worker instead of updating the real one.
+  "name": "digital-home-frontend-starter",
   "compatibility_date": "2025-12-01",
   "compatibility_flags": ["nodejs_compat"],
   "main": ".open-next/worker.js",
