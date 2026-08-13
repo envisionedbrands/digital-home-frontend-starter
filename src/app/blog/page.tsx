@@ -180,14 +180,26 @@ export default async function BlogPage() {
             </Link>
           </div>
 
-          {/* Peek of the next piece — the Chronicle's carousel edge, static */}
-          {allArticles[1] && (
+          {/* Peek of the next piece — the Chronicle's carousel edge, static.
+              Only rendered when the piece has a real image: a fill-image with
+              an empty src is a broken tile, worse than no peek. */}
+          {allArticles[1]?.image && (
             <Link
               href={`/blog/${allArticles[1].slug}`}
-              className="group hidden overflow-hidden border-l border-hair pl-10 lg:block"
+              className="group relative hidden overflow-hidden border-l border-hair pl-10 lg:block"
               aria-label={allArticles[1].title}
             >
-              <ArticleImage article={allArticles[1]} ratio="aspect-[3/4]" sizes={[448, 597]} />
+              {/* Fills the band's full height so its bottom edge lines up with
+                  the hero image, whatever the source image's own ratio. */}
+              <div className="relative h-full min-h-[420px]">
+                <Image
+                  src={allArticles[1].image || ''}
+                  alt={allArticles[1].title}
+                  fill
+                  sizes="30vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                />
+              </div>
             </Link>
           )}
         </div>
@@ -226,10 +238,14 @@ export default async function BlogPage() {
                   <p className="kicker text-[0.6rem] uppercase tracking-[0.22em] text-ink/80 capitalize">
                     Filed in: {article.category}
                   </p>
-                  <h3 className="display min-h-[4.5rem] text-xl md:text-[1.35rem] text-ink leading-snug transition-colors group-hover:text-olive">
+                  <h3 className="display text-xl md:text-[1.35rem] text-ink leading-snug transition-colors group-hover:text-olive">
                     {article.title}
                   </h3>
-                  <div className="overflow-hidden">
+                  {/* mt-auto pins every image to the card's bottom edge, so a
+                      title wrapping to four lines can't push its image out of
+                      line with the neighbours. Same aspect + same pin = all
+                      four images identical in size and vertical position. */}
+                  <div className="mt-auto overflow-hidden">
                     <ArticleImage article={article} ratio="aspect-[4/3]" sizes={[640, 480]} />
                   </div>
                 </Link>
