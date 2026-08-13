@@ -40,15 +40,37 @@ function categoryOf(tags: string[], contentType: string): string {
   return contentType;
 }
 
-/* Editorial visual for articles without a hero image — a Meganté initial
-   on the stone palette, so the page holds its look before photos exist */
-function ImageFallback({ initial }: { initial: string }) {
+/* Editorial visual for articles without a hero image — an initial on the stone
+   palette, so the page holds its look before photos exist */
+function ImageFallback({ initial, ratio = 'aspect-[4/3]' }: { initial: string; ratio?: string }) {
   return (
-    <div className="relative aspect-[4/3] w-full bg-[linear-gradient(160deg,#F3F1EC_0%,#EDE9E3_60%,#E3DED5_100%)]">
+    <div className={`relative ${ratio} w-full bg-[linear-gradient(160deg,#F3F1EC_0%,#EDE9E3_60%,#E3DED5_100%)]`}>
       <span className="display pointer-events-none absolute inset-0 flex items-center justify-center text-[7rem] leading-none text-olive/20 select-none">
         {initial}
       </span>
     </div>
+  );
+}
+
+function ArticleImage({
+  article,
+  ratio,
+  sizes,
+}: {
+  article: JournalArticle;
+  ratio: string;
+  sizes: [number, number];
+}) {
+  return article.image ? (
+    <Image
+      src={article.image}
+      alt={article.title}
+      width={sizes[0]}
+      height={sizes[1]}
+      className={`${ratio} w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]`}
+    />
+  ) : (
+    <ImageFallback initial={article.title.charAt(0)} ratio={ratio} />
   );
 }
 
@@ -103,147 +125,176 @@ export default async function BlogPage() {
     );
   }
 
-  const trio = allArticles.slice(0, 3);
-  const rest = allArticles.slice(3);
+  const hero = allArticles[0];
+  const featured = allArticles.slice(0, 4);
+  const categories = Array.from(new Set(allArticles.map((a) => a.category)));
 
   return (
     <main>
-      {/* ── Masthead ─────────────────────────────────────────── */}
-      <section className="pt-36 pb-12 px-6">
-        <div className="max-w-[1200px] mx-auto text-center">
-          <p className="kicker text-[0.68rem] uppercase tracking-[0.28em] text-olive mb-6">
+      {/* ── Masthead — serif nameplate over a heavy rule ─────── */}
+      <section className="pt-32 px-6">
+        <div className="mx-auto max-w-[1300px] text-center">
+          <h1 className="display text-5xl md:text-7xl text-ink leading-[1.02] tracking-tight pb-10">
             The Journal
-          </p>
-          <h1 className="display text-5xl md:text-7xl text-ink leading-[1.02] tracking-tight">
-            Hot off the press.
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-ink/70 leading-relaxed">
-            Essays and field notes on codifying what you know — so your business can think
-            with you, not just wait for you.
-          </p>
+        </div>
+        <div className="mx-auto max-w-[1300px] border-b-2 border-ink" />
+      </section>
+
+      {/* ── Hero band — image · latest post · image, hairline-divided ── */}
+      <section className="px-6">
+        <div className="mx-auto grid max-w-[1300px] gap-10 py-12 md:grid-cols-[1.1fr_1fr] md:gap-0 lg:grid-cols-[1.1fr_1fr_0.35fr]">
+          <Link href={`/blog/${hero.slug}`} className="group block md:border-r md:border-hair md:pr-10">
+            <ArticleImage article={hero} ratio="aspect-[4/3]" sizes={[1024, 768]} />
+          </Link>
+
+          <div className="flex flex-col justify-between md:px-10">
+            <div className="flex items-baseline justify-between">
+              <p className="kicker text-[0.65rem] uppercase tracking-[0.26em] text-ink">
+                Latest piece
+              </p>
+              <p className="kicker text-[0.62rem] uppercase tracking-[0.2em] text-ink/50">
+                {formatDate(hero.published_at)}
+              </p>
+            </div>
+
+            <div className="py-10">
+              <Link href={`/blog/${hero.slug}`} className="group">
+                <h2 className="display text-3xl md:text-4xl lg:text-[2.75rem] text-ink leading-[1.08] transition-colors group-hover:text-olive">
+                  {hero.title}
+                </h2>
+              </Link>
+              {hero.excerpt && (
+                <p className="mt-6 max-w-lg text-base md:text-lg leading-relaxed text-ink/70">
+                  {hero.excerpt}
+                </p>
+              )}
+            </div>
+
+            <Link
+              href={`/blog/${hero.slug}`}
+              className="kicker group inline-flex items-center gap-3 text-[0.65rem] uppercase tracking-[0.24em] text-ink"
+            >
+              Continue reading
+              <span aria-hidden="true" className="inline-block h-px w-8 bg-ink transition-all duration-300 group-hover:w-12" />
+            </Link>
+          </div>
+
+          {/* Peek of the next piece — the Chronicle's carousel edge, static */}
+          {allArticles[1] && (
+            <Link
+              href={`/blog/${allArticles[1].slug}`}
+              className="group hidden overflow-hidden border-l border-hair pl-10 lg:block"
+              aria-label={allArticles[1].title}
+            >
+              <ArticleImage article={allArticles[1]} ratio="aspect-[3/4]" sizes={[448, 597]} />
+            </Link>
+          )}
         </div>
       </section>
 
-      {/* ── Featured trio ────────────────────────────────────── */}
-      <section className="px-6 pb-16">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="grid gap-10 md:grid-cols-3">
-            {trio.map((article) => (
-              <Link key={article.slug} href={`/blog/${article.slug}`} className="group block text-center">
-                <div className="overflow-hidden border border-hair">
-                  {article.image ? (
-                    <Image
-                      src={article.image}
-                      alt={article.title}
-                      width={896}
-                      height={672}
-                      className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                  ) : (
-                    <ImageFallback initial={article.title.charAt(0)} />
-                  )}
-                </div>
-                <p className="kicker mt-6 text-[0.62rem] uppercase tracking-[0.24em] text-olive capitalize">
-                  {article.category}
-                </p>
-                <h2 className="display mt-3 text-xl md:text-2xl text-ink leading-snug transition-colors group-hover:text-olive">
-                  {article.title}
-                </h2>
-                <div className="mx-auto mt-5 h-px w-10 bg-hair transition-all duration-300 group-hover:w-16 group-hover:bg-olive/50" />
-              </Link>
+      {/* ── Category strip between hairlines ─────────────────── */}
+      <section className="px-6">
+        <div className="mx-auto max-w-[1300px] border-y border-ink/60 py-4">
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-2 md:justify-between md:px-10">
+            {categories.slice(0, 6).map((c) => (
+              <span key={c} className="kicker text-[0.62rem] uppercase tracking-[0.24em] text-ink capitalize">
+                {c}
+              </span>
             ))}
+            <span className="kicker text-[0.62rem] uppercase tracking-[0.24em] text-ink/50">
+              {allArticles.length} pieces
+            </span>
           </div>
         </div>
       </section>
 
-      {/* ── Slim CTA strip ───────────────────────────────────── */}
-      <section className="px-6 pb-20">
-        <div className="max-w-[1200px] mx-auto">
-          <Link
-            href="/services"
-            className="group flex flex-col items-center justify-between gap-4 border border-ink/60 bg-canvas-soft px-8 py-6 md:flex-row"
-          >
-            <div className="flex items-center gap-5">
-              <span className="kicker hidden text-[0.62rem] uppercase tracking-[0.24em] text-olive md:inline">
-                While you&rsquo;re here
-              </span>
-              <span className="display text-lg md:text-xl text-ink">
-                Curious what a business that thinks with you looks like?
-              </span>
-            </div>
-            <span className="kicker border border-ink px-5 py-2.5 text-[0.65rem] uppercase tracking-[0.22em] text-ink transition-colors group-hover:bg-ink group-hover:text-canvas">
-              See the rooms
-            </span>
-          </Link>
-        </div>
-      </section>
-
-      {/* ── The archive list ─────────────────────────────────── */}
-      {rest.length > 0 && (
-        <section className="px-6 pb-24">
-          <div className="max-w-[1000px] mx-auto">
-            <div className="flex items-center gap-6 mb-2">
-              <p className="kicker text-[0.68rem] uppercase tracking-[0.28em] text-olive whitespace-nowrap">
-                From the archive
-              </p>
-              <div className="h-px flex-1 bg-hair" />
-              <span className="kicker text-[0.62rem] uppercase tracking-[0.2em] text-ink/50 whitespace-nowrap">
-                {allArticles.length} pieces
-              </span>
-            </div>
-
-            <div>
-              {rest.map((article) => (
+      {/* ── Featured posts — 4-up grid, hairline-columned ────── */}
+      <section className="px-6 pt-24 pb-8">
+        <div className="mx-auto max-w-[1300px]">
+          <p className="kicker text-[0.68rem] uppercase tracking-[0.28em] text-ink mb-6">
+            Featured posts
+          </p>
+          <div className="border-t-2 border-ink">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4">
+              {featured.map((article, i) => (
                 <Link
                   key={article.slug}
                   href={`/blog/${article.slug}`}
-                  className="group grid items-center gap-6 border-b border-hair py-10 sm:grid-cols-[220px_minmax(0,1fr)] md:gap-10"
+                  className={`group flex flex-col gap-5 py-8 pr-6 ${i > 0 ? 'lg:border-l lg:border-hair lg:pl-6' : ''} ${i % 2 === 1 ? 'sm:border-l sm:border-hair sm:pl-6 lg:pl-6' : ''}`}
                 >
-                  <div className="overflow-hidden border border-hair">
-                    {article.image ? (
-                      <Image
-                        src={article.image}
-                        alt={article.title}
-                        width={448}
-                        height={336}
-                        className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                      />
-                    ) : (
-                      <ImageFallback initial={article.title.charAt(0)} />
-                    )}
-                  </div>
-
-                  <div>
-                    <p className="kicker text-[0.62rem] uppercase tracking-[0.24em] text-olive capitalize">
-                      {article.category}
-                    </p>
-                    <h3 className="display mt-3 text-2xl md:text-3xl text-ink leading-snug transition-colors group-hover:text-olive">
-                      {article.title}
-                    </h3>
-                    {article.excerpt && (
-                      <p className="mt-3 max-w-xl text-base leading-relaxed text-ink/70">
-                        {article.excerpt}
-                      </p>
-                    )}
-                    <div className="mt-6 flex flex-wrap items-center gap-5">
-                      <span className="kicker border border-ink px-5 py-2.5 text-[0.62rem] uppercase tracking-[0.22em] text-ink transition-colors group-hover:bg-ink group-hover:text-canvas">
-                        Read the post
-                      </span>
-                      <span className="kicker text-[0.62rem] uppercase tracking-[0.18em] text-ink/50">
-                        {formatDate(article.published_at)} · {article.reading_time} min
-                      </span>
-                    </div>
+                  <p className="kicker text-[0.6rem] uppercase tracking-[0.22em] text-ink/60 capitalize">
+                    Filed in: {article.category}
+                  </p>
+                  <h3 className="display min-h-[4.5rem] text-xl md:text-[1.35rem] text-ink leading-snug transition-colors group-hover:text-olive">
+                    {article.title}
+                  </h3>
+                  <div className="overflow-hidden">
+                    <ArticleImage article={article} ratio="aspect-[4/3]" sizes={[640, 480]} />
                   </div>
                 </Link>
               ))}
             </div>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
+
+      {/* ── The articles — alternating editorial rows ────────── */}
+      <section className="px-6 pt-20 pb-8">
+        <div className="mx-auto max-w-[1300px]">
+          <h2 className="display text-center text-4xl md:text-6xl uppercase tracking-[0.06em] text-ink">
+            The Articles
+          </h2>
+          <div className="mx-auto mt-12 border-t border-ink/60" />
+
+          {allArticles.map((article, i) => (
+            <article
+              key={article.slug}
+              className="grid items-center gap-10 border-b border-hair py-16 md:grid-cols-2 md:gap-16"
+            >
+              <div className={i % 2 === 1 ? 'md:order-2' : ''}>
+                <p className="kicker text-[0.62rem] uppercase tracking-[0.22em] text-ink/60 capitalize">
+                  Filed in: {article.category}
+                </p>
+                <Link href={`/blog/${article.slug}`} className="group block">
+                  <h3 className="display mt-5 text-3xl md:text-4xl text-ink leading-[1.1] transition-colors group-hover:text-olive">
+                    {article.title}
+                  </h3>
+                </Link>
+                {article.excerpt && (
+                  <p className="mt-5 max-w-xl text-base md:text-lg leading-relaxed text-ink/70">
+                    {article.excerpt}
+                  </p>
+                )}
+                <div className="mt-10 flex flex-wrap items-center gap-6">
+                  <Link
+                    href={`/blog/${article.slug}`}
+                    className="kicker group inline-flex items-center gap-3 text-[0.65rem] uppercase tracking-[0.24em] text-ink"
+                  >
+                    Continue reading
+                    <span aria-hidden="true" className="inline-block h-px w-8 bg-ink transition-all duration-300 group-hover:w-12" />
+                  </Link>
+                  <span className="kicker text-[0.6rem] uppercase tracking-[0.18em] text-ink/50">
+                    {formatDate(article.published_at)} · {article.reading_time} min
+                  </span>
+                </div>
+              </div>
+
+              <Link
+                href={`/blog/${article.slug}`}
+                className={`group block overflow-hidden ${i % 2 === 1 ? 'md:order-1' : ''}`}
+                aria-label={article.title}
+              >
+                <ArticleImage article={article} ratio="aspect-[4/5] max-h-[560px]" sizes={[820, 1025]} />
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
 
       {/* ── Closing band ─────────────────────────────────────── */}
-      <section className="px-6 pb-24">
-        <div className="max-w-[1200px] mx-auto bg-ink px-8 py-16 text-center md:py-20">
+      <section className="px-6 py-24">
+        <div className="max-w-[1300px] mx-auto bg-ink px-8 py-16 text-center md:py-20">
           <p className="kicker text-[0.68rem] uppercase tracking-[0.28em] text-sage mb-6">
             Before you go
           </p>
