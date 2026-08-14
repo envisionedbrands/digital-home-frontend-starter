@@ -109,7 +109,7 @@ export default async function BlogPage() {
       <main>
         <section className="min-h-screen flex items-center justify-center px-6">
           <div className="max-w-2xl border border-hair bg-canvas-soft p-12 text-center">
-            <p className="kicker text-[0.68rem] uppercase tracking-[0.24em] text-olive mb-6">
+            <p className="kicker text-[0.74rem] uppercase tracking-[0.24em] text-olive mb-6">
               The Journal
             </p>
             <h1 className="display text-4xl md:text-5xl text-ink mb-5 leading-tight">
@@ -150,10 +150,10 @@ export default async function BlogPage() {
 
           <div className="flex flex-col justify-between md:px-10">
             <div className="flex items-baseline justify-between">
-              <p className="kicker text-[0.65rem] uppercase tracking-[0.26em] text-ink">
+              <p className="kicker text-[0.72rem] uppercase tracking-[0.26em] text-ink">
                 Latest piece
               </p>
-              <p className="kicker text-[0.62rem] uppercase tracking-[0.2em] text-ink/80">
+              <p className="kicker text-[0.74rem] uppercase tracking-[0.2em] text-ink/80">
                 {formatDate(hero.published_at)}
               </p>
             </div>
@@ -173,7 +173,7 @@ export default async function BlogPage() {
 
             <Link
               href={`/blog/${hero.slug}`}
-              className="kicker group inline-flex items-center gap-3 text-[0.65rem] uppercase tracking-[0.24em] text-ink"
+              className="kicker group inline-flex items-center gap-3 text-[0.72rem] uppercase tracking-[0.24em] text-ink"
             >
               Continue reading
               <span aria-hidden="true" className="inline-block h-px w-8 bg-ink transition-all duration-300 group-hover:w-12" />
@@ -210,11 +210,11 @@ export default async function BlogPage() {
         <div className="mx-auto max-w-[1300px] border-y border-ink/60 py-4">
           <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-2 md:justify-between md:px-10">
             {categories.slice(0, 6).map((c) => (
-              <span key={c} className="kicker text-[0.62rem] uppercase tracking-[0.24em] text-ink capitalize">
+              <span key={c} className="kicker text-[0.74rem] uppercase tracking-[0.24em] text-ink capitalize">
                 {c}
               </span>
             ))}
-            <span className="kicker text-[0.62rem] uppercase tracking-[0.24em] text-ink/80">
+            <span className="kicker text-[0.74rem] uppercase tracking-[0.24em] text-ink/80">
               {allArticles.length} pieces
             </span>
           </div>
@@ -224,7 +224,7 @@ export default async function BlogPage() {
       {/* ── Featured posts — 4-up grid, hairline-columned ────── */}
       <section className="px-6 pt-24 pb-8">
         <div className="mx-auto max-w-[1300px]">
-          <p className="kicker text-[0.68rem] uppercase tracking-[0.28em] text-ink mb-6">
+          <p className="kicker text-[0.74rem] uppercase tracking-[0.28em] text-ink mb-6">
             Featured posts
           </p>
           <div className="border-t-2 border-ink">
@@ -235,7 +235,7 @@ export default async function BlogPage() {
                   href={`/blog/${article.slug}`}
                   className={`group flex flex-col gap-5 py-8 pr-6 ${i > 0 ? 'lg:border-l lg:border-hair lg:pl-6' : ''} ${i % 2 === 1 ? 'sm:border-l sm:border-hair sm:pl-6 lg:pl-6' : ''}`}
                 >
-                  <p className="kicker text-[0.6rem] uppercase tracking-[0.22em] text-ink/80 capitalize">
+                  <p className="kicker text-[0.74rem] uppercase tracking-[0.22em] text-ink/80 capitalize">
                     Filed in: {article.category}
                   </p>
                   <h3 className="display text-xl md:text-[1.35rem] text-ink leading-snug transition-colors group-hover:text-olive">
@@ -269,7 +269,7 @@ export default async function BlogPage() {
               className="grid items-center gap-10 border-b border-hair py-16 md:grid-cols-2 md:gap-16"
             >
               <div className={i % 2 === 1 ? 'md:order-2' : ''}>
-                <p className="kicker text-[0.62rem] uppercase tracking-[0.22em] text-ink/80 capitalize">
+                <p className="kicker text-[0.74rem] uppercase tracking-[0.22em] text-ink/80 capitalize">
                   Filed in: {article.category}
                 </p>
                 <Link href={`/blog/${article.slug}`} className="group block">
@@ -285,12 +285,12 @@ export default async function BlogPage() {
                 <div className="mt-10 flex flex-wrap items-center gap-6">
                   <Link
                     href={`/blog/${article.slug}`}
-                    className="kicker group inline-flex items-center gap-3 text-[0.65rem] uppercase tracking-[0.24em] text-ink"
+                    className="kicker group inline-flex items-center gap-3 text-[0.72rem] uppercase tracking-[0.24em] text-ink"
                   >
                     Continue reading
                     <span aria-hidden="true" className="inline-block h-px w-8 bg-ink transition-all duration-300 group-hover:w-12" />
                   </Link>
-                  <span className="kicker text-[0.6rem] uppercase tracking-[0.18em] text-ink/80">
+                  <span className="kicker text-[0.74rem] uppercase tracking-[0.18em] text-ink/80">
                     {formatDate(article.published_at)} · {article.reading_time} min
                   </span>
                 </div>
@@ -311,7 +311,7 @@ export default async function BlogPage() {
       {/* ── Closing band ─────────────────────────────────────── */}
       <section className="px-6 py-24">
         <div className="max-w-[1300px] mx-auto bg-ink px-8 py-16 text-center md:py-20">
-          <p className="kicker text-[0.68rem] uppercase tracking-[0.28em] text-sage mb-6">
+          <p className="kicker text-[0.74rem] uppercase tracking-[0.28em] text-sage mb-6">
             Before you go
           </p>
           <p className="display mx-auto max-w-3xl text-3xl md:text-5xl leading-tight text-canvas">
@@ -319,7 +319,7 @@ export default async function BlogPage() {
           </p>
           <Link
             href="/contact"
-            className="kicker mt-10 inline-block border border-canvas px-8 py-3.5 text-[0.68rem] uppercase tracking-[0.24em] text-canvas transition-colors hover:bg-canvas hover:text-ink"
+            className="kicker mt-10 inline-block border border-canvas px-8 py-3.5 text-[0.74rem] uppercase tracking-[0.24em] text-canvas transition-colors hover:bg-canvas hover:text-ink"
           >
             Start the conversation
           </Link>

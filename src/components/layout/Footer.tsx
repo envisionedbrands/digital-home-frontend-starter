@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 const FOOTER_LINKS = [
+  { href: '/founder-access', label: 'Founder Access Diagnostic' },
   { href: 'https://codifiedinthecity.com', label: 'Codified in the City' },
   { href: 'https://codifiedinthecity.com', label: 'Codified Live' },
   { href: '/contact', label: 'The Integration Map' },
@@ -18,7 +19,7 @@ export default function Footer() {
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div>
             <p className="display text-[1.35rem] text-ink">Envisioned Brands</p>
-            <p className="kicker mt-3 text-[0.62rem] text-olive">
+            <p className="kicker mt-3 text-[0.74rem] text-olive">
               Founder intelligence, made usable.
             </p>
           </div>
@@ -46,7 +47,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        <p className="kicker mt-12 text-[0.6rem] text-ink/40">
+        <p className="kicker mt-12 text-[0.74rem] text-ink/80">
           © 2026 Envisioned Brands. All rights reserved.
         </p>
       </div>

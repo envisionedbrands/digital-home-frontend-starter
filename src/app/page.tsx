@@ -37,7 +37,7 @@ export default function HomePage() {
               Explore Codified in the City
             </a>
           </div>
-          <p className="kicker text-[0.62rem] text-ink/50">
+          <p className="kicker text-[0.74rem] text-ink/80">
             For established founders, mentors and programme leaders whose expertise is already proven.
           </p>
         </section>
@@ -160,7 +160,7 @@ export default function HomePage() {
               Prefer to meet online? Explore Codified Live.
             </a>
           </div>
-          <p className="kicker text-[0.62rem] text-ink/50">
+          <p className="kicker text-[0.74rem] text-ink/80">
             €5,500 + VAT where applicable. Two payments available.
           </p>
         </section>
@@ -260,7 +260,7 @@ export default function HomePage() {
             {/* ── One · The Integration Map ── */}
             <div className="flex flex-col py-10 pr-6">
               <div className="flex items-start justify-between gap-3">
-                <p className="kicker text-[0.62rem] uppercase tracking-[0.28em] text-ink/80">One</p>
+                <p className="kicker text-[0.74rem] uppercase tracking-[0.28em] text-ink/80">One</p>
                 <span className="display -rotate-3 text-[0.95rem] italic text-olive">Begin here</span>
               </div>
               <div className="mt-4 flex min-h-[7rem] items-start border-b border-hair pb-6 sm:min-h-[8rem]">
@@ -284,7 +284,7 @@ export default function HomePage() {
                 className="group mt-auto flex items-center justify-between gap-4 pt-6"
                 title="Start with the Map"
               >
-                <span className="kicker text-[0.68rem] uppercase tracking-[0.22em] text-ink">€1,500</span>
+                <span className="kicker text-[0.74rem] uppercase tracking-[0.22em] text-ink">€1,500</span>
                 <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center border border-ink text-ink transition-colors group-hover:bg-ink group-hover:text-canvas">
                   →
                 </span>
@@ -293,7 +293,7 @@ export default function HomePage() {
 
             {/* ── Two · Codified in the City / Codified Live ── */}
             <div className="flex flex-col py-10 pr-6 sm:border-l sm:border-hair sm:pl-8">
-              <p className="kicker text-[0.62rem] uppercase tracking-[0.28em] text-ink/80">Two</p>
+              <p className="kicker text-[0.74rem] uppercase tracking-[0.28em] text-ink/80">Two</p>
               <div className="mt-4 flex min-h-[7rem] items-start border-b border-hair pb-6 sm:min-h-[8rem]">
                 <h3 className="display text-2xl md:text-[1.7rem] leading-[1.15] text-ink">
                   Codified in the City / Codified Live
@@ -312,7 +312,7 @@ export default function HomePage() {
                 className="group mt-auto flex items-center justify-between gap-4 pt-6"
                 title="Explore the build day"
               >
-                <span className="kicker text-[0.68rem] uppercase tracking-[0.22em] text-ink">€5,500</span>
+                <span className="kicker text-[0.74rem] uppercase tracking-[0.22em] text-ink">€5,500</span>
                 <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center border border-ink text-ink transition-colors group-hover:bg-ink group-hover:text-canvas">
                   →
                 </span>
@@ -321,7 +321,7 @@ export default function HomePage() {
 
             {/* ── Three · The Atelier ── */}
             <div className="flex flex-col py-10 pr-6 lg:border-l lg:border-hair lg:pl-8">
-              <p className="kicker text-[0.62rem] uppercase tracking-[0.28em] text-ink/80">Three</p>
+              <p className="kicker text-[0.74rem] uppercase tracking-[0.28em] text-ink/80">Three</p>
               <div className="mt-4 flex min-h-[7rem] items-start border-b border-hair pb-6 sm:min-h-[8rem]">
                 <h3 className="display text-2xl md:text-[1.7rem] leading-[1.15] text-ink">The Atelier</h3>
               </div>
@@ -340,7 +340,7 @@ export default function HomePage() {
                 className="group mt-auto flex items-center justify-between gap-4 pt-6"
                 title="Visit The Atelier"
               >
-                <span className="kicker text-[0.68rem] uppercase tracking-[0.22em] text-ink">€2,499</span>
+                <span className="kicker text-[0.74rem] uppercase tracking-[0.22em] text-ink">€2,499</span>
                 <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center border border-ink text-ink transition-colors group-hover:bg-ink group-hover:text-canvas">
                   →
                 </span>
@@ -349,7 +349,7 @@ export default function HomePage() {
 
             {/* ── Four · Codified Studio ── */}
             <div className="flex flex-col py-10 pr-6 sm:border-l sm:border-hair sm:pl-8">
-              <p className="kicker text-[0.62rem] uppercase tracking-[0.28em] text-ink/80">Four</p>
+              <p className="kicker text-[0.74rem] uppercase tracking-[0.28em] text-ink/80">Four</p>
               <div className="mt-4 flex min-h-[7rem] items-start border-b border-hair pb-6 sm:min-h-[8rem]">
                 <h3 className="display text-2xl md:text-[1.7rem] leading-[1.15] text-ink">Codified Studio</h3>
               </div>
@@ -369,7 +369,7 @@ export default function HomePage() {
                 className="group mt-auto flex items-center justify-between gap-4 pt-6"
                 title="Explore Codified Studio"
               >
-                <span className="kicker text-[0.68rem] uppercase tracking-[0.22em] text-ink">From €1,499</span>
+                <span className="kicker text-[0.74rem] uppercase tracking-[0.22em] text-ink">From €1,499</span>
                 <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center border border-ink text-ink transition-colors group-hover:bg-ink group-hover:text-canvas">
                   →
                 </span>
@@ -490,7 +490,7 @@ export default function HomePage() {
               </a>
               <Link
                 href="/contact"
-                className="kicker border border-canvas px-8 py-3.5 text-[0.68rem] uppercase tracking-[0.24em] text-canvas transition-colors hover:bg-canvas hover:text-ink"
+                className="kicker border border-canvas px-8 py-3.5 text-[0.74rem] uppercase tracking-[0.24em] text-canvas transition-colors hover:bg-canvas hover:text-ink"
               >
                 Start with The Integration Map
               </Link>

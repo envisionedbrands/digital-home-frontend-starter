@@ -107,7 +107,7 @@ export default async function ArticlePage({
       {/* ── Article header ───────────────────────────────────── */}
       <section className="pt-36 pb-10 px-6">
         <div className="mx-auto max-w-[760px] text-center">
-          <p className="kicker text-[0.68rem] uppercase tracking-[0.28em] text-olive capitalize">
+          <p className="kicker text-[0.74rem] uppercase tracking-[0.28em] text-olive capitalize">
             {category}
           </p>
           <h1 className="display mt-6 text-4xl md:text-5xl xl:text-6xl text-ink leading-[1.06]">
@@ -118,7 +118,7 @@ export default async function ArticlePage({
               {article.excerpt}
             </p>
           )}
-          <p className="kicker mt-8 text-[0.62rem] uppercase tracking-[0.22em] text-ink/50">
+          <p className="kicker mt-8 text-[0.74rem] uppercase tracking-[0.22em] text-ink/80">
             {formatDate(publishedAt)} · {readingTime} min read · {article.author_name}
           </p>
         </div>
@@ -147,7 +147,7 @@ export default async function ArticlePage({
           <aside className="hidden lg:block">
             {toc.length > 0 && (
               <nav className="sticky top-28">
-                <p className="kicker mb-5 text-[0.62rem] uppercase tracking-[0.24em] text-olive">
+                <p className="kicker mb-5 text-[0.74rem] uppercase tracking-[0.24em] text-olive">
                   In this article
                 </p>
                 <ol className="space-y-3 border-l border-hair pl-4">
@@ -180,7 +180,7 @@ export default async function ArticlePage({
         <section className="px-6 pb-20">
           <div className="mx-auto max-w-[1100px]">
             <div className="mb-10 text-center">
-              <p className="kicker text-[0.68rem] uppercase tracking-[0.28em] text-olive">
+              <p className="kicker text-[0.74rem] uppercase tracking-[0.28em] text-olive">
                 Ready for more?
               </p>
             </div>
@@ -204,7 +204,7 @@ export default async function ArticlePage({
                       </div>
                     )}
                   </div>
-                  <p className="kicker mt-5 text-[0.62rem] uppercase tracking-[0.24em] text-olive capitalize">
+                  <p className="kicker mt-5 text-[0.74rem] uppercase tracking-[0.24em] text-olive capitalize">
                     {(item.semantic_tags?.[0] || item.content_type).replace(/-/g, ' ')}
                   </p>
                   <h2 className="display mt-3 text-xl text-ink leading-snug transition-colors group-hover:text-olive">
@@ -220,7 +220,7 @@ export default async function ArticlePage({
       {/* ── Closing band ─────────────────────────────────────── */}
       <section className="px-6 pb-24">
         <div className="mx-auto max-w-[1100px] bg-ink px-8 py-16 text-center md:py-20">
-          <p className="kicker mb-6 text-[0.68rem] uppercase tracking-[0.28em] text-sage">
+          <p className="kicker mb-6 text-[0.74rem] uppercase tracking-[0.28em] text-sage">
             Before you go
           </p>
           <p className="display mx-auto max-w-3xl text-3xl leading-tight text-canvas md:text-5xl">
@@ -228,7 +228,7 @@ export default async function ArticlePage({
           </p>
           <Link
             href="/contact"
-            className="kicker mt-10 inline-block border border-canvas px-8 py-3.5 text-[0.68rem] uppercase tracking-[0.24em] text-canvas transition-colors hover:bg-canvas hover:text-ink"
+            className="kicker mt-10 inline-block border border-canvas px-8 py-3.5 text-[0.74rem] uppercase tracking-[0.24em] text-canvas transition-colors hover:bg-canvas hover:text-ink"
           >
             Start the conversation
           </Link>

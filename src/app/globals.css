@@ -139,7 +139,7 @@ body {
 /* Kicker — the quiet label above a section */
 .kicker {
   font-family: var(--font-kicker), 'Courier Prime', monospace;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.3em;
@@ -149,7 +149,9 @@ body {
    needed on dark bands, where olive-on-ink is unreadable */
 @layer components {
   .kicker {
-    color: var(--olive);
+    /* olive-deep, not olive: Courier Prime is thin, so at kicker sizes the
+       lighter olive reads as pale. Raised with the size bump, 2026-08-06. */
+    color: var(--olive-deep);
   }
 }
 
