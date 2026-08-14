@@ -24,18 +24,18 @@ export default function HomePage() {
           </p>
 
           <div className="flex flex-wrap items-center gap-8 mb-6">
+            <Link
+              href="/founder-access"
+              className="text-[0.95rem] bg-olive text-canvas px-8 py-3 hover:bg-olive-deep transition-colors tracking-[0.04em]"
+            >
+              Take the Founder Access Diagnostic
+            </Link>
             <a
               href={CITC_URL}
-              className="text-[0.95rem] bg-olive text-canvas px-8 py-3 hover:bg-olive-deep transition-colors tracking-[0.04em]"
+              className="text-[1.02rem] text-olive underline underline-offset-4 hover:text-olive-deep transition-colors"
             >
               Explore Codified in the City
             </a>
-            <Link
-              href="/contact"
-              className="text-[1.02rem] text-olive underline underline-offset-4 hover:text-olive-deep transition-colors"
-            >
-              Begin with The Integration Map
-            </Link>
           </div>
           <p className="kicker text-[0.62rem] text-ink/50">
             For established founders, mentors and programme leaders whose expertise is already proven.
@@ -243,86 +243,136 @@ export default function HomePage() {
 
         {/* ── 9 · Ways to work together ────────────────────────── */}
         <section id="ways-to-work" className="border-t border-hair-olive pt-16 mb-32 scroll-mt-28">
-          <h2 className="display text-3xl md:text-5xl text-ink mb-14">Begin where you are.</h2>
+          {/* Chronicle-style service table (chronicle.northfolk.co/services):
+              centred intro, a double rule, numbered hairline-divided columns,
+              price + boxed arrow as the footer row. Copy and prices unchanged —
+              only the layout moved. */}
+          <div className="text-center">
+            <p className="kicker mb-6">Ways to work</p>
+            <h2 className="display text-3xl md:text-5xl text-ink">Begin where you are.</h2>
+          </div>
 
-          <div className="grid gap-px sm:grid-cols-2 border border-hair bg-hair">
-            <div className="bg-canvas-soft px-9 py-11 flex flex-col">
-              <h3 className="display text-2xl text-ink mb-3">The Integration Map</h3>
-              <p className="text-[1.05rem] text-ink mb-4">
-                See what is making you the bottleneck and what to build first.
-              </p>
-              <p className="text-[1rem] text-taupe leading-[1.7] mb-4">
-                A paid diagnostic for founders who can feel the weight but do not yet
-                know which system, workflow or body of knowledge should come first.
-              </p>
-              <p className="text-[1rem] text-taupe leading-[1.7] mb-6">
-                You receive a written map you can keep, whether or not we continue.
-              </p>
-              <p className="text-ink text-lg mb-1">€1,500</p>
-              <p className="text-[0.9rem] text-taupe mb-7">
-                Credited in full toward Codified in the City or Codified Live within 60 days.
-              </p>
+          {/* Double rule */}
+          <div className="mt-14 border-t-2 border-ink" />
+          <div className="mt-[3px] border-t border-ink/40" />
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4">
+            {/* ── One · The Integration Map ── */}
+            <div className="flex flex-col py-10 pr-6">
+              <div className="flex items-start justify-between gap-3">
+                <p className="kicker text-[0.62rem] uppercase tracking-[0.28em] text-ink/80">One</p>
+                <span className="display -rotate-3 text-[0.95rem] italic text-olive">Begin here</span>
+              </div>
+              <div className="mt-4 flex min-h-[7rem] items-start border-b border-hair pb-6 sm:min-h-[8rem]">
+                <h3 className="display text-2xl md:text-[1.7rem] leading-[1.15] text-ink">The Integration Map</h3>
+              </div>
+              <div className="pt-6">
+                <p className="text-[1.02rem] text-ink mb-4">
+                  See what is making you the bottleneck and what to build first.
+                </p>
+                <p className="text-[0.98rem] text-taupe leading-[1.7] mb-4">
+                  A paid diagnostic for founders who can feel the weight but do not yet
+                  know which system, workflow or body of knowledge should come first.
+                </p>
+                <p className="text-[0.98rem] text-taupe leading-[1.7] mb-4">
+                  You receive a written map you can keep, whether or not we continue.
+                  Credited in full toward Codified in the City or Codified Live within 60 days.
+                </p>
+              </div>
               <Link
                 href="/contact"
-                className="mt-auto inline-block w-fit text-[0.92rem] border border-ink px-7 py-2.5 text-ink hover:bg-ink hover:text-canvas transition-colors tracking-[0.04em]"
+                className="group mt-auto flex items-center justify-between gap-4 pt-6"
+                title="Start with the Map"
               >
-                Start with the Map
+                <span className="kicker text-[0.68rem] uppercase tracking-[0.22em] text-ink">€1,500</span>
+                <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center border border-ink text-ink transition-colors group-hover:bg-ink group-hover:text-canvas">
+                  →
+                </span>
               </Link>
             </div>
 
-            <div className="bg-canvas-soft px-9 py-11 flex flex-col">
-              <h3 className="display text-2xl text-ink mb-3">Codified in the City / Codified Live</h3>
-              <p className="text-[1.05rem] text-ink mb-4">
-                Get the foundation out of your head and the first working system live in one day.
-              </p>
-              <p className="text-[1rem] text-taupe leading-[1.7] mb-6">
-                In person in selected cities, or online with remote screen control.
-              </p>
-              <p className="text-ink text-lg mb-7">€5,500</p>
+            {/* ── Two · Codified in the City / Codified Live ── */}
+            <div className="flex flex-col py-10 pr-6 sm:border-l sm:border-hair sm:pl-8">
+              <p className="kicker text-[0.62rem] uppercase tracking-[0.28em] text-ink/80">Two</p>
+              <div className="mt-4 flex min-h-[7rem] items-start border-b border-hair pb-6 sm:min-h-[8rem]">
+                <h3 className="display text-2xl md:text-[1.7rem] leading-[1.15] text-ink">
+                  Codified in the City / Codified Live
+                </h3>
+              </div>
+              <div className="pt-6">
+                <p className="text-[1.02rem] text-ink mb-4">
+                  Get the foundation out of your head and the first working system live in one day.
+                </p>
+                <p className="text-[0.98rem] text-taupe leading-[1.7] mb-4">
+                  In person in selected cities, or online with remote screen control.
+                </p>
+              </div>
               <a
                 href={CITC_URL}
-                className="mt-auto inline-block w-fit text-[0.92rem] border border-ink px-7 py-2.5 text-ink hover:bg-ink hover:text-canvas transition-colors tracking-[0.04em]"
+                className="group mt-auto flex items-center justify-between gap-4 pt-6"
+                title="Explore the build day"
               >
-                Explore the build day
+                <span className="kicker text-[0.68rem] uppercase tracking-[0.22em] text-ink">€5,500</span>
+                <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center border border-ink text-ink transition-colors group-hover:bg-ink group-hover:text-canvas">
+                  →
+                </span>
               </a>
             </div>
 
-            <div className="bg-canvas-soft px-9 py-11 flex flex-col">
-              <h3 className="display text-2xl text-ink mb-3">The Atelier</h3>
-              <p className="text-[1.05rem] text-ink mb-4">
-                Build the business brain and your first fitted system over eight weeks.
-              </p>
-              <p className="text-[1rem] text-taupe leading-[1.7] mb-6">
-                A small live working studio for founders who want the extraction and
-                build process in a group environment, with six working sessions and a
-                clear plan for what comes next.
-              </p>
-              <p className="text-ink text-lg mb-7">€2,499</p>
+            {/* ── Three · The Atelier ── */}
+            <div className="flex flex-col py-10 pr-6 lg:border-l lg:border-hair lg:pl-8">
+              <p className="kicker text-[0.62rem] uppercase tracking-[0.28em] text-ink/80">Three</p>
+              <div className="mt-4 flex min-h-[7rem] items-start border-b border-hair pb-6 sm:min-h-[8rem]">
+                <h3 className="display text-2xl md:text-[1.7rem] leading-[1.15] text-ink">The Atelier</h3>
+              </div>
+              <div className="pt-6">
+                <p className="text-[1.02rem] text-ink mb-4">
+                  Build the business brain and your first fitted system over eight weeks.
+                </p>
+                <p className="text-[0.98rem] text-taupe leading-[1.7] mb-4">
+                  A small live working studio for founders who want the extraction and
+                  build process in a group environment, with six working sessions and a
+                  clear plan for what comes next.
+                </p>
+              </div>
               <Link
                 href="/contact"
-                className="mt-auto inline-block w-fit text-[0.92rem] border border-ink px-7 py-2.5 text-ink hover:bg-ink hover:text-canvas transition-colors tracking-[0.04em]"
+                className="group mt-auto flex items-center justify-between gap-4 pt-6"
+                title="Visit The Atelier"
               >
-                Visit The Atelier
+                <span className="kicker text-[0.68rem] uppercase tracking-[0.22em] text-ink">€2,499</span>
+                <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center border border-ink text-ink transition-colors group-hover:bg-ink group-hover:text-canvas">
+                  →
+                </span>
               </Link>
             </div>
 
-            <div className="bg-canvas-soft px-9 py-11 flex flex-col">
-              <h3 className="display text-2xl text-ink mb-3">Codified Studio</h3>
-              <p className="text-[1.05rem] text-ink mb-4">
-                Let your video move from phone to finished, branded content without
-                becoming another editing project.
-              </p>
-              <p className="text-[1rem] text-taupe leading-[1.7] mb-6">
-                A customised video system that tightens the master, creates vertical
-                clips, applies your captions and sends the results to Telegram for
-                approval.
-              </p>
-              <p className="text-ink text-lg mb-7">From €1,499</p>
+            {/* ── Four · Codified Studio ── */}
+            <div className="flex flex-col py-10 pr-6 sm:border-l sm:border-hair sm:pl-8">
+              <p className="kicker text-[0.62rem] uppercase tracking-[0.28em] text-ink/80">Four</p>
+              <div className="mt-4 flex min-h-[7rem] items-start border-b border-hair pb-6 sm:min-h-[8rem]">
+                <h3 className="display text-2xl md:text-[1.7rem] leading-[1.15] text-ink">Codified Studio</h3>
+              </div>
+              <div className="pt-6">
+                <p className="text-[1.02rem] text-ink mb-4">
+                  Let your video move from phone to finished, branded content without
+                  becoming another editing project.
+                </p>
+                <p className="text-[0.98rem] text-taupe leading-[1.7] mb-4">
+                  A customised video system that tightens the master, creates vertical
+                  clips, applies your captions and sends the results to Telegram for
+                  approval.
+                </p>
+              </div>
               <Link
                 href="/contact"
-                className="mt-auto inline-block w-fit text-[0.92rem] border border-ink px-7 py-2.5 text-ink hover:bg-ink hover:text-canvas transition-colors tracking-[0.04em]"
+                className="group mt-auto flex items-center justify-between gap-4 pt-6"
+                title="Explore Codified Studio"
               >
-                Explore Codified Studio
+                <span className="kicker text-[0.68rem] uppercase tracking-[0.22em] text-ink">From €1,499</span>
+                <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center border border-ink text-ink transition-colors group-hover:bg-ink group-hover:text-canvas">
+                  →
+                </span>
               </Link>
             </div>
           </div>
