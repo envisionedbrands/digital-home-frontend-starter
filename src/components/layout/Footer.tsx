@@ -1,6 +1,3 @@
-'use client';
-
-import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 const FOOTER_LINKS = [
@@ -16,10 +13,6 @@ const FOOTER_LINKS = [
 ];
 
 export default function Footer() {
-  // Hidden on the homepage — it ends in its own Chronicle-style footer band.
-  const pathname = usePathname();
-  if (pathname === '/') return null;
-
   return (
     <footer className="border-t border-hair px-6 py-14 mt-8">
       <div className="max-w-[1140px] mx-auto">

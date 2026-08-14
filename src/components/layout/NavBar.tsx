@@ -14,10 +14,6 @@ const NAV_LINKS = [
 
 export default function NavBar() {
   const pathname = usePathname();
-
-  // The homepage carries its own Chronicle-style masthead (src/app/page.tsx);
-  // rendering this bar too would stack two navs.
-  const isHome = pathname === '/';
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -26,8 +22,6 @@ export default function NavBar() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  if (isHome) return null;
 
   return (
     <nav
@@ -68,7 +62,7 @@ export default function NavBar() {
             )
           )}
           <Link
-            href="/founder-access"
+            href="/contact"
             className="text-[0.95rem] bg-olive text-canvas px-7 py-2.5 hover:bg-olive-deep transition-colors tracking-[0.04em]"
           >
             Start Here
