@@ -208,15 +208,15 @@ export default function HomePage() {
               <h1 className="h-b nr max-w-[13em] text-[2.5rem] leading-[1.06] text-[#FBFAF9] md:text-[3.8rem]">
                 Your business is already sitting on <em>extraordinary value.</em>
               </h1>
-              <p className="h-c mt-8 max-w-[34em] text-[1.1rem] leading-[1.7] text-[#FBFAF9]/90 md:text-[1.2rem]">
-                We find it, organise it, and put it to work — so you, your team, your
-                clients and AI can use more of what you&rsquo;ve spent years creating.
-              </p>
               <p
-                className="typeband hero-tw h-e mt-12 min-h-[1.6em] text-[1.3rem] text-[#FBFAF9]/95 md:text-[1.85rem]"
+                className="typeband hero-tw h-c mt-10 min-h-[1.6em] text-[1.3rem] text-[#FBFAF9]/95 md:text-[1.85rem]"
                 data-typewriter='["Years of ideas.","Client conversations.","Methodologies.","Decisions.","Workshops.","Content.","Frameworks.","Patterns you notice without even realising you notice them anymore."]'
               >
                 Years of ideas.
+              </p>
+              <p className="h-e mt-10 max-w-[34em] text-[1.1rem] leading-[1.7] text-[#FBFAF9]/90 md:text-[1.2rem]">
+                We find it, organise it, and put it to work — so you, your team, your
+                clients and AI can use more of what you&rsquo;ve spent years creating.
               </p>
               <a href={CITC_MAILTO} className="pointer-events-auto h-d lbl mt-12 flex items-center gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
                 Explore Codified in the City <span aria-hidden="true">↗</span>
