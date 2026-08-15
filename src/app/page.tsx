@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import HomeFx from '@/components/home-fx';
 
 /**
  * Homepage — the Chronicle front page (chronicle.northfolk.co, a Showit
@@ -39,6 +40,31 @@ const CSS = `
 .ch .ticker-track { display:flex; width:max-content; animation:ch-ticker 36s linear infinite; }
 .ch .heavy { border-top:2px solid var(--ink); position:relative; }
 .ch .heavy::after { content:''; position:absolute; left:0; right:0; top:4px; border-top:1px solid rgba(30,30,30,0.35); }
+
+/* ── Motion layer (choreography only, no new visual design) ─────────── */
+.ch.fx [data-rv] { opacity:0; transform:translateY(26px); transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); transition-delay:calc(var(--i,0)*90ms); }
+.ch.fx [data-rv].rv-in { opacity:1; transform:none; }
+.ch.fx [data-draw] { transform:scaleX(0); transform-origin:left; transition:transform 1.2s cubic-bezier(.22,1,.36,1); }
+.ch.fx [data-draw].rv-in { transform:scaleX(1); }
+@keyframes ch-rise { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:none; } }
+@keyframes ch-settle { from { transform:scale(1.08); } to { transform:scale(1); } }
+.ch .hero-zoom { animation:ch-settle 2.8s cubic-bezier(.22,1,.36,1) both; }
+.ch .h-a { animation:ch-rise .9s .2s cubic-bezier(.22,1,.36,1) both; }
+.ch .h-b { animation:ch-rise .9s .45s cubic-bezier(.22,1,.36,1) both; }
+.ch .h-c { animation:ch-rise .9s .7s cubic-bezier(.22,1,.36,1) both; }
+.ch .h-d { animation:ch-rise .9s .95s cubic-bezier(.22,1,.36,1) both; }
+.ch .tickerwrap:hover .ticker-track { animation-play-state:paused; }
+.ch [data-px] img { transition:none; will-change:transform; }
+.ch .ledger li { transition:background-color .35s, transform .35s cubic-bezier(.22,1,.36,1); }
+.ch .ledger li:hover { background-color:var(--stone); transform:translateX(6px); }
+.ch .sheet > div { transition:background-color .35s; }
+.ch .sheet > div:hover { background-color:var(--stone); }
+.ch .pull-cards a { transition:background-color .35s; }
+.ch .pull-cards a:hover { background-color:var(--stone); }
+@media (prefers-reduced-motion: reduce) {
+  .ch .hero-zoom, .ch .h-a, .ch .h-b, .ch .h-c, .ch .h-d { animation:none; }
+  .ch .ticker-track { animation:none; }
+}
 `;
 
 const WRAP = 'mx-auto max-w-[1280px]';
@@ -68,7 +94,7 @@ function Ticker({ items, dark = false }: { items: string[]; dark?: boolean }) {
     </div>
   );
   return (
-    <div className={`overflow-hidden border-y py-5 ${dark ? 'border-transparent bg-[color:var(--char)] text-[#FBFAF9]' : 'border-[color:var(--ink)] text-[color:var(--ink)]'}`}>
+    <div className={`tickerwrap overflow-hidden border-y py-5 ${dark ? 'border-transparent bg-[color:var(--char)] text-[#FBFAF9]' : 'border-[color:var(--ink)] text-[color:var(--ink)]'}`}>
       <div className="ticker-track">{row('a')}{row('b')}</div>
     </div>
   );
@@ -77,7 +103,7 @@ function Ticker({ items, dark = false }: { items: string[]; dark?: boolean }) {
 /** Numbered ledger — list items become indexed rows with hairlines. */
 function Ledger({ items, tight = false }: { items: React.ReactNode[]; tight?: boolean }) {
   return (
-    <ol className="border-t border-[color:var(--hair)]">
+    <ol className="ledger stagger border-t border-[color:var(--hair)]">
       {items.map((t, i) => (
         <li key={i} className={`flex gap-6 border-b border-[color:var(--hair)] ${tight ? 'py-3.5' : 'py-5'}`}>
           <span className="idx shrink-0 pt-1">{String(i + 1).padStart(2, '0')}</span>
@@ -92,7 +118,7 @@ function Ledger({ items, tight = false }: { items: React.ReactNode[]; tight?: bo
 function Sheet({ items, cols = 3 }: { items: string[]; cols?: 2 | 3 | 4 }) {
   const colCls = { 2: 'sm:grid-cols-2', 3: 'sm:grid-cols-2 lg:grid-cols-3', 4: 'sm:grid-cols-2 lg:grid-cols-4' }[cols];
   return (
-    <div className={`grid grid-cols-1 gap-x-10 ${colCls}`}>
+    <div className={`sheet stagger grid grid-cols-1 gap-x-10 ${colCls}`}>
       {items.map((t, i) => (
         <div key={t} className="flex items-baseline gap-4 border-t border-[color:var(--hair)] py-4">
           <span className="idx shrink-0">{String(i + 1).padStart(2, '0')}</span>
@@ -107,6 +133,7 @@ export default function HomePage() {
   return (
     <div className="ch">
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
+      <HomeFx />
 
       {/* ── Masthead — ink band, numbered nav ───────────────────────── */}
       <header className="bg-[color:var(--char)] text-[#FBFAF9]">
@@ -139,18 +166,18 @@ export default function HomePage() {
       <main id="top">
         {/* ── Cover — full-bleed postcard hero with the lockup ──────── */}
         <section id="founder-intelligence" className="relative flex min-h-[92vh] items-center justify-center overflow-hidden px-6 py-24">
-          <Image src="/img/hero-postcard.jpg" alt="Tuscan window with shutters, espresso and notebook in golden morning light" fill priority className="object-cover" />
+          <Image src="/img/hero-postcard.jpg" alt="Tuscan window with shutters, espresso and notebook in golden morning light" fill priority className="hero-zoom object-cover" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(30,30,30,0.50) 0%, rgba(30,30,30,0.28) 42%, rgba(30,30,30,0.62) 100%)' }} />
           <div className="photo-em relative flex w-full max-w-[880px] flex-col items-center text-center">
-            <Image src="/img/logo-envisioned-white.png" alt="Envisioned by Maria-Ines" width={360} height={130} priority className="w-[240px] md:w-[340px]" />
-            <h1 className="nr mt-14 max-w-[13em] text-[2.5rem] leading-[1.06] text-[#FBFAF9] md:text-[3.8rem]">
+            <Image src="/img/logo-envisioned-white.png" alt="Envisioned by Maria-Ines" width={360} height={130} priority className="h-a w-[240px] md:w-[340px]" />
+            <h1 className="h-b nr mt-14 max-w-[13em] text-[2.5rem] leading-[1.06] text-[#FBFAF9] md:text-[3.8rem]">
               Your business is already sitting on <em>extraordinary value.</em>
             </h1>
-            <p className="mt-8 max-w-[34em] text-[1.1rem] leading-[1.7] text-[#FBFAF9]/90 md:text-[1.2rem]">
+            <p className="h-c mt-8 max-w-[34em] text-[1.1rem] leading-[1.7] text-[#FBFAF9]/90 md:text-[1.2rem]">
               We find it, organise it, and put it to work — so you, your team, your
               clients and AI can use more of what you&rsquo;ve spent years creating.
             </p>
-            <a href={CITC_MAILTO} className="lbl mt-10 flex items-center gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
+            <a href={CITC_MAILTO} className="h-d lbl mt-10 flex items-center gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
               Explore Codified in the City <span aria-hidden="true">↗</span>
             </a>
           </div>
@@ -165,7 +192,7 @@ export default function HomePage() {
             </div>
 
             {/* Pull-out card row — front-page departments */}
-            <div className="mt-14 grid border-y border-[color:var(--ink)] sm:grid-cols-3 sm:divide-x sm:divide-[color:var(--hair)]">
+            <div className="pull-cards stagger mt-14 grid border-y border-[color:var(--ink)] sm:grid-cols-3 sm:divide-x sm:divide-[color:var(--hair)]">
               {[
                 ['01', 'Founder Intelligence', 'The layer we uncover', '#founder-intelligence-name'],
                 ['02', 'Codified in the City', 'The hero experience', '#citc'],
@@ -259,7 +286,7 @@ export default function HomePage() {
         </section>
 
         {/* Act break */}
-        <div className="relative h-[420px] w-full overflow-hidden">
+        <div data-px className="relative h-[420px] w-full overflow-hidden">
           <Image src="/img/lived-intelligence.jpg" alt="Working across a table, marking up documents" fill className="object-cover" />
           <div className="absolute inset-0 bg-[#1E1E1E]/45" />
           <p className="photo-em nr absolute inset-x-6 bottom-10 mx-auto max-w-[1280px] text-[1.5rem] text-[#FBFAF9] md:text-[2rem]">
@@ -349,7 +376,7 @@ export default function HomePage() {
             <h2 className="nr max-w-[16em] text-[2.2rem] leading-[1.08] md:text-[3rem]">
               What if the most exciting thing AI helps you create next&hellip; <em>isn&rsquo;t actually new?</em>
             </h2>
-            <div className="mt-12 grid border-y border-[color:var(--ink)]/30 sm:grid-cols-2 sm:divide-x sm:divide-[color:var(--hair)] lg:grid-cols-3">
+            <div className="stagger mt-12 grid border-y border-[color:var(--ink)]/30 sm:grid-cols-2 sm:divide-x sm:divide-[color:var(--hair)] lg:grid-cols-3">
               {[
                 'Maybe an old programme becomes an interactive client experience that can guide someone through your methodology while they’re implementing it.',
                 'Maybe hundreds of client calls reveal patterns you’ve never had the ability to see across the whole body of work.',
@@ -402,7 +429,7 @@ export default function HomePage() {
             </div>
 
             <p className="nr mt-20 text-[2rem] md:text-[2.6rem]">Find it. Organise it. <em>Put it to work.</em></p>
-            <div className="mt-10 grid border-t-2 border-[color:var(--ink)] sm:grid-cols-3 sm:divide-x sm:divide-[color:var(--hair)]">
+            <div className="stagger mt-10 grid border-t-2 border-[color:var(--ink)] sm:grid-cols-3 sm:divide-x sm:divide-[color:var(--hair)]">
               <div className="py-6 sm:pr-10">
                 <p className="lbl text-[color:var(--ox)]">We find it</p>
                 <div className="mt-4 space-y-4 text-[1.02rem] leading-[1.7]">
@@ -575,7 +602,7 @@ export default function HomePage() {
             <h2 className="nr max-w-[15em] text-[2.2rem] leading-[1.08] md:text-[3.1rem]">
               When your intelligence becomes usable, <em>the business changes.</em>
             </h2>
-            <div className="mt-14 grid border-t border-[color:var(--hair)] sm:grid-cols-2">
+            <div className="stagger mt-14 grid border-t border-[color:var(--hair)] sm:grid-cols-2">
               {[
                 ['01', 'Your clients get more of what they actually hired you for.',
                   'Not simply access to more information. More of the judgement behind the information. More help applying what you teach when the real-world situation refuses to fit neatly inside the example from Module Four.'],
@@ -616,7 +643,7 @@ export default function HomePage() {
 
         {/* ── CITC band ─────────────────────────────────────────────── */}
         <section id="citc" className="relative overflow-hidden">
-          <div className="relative h-[560px] w-full">
+          <div data-px className="relative h-[560px] w-full overflow-hidden">
             <Image src="/img/atmosphere-terrace.jpg" alt="Terrace table in Mediterranean light" fill className="object-cover" />
             <div className="absolute inset-0 bg-[#1E1E1E]/55" />
             <div className="absolute inset-0 flex items-center px-6">
@@ -648,7 +675,7 @@ export default function HomePage() {
             <h2 className="nr max-w-[16em] text-[2.2rem] leading-[1.08] md:text-[3rem]">
               Begin with the part that needs to become <em>usable first.</em>
             </h2>
-            <div className="mt-12 grid border-t-2 border-[color:var(--ink)] sm:grid-cols-3 sm:divide-x sm:divide-[color:var(--hair)]">
+            <div className="stagger mt-12 grid border-t-2 border-[color:var(--ink)] sm:grid-cols-3 sm:divide-x sm:divide-[color:var(--hair)]">
               <div className="flex flex-col py-8 sm:pr-8">
                 <p className="lbl text-[color:var(--ox)]">One</p>
                 <p className="nr mt-4 text-[1.55rem] leading-[1.25]">Not ready for the full build? Start with The Integration Map.</p>
