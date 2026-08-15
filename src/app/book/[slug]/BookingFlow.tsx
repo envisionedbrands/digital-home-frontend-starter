@@ -74,7 +74,6 @@ export default function BookingFlow({ eventType, ownerTimezone }: Props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [notes, setNotes] = useState('');
-  const [consent, setConsent] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<{ starts_at: string; note: string | null } | null>(null);
@@ -180,7 +179,6 @@ export default function BookingFlow({ eventType, ownerTimezone }: Props) {
           email,
           notes,
           timezone: tz,
-          recording_consent: consent,
         }),
       });
       const data = await res.json();
@@ -449,20 +447,6 @@ export default function BookingFlow({ eventType, ownerTimezone }: Props) {
               className="mt-2 w-full border border-[color:var(--stone-deep)] bg-transparent px-4 py-3 text-[1.02rem] leading-[1.6] placeholder:text-[color:var(--taupe)] focus:border-[color:var(--olive)] focus:outline-none"
             />
           </div>
-
-          <label className="flex items-start gap-3 text-[0.92rem] leading-[1.6] text-[color:var(--taupe)]">
-            <input
-              type="checkbox"
-              required
-              checked={consent}
-              onChange={(e) => setConsent(e.target.checked)}
-              className="mt-1 accent-[color:var(--olive)]"
-            />
-            <span>
-              I understand the call is recorded, and that I&rsquo;ll receive an AI-drafted
-              summary of it afterwards.
-            </span>
-          </label>
 
           {error && <p className="text-[0.95rem] text-[color:var(--color-error)]">{error}</p>}
 
