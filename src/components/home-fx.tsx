@@ -54,7 +54,11 @@ export default function HomeFx() {
       if (raf) return;
       raf = requestAnimationFrame(() => {
         raf = 0;
-        if (masthead) masthead.classList.toggle('nav-in', window.scrollY > 60);
+        if (masthead) {
+          const on = window.scrollY > 60;
+          masthead.classList.toggle('nav-in', on);
+          root.classList.toggle('nav-on', on);
+        }
         const vh = window.innerHeight;
         for (const img of pxImgs) {
           const holder = img.parentElement as HTMLElement;

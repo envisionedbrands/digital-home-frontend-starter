@@ -62,6 +62,8 @@ const CSS = `
 .ch .pull-cards a { transition:background-color .35s; }
 .ch .pull-cards a:hover { background-color:var(--stone); }
 .ch .masthead { transition:transform .5s cubic-bezier(.22,1,.36,1), opacity .5s cubic-bezier(.22,1,.36,1); }
+.ch .hero-logo { transition:opacity .45s cubic-bezier(.22,1,.36,1), transform .45s cubic-bezier(.22,1,.36,1); }
+.ch.nav-on .hero-logo { animation:none; opacity:0; transform:translateY(-16px); }
 .ch.fx .masthead:not(.nav-in) { transform:translateY(-100%); opacity:0; }
 .ch .typeband { font-family:'Courier Prime',monospace; letter-spacing:0.06em; }
 .ch .hero-tw .caret { background:#FBFAF9; opacity:0.9; }
@@ -158,7 +160,9 @@ export default function HomePage() {
       {/* ── Masthead — ink band, numbered nav ───────────────────────── */}
       <header className="masthead fixed inset-x-0 top-0 z-50 bg-[color:var(--char)] text-[#FBFAF9]">
         <div className="mx-auto flex h-[64px] max-w-[1360px] items-center justify-between px-6">
-          <a href="#top" className="nr text-[1.15rem] tracking-tight">Envisioned Brands</a>
+          <a href="#top" aria-label="Envisioned by Maria-Ines — back to top">
+            <Image src="/img/logo-envisioned-white.png" alt="" width={150} height={54} className="h-[38px] w-auto" />
+          </a>
           <nav className="hidden items-center gap-8 lg:flex">
             {[
               ['01', 'Founder Intelligence', '#founder-intelligence'],
@@ -190,7 +194,7 @@ export default function HomePage() {
           <div className="pointer-events-none sticky top-0 z-10 flex h-screen flex-col items-center px-6 pt-10 pb-12">
             {/* Traveling scrim — legibility never depends on the photo behind */}
             <div aria-hidden="true" className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 62% 52% at 50% 46%, rgba(30,30,30,0.42) 0%, rgba(30,30,30,0.18) 62%, rgba(30,30,30,0) 100%)' }} />
-            <Image src="/img/logo-envisioned-white.png" alt="Envisioned by Maria-Ines" width={300} height={108} priority className="h-a relative w-[190px] md:w-[250px]" />
+            <Image src="/img/logo-envisioned-white.png" alt="Envisioned by Maria-Ines" width={300} height={108} priority className="hero-logo h-a relative w-[190px] md:w-[250px]" />
             <div className="photo-em relative flex w-full max-w-[880px] flex-1 flex-col items-center justify-center text-center">
               <h1 className="h-b nr max-w-[13em] text-[2.5rem] leading-[1.06] text-[#FBFAF9] md:text-[3.8rem]">
                 Your business is already sitting on <em>extraordinary value.</em>
@@ -200,7 +204,7 @@ export default function HomePage() {
                 clients and AI can use more of what you&rsquo;ve spent years creating.
               </p>
               <p
-                className="typeband hero-tw h-e mt-12 min-h-[1.6em] text-[1rem] text-[#FBFAF9]/95 md:text-[1.25rem]"
+                className="typeband hero-tw h-e mt-12 min-h-[1.6em] text-[1.3rem] text-[#FBFAF9]/95 md:text-[1.85rem]"
                 data-typewriter='["Years of ideas.","Client conversations.","Methodologies.","Decisions.","Workshops.","Content.","Frameworks.","Patterns you notice without even realising you notice them anymore."]'
               >
                 Years of ideas.
