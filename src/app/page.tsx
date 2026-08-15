@@ -137,26 +137,31 @@ export default function HomePage() {
       </header>
 
       <main id="top">
-        {/* ── Front page — dateline + stacked hero + pull-out cards ── */}
-        <section id="founder-intelligence" className="px-6 pt-10 pb-16">
+        {/* ── Cover — full-bleed postcard hero with the lockup ──────── */}
+        <section id="founder-intelligence" className="relative flex min-h-[92vh] items-center justify-center overflow-hidden px-6 py-24">
+          <Image src="/img/hero-postcard.jpg" alt="Tuscan window with shutters, espresso and notebook in golden morning light" fill priority className="object-cover" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(30,30,30,0.50) 0%, rgba(30,30,30,0.28) 42%, rgba(30,30,30,0.62) 100%)' }} />
+          <div className="photo-em relative flex w-full max-w-[880px] flex-col items-center text-center">
+            <Image src="/img/logo-envisioned-white.png" alt="Envisioned by Maria-Ines" width={360} height={130} priority className="w-[240px] md:w-[340px]" />
+            <h1 className="nr mt-14 max-w-[13em] text-[2.5rem] leading-[1.06] text-[#FBFAF9] md:text-[3.8rem]">
+              Your business is already sitting on <em>extraordinary value.</em>
+            </h1>
+            <p className="mt-8 max-w-[34em] text-[1.1rem] leading-[1.7] text-[#FBFAF9]/90 md:text-[1.2rem]">
+              We find it, organise it, and put it to work — so you, your team, your
+              clients and AI can use more of what you&rsquo;ve spent years creating.
+            </p>
+            <a href={CITC_MAILTO} className="lbl mt-10 flex items-center gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
+              Explore Codified in the City <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </section>
+
+        {/* ── Front page — dateline + pull-out cards ────────────────── */}
+        <section className="px-6 pt-10 pb-16">
           <div className={WRAP}>
             <div className="flex flex-wrap items-baseline justify-between gap-y-2 border-b border-[color:var(--ink)] pb-4">
               <span className="lbl">Founder intelligence, made usable.</span>
               <span className="lbl text-[color:var(--ink)]/50">E / B</span>
-            </div>
-            <h1 className="nr mt-14 max-w-[11em] text-[3rem] leading-[1.02] md:text-[4.4rem]">
-              Your business is already sitting on <em>extraordinary value.</em>
-            </h1>
-            <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-end">
-              <p className="max-w-[32em] text-[1.15rem] leading-[1.7] md:text-[1.25rem]">
-                We find it, organise it, and put it to work — so you, your team, your
-                clients and AI can use more of what you&rsquo;ve spent years creating.
-              </p>
-              <div className="flex lg:justify-end">
-                <a href={CITC_MAILTO} className="lbl flex items-center gap-2 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
-                  Explore Codified in the City <span aria-hidden="true">↗</span>
-                </a>
-              </div>
             </div>
 
             {/* Pull-out card row — front-page departments */}
