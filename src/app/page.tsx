@@ -125,9 +125,14 @@ export default function HomePage() {
               </a>
             ))}
           </nav>
-          <a href={MAP_MAILTO} className="lbl bg-[color:var(--ox)] px-5 py-2.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
-            Start with the Map
-          </a>
+          <div className="flex items-center gap-6">
+            <a href={MAP_MAILTO} className="lbl bg-[color:var(--ox)] px-5 py-2.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
+              Start with the Map
+            </a>
+            <a href="https://app.envisioned.me/login" title="Studio login" className="lbl text-[#FBFAF9]/50 transition-colors hover:text-[#FBFAF9]">
+              Studio
+            </a>
+          </div>
         </div>
       </header>
 
@@ -797,6 +802,7 @@ export default function HomePage() {
                   </a>
                 ))}
                 <a href="mailto:hello@mariaines.co" className="hover:text-[#FBFAF9]">hello@mariaines.co</a>
+                <a href="https://app.envisioned.me/login" title="Studio login" className="hover:text-[#FBFAF9]">Studio</a>
               </div>
             </div>
             <p className="lbl mt-8 text-[#FBFAF9]/40">© 2026 Envisioned Brands · Written, built and run from Europe.</p>
