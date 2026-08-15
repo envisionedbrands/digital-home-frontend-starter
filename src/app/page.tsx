@@ -61,9 +61,14 @@ const CSS = `
 .ch .sheet > div:hover { background-color:var(--stone); }
 .ch .pull-cards a { transition:background-color .35s; }
 .ch .pull-cards a:hover { background-color:var(--stone); }
+.ch .typeband { font-family:'Courier Prime',monospace; letter-spacing:0.06em; }
+.ch .typeband .caret { display:inline-block; width:0.55em; height:1.15em; margin-left:0.12em; vertical-align:text-bottom; background:var(--ox); animation:ch-caret 1.05s step-end infinite; }
+@keyframes ch-caret { 0%,100% { opacity:1; } 50% { opacity:0; } }
+.ch .quote-tw em { font-family:'Courier Prime',monospace; font-style:italic; font-size:0.88em; letter-spacing:0; color:var(--ox); }
 @media (prefers-reduced-motion: reduce) {
   .ch .hero-zoom, .ch .h-a, .ch .h-b, .ch .h-c, .ch .h-d { animation:none; }
   .ch .ticker-track { animation:none; }
+  .ch .typeband .caret { animation:none; }
 }
 `;
 
@@ -175,22 +180,33 @@ export default function HomePage() {
       </header>
 
       <main id="top">
-        {/* ── Cover — full-bleed postcard hero with the lockup ──────── */}
-        <section id="founder-intelligence" className="relative flex min-h-[92vh] items-center justify-center overflow-hidden px-6 py-24">
-          <Image src="/img/hero-postcard.jpg" alt="Tuscan window with shutters, espresso and notebook in golden morning light" fill priority className="hero-zoom object-cover" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(30,30,30,0.50) 0%, rgba(30,30,30,0.28) 42%, rgba(30,30,30,0.62) 100%)' }} />
-          <div className="photo-em relative flex w-full max-w-[880px] flex-col items-center text-center">
-            <Image src="/img/logo-envisioned-white.png" alt="Envisioned by Maria-Ines" width={360} height={130} priority className="h-a w-[240px] md:w-[340px]" />
-            <h1 className="h-b nr mt-14 max-w-[13em] text-[2.5rem] leading-[1.06] text-[#FBFAF9] md:text-[3.8rem]">
-              Your business is already sitting on <em>extraordinary value.</em>
-            </h1>
-            <p className="h-c mt-8 max-w-[34em] text-[1.1rem] leading-[1.7] text-[#FBFAF9]/90 md:text-[1.2rem]">
-              We find it, organise it, and put it to work — so you, your team, your
-              clients and AI can use more of what you&rsquo;ve spent years creating.
-            </p>
-            <a href={CITC_MAILTO} className="h-d lbl mt-10 flex items-center gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
-              Explore Codified in the City <span aria-hidden="true">↗</span>
-            </a>
+        {/* ── Cover — the Martini move: lockup + headline stay pinned
+             while the photography scrolls beneath them ─────────────── */}
+        <section id="founder-intelligence" className="relative">
+          <div className="pointer-events-none sticky top-0 z-10 flex h-screen items-center justify-center px-6">
+            <div className="photo-em pointer-events-auto flex w-full max-w-[880px] flex-col items-center text-center">
+              <Image src="/img/logo-envisioned-white.png" alt="Envisioned by Maria-Ines" width={360} height={130} priority className="h-a w-[240px] md:w-[340px]" />
+              <h1 className="h-b nr mt-14 max-w-[13em] text-[2.5rem] leading-[1.06] text-[#FBFAF9] md:text-[3.8rem]">
+                Your business is already sitting on <em>extraordinary value.</em>
+              </h1>
+              <p className="h-c mt-8 max-w-[34em] text-[1.1rem] leading-[1.7] text-[#FBFAF9]/90 md:text-[1.2rem]">
+                We find it, organise it, and put it to work — so you, your team, your
+                clients and AI can use more of what you&rsquo;ve spent years creating.
+              </p>
+              <a href={CITC_MAILTO} className="h-d lbl mt-10 flex items-center gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
+                Explore Codified in the City <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+          <div className="relative z-0 -mt-[100vh]">
+            <div className="relative h-screen overflow-hidden">
+              <Image src="/img/hero-postcard.jpg" alt="Tuscan window with shutters, espresso and notebook in golden morning light" fill priority className="hero-zoom object-cover" />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(30,30,30,0.52) 0%, rgba(30,30,30,0.30) 45%, rgba(30,30,30,0.58) 100%)' }} />
+            </div>
+            <div className="relative h-[85vh] overflow-hidden">
+              <Image src="/img/movement-drive.jpg" alt="Driving through the Tuscan countryside" fill className="object-cover" />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(30,30,30,0.55) 0%, rgba(30,30,30,0.35) 50%, rgba(30,30,30,0.62) 100%)' }} />
+            </div>
           </div>
         </section>
 
@@ -221,11 +237,18 @@ export default function HomePage() {
           </div>
         </section>
 
-        <Ticker items={[
-          'Years of ideas.', 'Client conversations.', 'Methodologies.', 'Decisions.',
-          'Workshops.', 'Content.', 'Frameworks.',
-          'Patterns you notice without even realising you notice them anymore.',
-        ]} />
+        {/* Typewriter band — the fragments type themselves (Courier, the
+             codification voice). Static sentence if JS never runs. */}
+        <div className="tickerwrap border-y border-[color:var(--ink)] px-6 py-10">
+          <p
+            className="typeband mx-auto max-w-[1280px] text-[1.05rem] text-[color:var(--ink)] md:text-[1.35rem]"
+            data-typewriter='["Years of ideas.","Client conversations.","Methodologies.","Decisions.","Workshops.","Content.","Frameworks.","Patterns you notice without even realising you notice them anymore."]'
+          >
+            Years of ideas. Client conversations. Methodologies. Decisions. Workshops.
+            Content. Frameworks. Patterns you notice without even realising you notice
+            them anymore.
+          </p>
+        </div>
 
         <section className="px-6 py-32">
           <div className={`${WRAP} grid gap-14 lg:grid-cols-12 lg:items-end`}>
@@ -281,11 +304,25 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* The chapter's one pull moment */}
-            <div className="fx-rv mx-auto max-w-[1080px] py-32 text-center">
-              <p className="nr text-[2.4rem] leading-[1.12] md:text-[3.6rem]">
-                What have you already created that your business <em>doesn&rsquo;t know how to use?</em>
-              </p>
+            {/* The chapter's one pull moment — pinned while photography
+                 passes over it (the Aperol move). Courier-italic accent trial. */}
+            <div className="relative -mx-6 lg:mx-0">
+              <div className="sticky top-0 z-0 flex h-screen items-center justify-center px-6">
+                <p className="quote-tw nr mx-auto max-w-[1080px] text-center text-[2.4rem] leading-[1.14] md:text-[3.6rem]">
+                  What have you already created that your business <em>doesn&rsquo;t know how to use?</em>
+                </p>
+              </div>
+              <div className="pointer-events-none relative z-10 -mt-[100vh]">
+                <div className="flex h-[75vh] items-center pl-[6%]">
+                  <Image src="/img/hero-desk.jpg" alt="Desk with notebook and coffee in warm light" width={420} height={300} className="w-[240px] border border-[color:var(--ink)]/15 object-cover md:w-[380px]" />
+                </div>
+                <div className="flex h-[80vh] items-center justify-end pr-[8%]">
+                  <Image src="/img/city-cafe.jpg" alt="Espresso at a café table in the city" width={460} height={330} className="w-[260px] border border-[color:var(--ink)]/15 object-cover md:w-[420px]" />
+                </div>
+                <div className="flex h-[70vh] items-center justify-center">
+                  <Image src="/img/lived-intelligence.jpg" alt="Working across a table, marking up documents" width={420} height={300} className="w-[230px] border border-[color:var(--ink)]/15 object-cover md:w-[360px]" />
+                </div>
+              </div>
             </div>
 
             <div className="mx-auto max-w-[36em] space-y-5 text-[1.05rem] leading-[1.8]">

@@ -66,7 +66,52 @@ export default function HomeFx() {
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
+    // Typewriter band: types each fragment, holds, erases, moves on.
+    const twEl = root.querySelector<HTMLElement>('[data-typewriter]');
+    const twTimers: ReturnType<typeof setTimeout>[] = [];
+    if (twEl) {
+      let items: string[] = [];
+      try { items = JSON.parse(twEl.dataset.typewriter || '[]'); } catch { /* keep fallback */ }
+      if (items.length) {
+        twEl.textContent = '';
+        const text = document.createTextNode('');
+        const caret = document.createElement('span');
+        caret.className = 'caret';
+        caret.setAttribute('aria-hidden', 'true');
+        twEl.append(text, caret);
+        twEl.setAttribute('aria-label', items.join(' '));
+        let item = 0;
+        let pos = 0;
+        let deleting = false;
+        const tick = () => {
+          const current = items[item];
+          if (!deleting) {
+            pos += 1;
+            text.textContent = current.slice(0, pos);
+            if (pos === current.length) {
+              deleting = true;
+              twTimers.push(setTimeout(tick, 1500));
+              return;
+            }
+            twTimers.push(setTimeout(tick, 42));
+          } else {
+            pos -= 1;
+            text.textContent = current.slice(0, pos);
+            if (pos === 0) {
+              deleting = false;
+              item = (item + 1) % items.length;
+              twTimers.push(setTimeout(tick, 350));
+              return;
+            }
+            twTimers.push(setTimeout(tick, 16));
+          }
+        };
+        twTimers.push(setTimeout(tick, 600));
+      }
+    }
+
     return () => {
+      twTimers.forEach(clearTimeout);
       io.disconnect();
       window.removeEventListener('scroll', onScroll);
       if (raf) cancelAnimationFrame(raf);
