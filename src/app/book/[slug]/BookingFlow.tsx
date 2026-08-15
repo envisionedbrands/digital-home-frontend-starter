@@ -67,6 +67,7 @@ function dayKeyIn(iso: string, tz: string) {
 export default function BookingFlow({ eventType, ownerTimezone }: Props) {
   const [slots, setSlots] = useState<string[] | null>(null);
   const [tz, setTz] = useState<string>(ownerTimezone);
+  const [hour12, setHour12] = useState<boolean>(false);
   const [cursor, setCursor] = useState<{ y: number; m: number } | null>(null);
   const [day, setDay] = useState<string | null>(null);
   const [chosen, setChosen] = useState<string | null>(null);
@@ -78,7 +79,15 @@ export default function BookingFlow({ eventType, ownerTimezone }: Props) {
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<{ starts_at: string; note: string | null } | null>(null);
 
-  useEffect(() => setTz(detectTz()), []);
+  useEffect(() => {
+    setTz(detectTz());
+    // Default to whatever their locale actually uses, then let them override.
+    try {
+      setHour12(Boolean(new Intl.DateTimeFormat(undefined, { hour: 'numeric' }).resolvedOptions().hour12));
+    } catch {
+      /* keep 24h */
+    }
+  }, []);
 
   useEffect(() => {
     let live = true;
@@ -138,10 +147,13 @@ export default function BookingFlow({ eventType, ownerTimezone }: Props) {
   };
 
   const fmtTime = (iso: string, zone: string) =>
-    new Date(iso).toLocaleTimeString('en-GB', {
+    new Date(iso).toLocaleTimeString(hour12 ? 'en-US' : 'en-GB', {
       timeZone: zone,
-      hour: '2-digit',
+      // 12-hour reads as "1:45 PM", not "01:45 PM"; 24-hour keeps the
+      // leading zero so the column stays aligned.
+      hour: hour12 ? 'numeric' : '2-digit',
       minute: '2-digit',
+      hour12,
     });
 
   const fmtDayLong = (key: string) =>
@@ -351,9 +363,32 @@ export default function BookingFlow({ eventType, ownerTimezone }: Props) {
       {/* Timezone */}
       {(slots?.length ?? 0) > 0 && (
         <div className="mt-10 border-t border-[color:var(--hair)] pt-5">
-          <label className="kicker block text-[color:var(--taupe)]" htmlFor="bk-tz">
-            Time zone
-          </label>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <label className="kicker block text-[color:var(--taupe)]" htmlFor="bk-tz">
+              Time zone
+            </label>
+            <div
+              role="group"
+              aria-label="Time format"
+              className="flex border border-[color:var(--stone-deep)]"
+            >
+              {([[false, '24h'], [true, '12h']] as const).map(([mode, label]) => (
+                <button
+                  key={label}
+                  type="button"
+                  aria-pressed={hour12 === mode}
+                  onClick={() => setHour12(mode)}
+                  className={`kicker px-3.5 py-2 transition-colors ${
+                    hour12 === mode
+                      ? 'bg-[color:var(--ink)] text-[color:var(--canvas)]'
+                      : 'text-[color:var(--taupe)] hover:text-[color:var(--ink)]'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
           <select
             id="bk-tz"
             value={tz}
