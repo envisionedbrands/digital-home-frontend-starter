@@ -61,12 +61,16 @@ const CSS = `
 .ch .sheet > div:hover { background-color:var(--stone); }
 .ch .pull-cards a { transition:background-color .35s; }
 .ch .pull-cards a:hover { background-color:var(--stone); }
+.ch .masthead { transition:transform .5s cubic-bezier(.22,1,.36,1), opacity .5s cubic-bezier(.22,1,.36,1); }
+.ch.fx .masthead:not(.nav-in) { transform:translateY(-100%); opacity:0; }
 .ch .typeband { font-family:'Courier Prime',monospace; letter-spacing:0.06em; }
+.ch .hero-tw .caret { background:#FBFAF9; opacity:0.9; }
+.ch .h-e { animation:ch-rise .9s 1.15s cubic-bezier(.22,1,.36,1) both; }
 .ch .typeband .caret { display:inline-block; width:0.55em; height:1.15em; margin-left:0.12em; vertical-align:text-bottom; background:var(--ox); animation:ch-caret 1.05s step-end infinite; }
 @keyframes ch-caret { 0%,100% { opacity:1; } 50% { opacity:0; } }
 .ch .quote-tw em { font-family:'Courier Prime',monospace; font-style:italic; font-size:0.88em; letter-spacing:0; color:var(--ox); }
 @media (prefers-reduced-motion: reduce) {
-  .ch .hero-zoom, .ch .h-a, .ch .h-b, .ch .h-c, .ch .h-d { animation:none; }
+  .ch .hero-zoom, .ch .h-a, .ch .h-b, .ch .h-c, .ch .h-d, .ch .h-e { animation:none; }
   .ch .ticker-track { animation:none; }
   .ch .typeband .caret { animation:none; }
 }
@@ -152,7 +156,7 @@ export default function HomePage() {
       <HomeFx />
 
       {/* ── Masthead — ink band, numbered nav ───────────────────────── */}
-      <header className="bg-[color:var(--char)] text-[#FBFAF9]">
+      <header className="masthead fixed inset-x-0 top-0 z-50 bg-[color:var(--char)] text-[#FBFAF9]">
         <div className="mx-auto flex h-[64px] max-w-[1360px] items-center justify-between px-6">
           <a href="#top" className="nr text-[1.15rem] tracking-tight">Envisioned Brands</a>
           <nav className="hidden items-center gap-8 lg:flex">
@@ -183,17 +187,25 @@ export default function HomePage() {
         {/* ── Cover — the Martini move: lockup + headline stay pinned
              while the photography scrolls beneath them ─────────────── */}
         <section id="founder-intelligence" className="relative">
-          <div className="pointer-events-none sticky top-0 z-10 flex h-screen items-center justify-center px-6">
-            <div className="photo-em pointer-events-auto flex w-full max-w-[880px] flex-col items-center text-center">
-              <Image src="/img/logo-envisioned-white.png" alt="Envisioned by Maria-Ines" width={360} height={130} priority className="h-a w-[240px] md:w-[340px]" />
-              <h1 className="h-b nr mt-14 max-w-[13em] text-[2.5rem] leading-[1.06] text-[#FBFAF9] md:text-[3.8rem]">
+          <div className="pointer-events-none sticky top-0 z-10 flex h-screen flex-col items-center px-6 pt-10 pb-12">
+            {/* Traveling scrim — legibility never depends on the photo behind */}
+            <div aria-hidden="true" className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 62% 52% at 50% 46%, rgba(30,30,30,0.42) 0%, rgba(30,30,30,0.18) 62%, rgba(30,30,30,0) 100%)' }} />
+            <Image src="/img/logo-envisioned-white.png" alt="Envisioned by Maria-Ines" width={300} height={108} priority className="h-a relative w-[190px] md:w-[250px]" />
+            <div className="photo-em relative flex w-full max-w-[880px] flex-1 flex-col items-center justify-center text-center">
+              <h1 className="h-b nr max-w-[13em] text-[2.5rem] leading-[1.06] text-[#FBFAF9] md:text-[3.8rem]">
                 Your business is already sitting on <em>extraordinary value.</em>
               </h1>
               <p className="h-c mt-8 max-w-[34em] text-[1.1rem] leading-[1.7] text-[#FBFAF9]/90 md:text-[1.2rem]">
                 We find it, organise it, and put it to work — so you, your team, your
                 clients and AI can use more of what you&rsquo;ve spent years creating.
               </p>
-              <a href={CITC_MAILTO} className="h-d lbl mt-10 flex items-center gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
+              <p
+                className="typeband hero-tw h-e mt-12 min-h-[1.6em] text-[1rem] text-[#FBFAF9]/95 md:text-[1.25rem]"
+                data-typewriter='["Years of ideas.","Client conversations.","Methodologies.","Decisions.","Workshops.","Content.","Frameworks.","Patterns you notice without even realising you notice them anymore."]'
+              >
+                Years of ideas.
+              </p>
+              <a href={CITC_MAILTO} className="pointer-events-auto h-d lbl mt-12 flex items-center gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
                 Explore Codified in the City <span aria-hidden="true">↗</span>
               </a>
             </div>
@@ -209,46 +221,6 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
-        {/* ── Front page — dateline + pull-out cards ────────────────── */}
-        <section className="px-6 pt-10 pb-16">
-          <div className={WRAP}>
-            <div className="flex flex-wrap items-baseline justify-between gap-y-2 border-b border-[color:var(--ink)] pb-4">
-              <span className="lbl">Founder intelligence, made usable.</span>
-              <span className="lbl text-[color:var(--ink)]/50">E / B</span>
-            </div>
-
-            {/* Pull-out card row — front-page departments */}
-            <div className="pull-cards stagger mt-14 grid border-y border-[color:var(--ink)] sm:grid-cols-3 sm:divide-x sm:divide-[color:var(--hair)]">
-              {[
-                ['01', 'Founder Intelligence', 'The layer we uncover', '#founder-intelligence-name'],
-                ['02', 'Codified in the City', 'The hero experience', '#citc'],
-                ['03', 'Ways to Work', 'Where to begin', '#ways-to-work'],
-              ].map(([n, label, kicker, href]) => (
-                <a key={label} href={href} className="group flex flex-col gap-3 py-6 sm:px-8 sm:first:pl-0 sm:last:pr-0">
-                  <span className="lbl text-[color:var(--ox)]">{kicker}</span>
-                  <span className="nr flex items-baseline justify-between gap-4 text-[1.3rem]">
-                    {label}
-                    <span aria-hidden="true" className="idx transition-transform group-hover:translate-x-1">{n} →</span>
-                  </span>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Typewriter band — the fragments type themselves (Courier, the
-             codification voice). Static sentence if JS never runs. */}
-        <div className="tickerwrap border-y border-[color:var(--ink)] px-6 py-10">
-          <p
-            className="typeband mx-auto max-w-[1280px] text-[1.05rem] text-[color:var(--ink)] md:text-[1.35rem]"
-            data-typewriter='["Years of ideas.","Client conversations.","Methodologies.","Decisions.","Workshops.","Content.","Frameworks.","Patterns you notice without even realising you notice them anymore."]'
-          >
-            Years of ideas. Client conversations. Methodologies. Decisions. Workshops.
-            Content. Frameworks. Patterns you notice without even realising you notice
-            them anymore.
-          </p>
-        </div>
 
         <section className="px-6 py-32">
           <div className={`${WRAP} grid gap-14 lg:grid-cols-12 lg:items-end`}>

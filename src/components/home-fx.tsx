@@ -48,11 +48,13 @@ export default function HomeFx() {
     // Parallax on the photo bands (act breaks + CITC): the image drifts
     // slower than the page. Scale compensates so edges never show.
     const pxImgs = Array.from(root.querySelectorAll<HTMLElement>('[data-px] img'));
+    const masthead = root.querySelector('.masthead');
     let raf = 0;
     const onScroll = () => {
       if (raf) return;
       raf = requestAnimationFrame(() => {
         raf = 0;
+        if (masthead) masthead.classList.toggle('nav-in', window.scrollY > 60);
         const vh = window.innerHeight;
         for (const img of pxImgs) {
           const holder = img.parentElement as HTMLElement;
