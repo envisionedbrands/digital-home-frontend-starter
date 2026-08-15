@@ -82,6 +82,17 @@ function ChapterHead({ n, children }: { n: string; children: React.ReactNode }) 
   );
 }
 
+/** Art-directed chapter opener — ghost numeral as a design object. */
+function GhostHead({ n, kicker, title }: { n: string; kicker: string; title: React.ReactNode }) {
+  return (
+    <div className={`${WRAP} relative px-6 pt-20`}>
+      <span aria-hidden="true" className="num pointer-events-none absolute -top-10 right-0 select-none text-[8rem] leading-none text-[color:var(--stone)] md:text-[15rem]">{n}</span>
+      <p className="lbl relative text-[color:var(--ox)]">{kicker}</p>
+      <h2 className="nr relative mt-10 max-w-[12em] text-[2.6rem] leading-[1.05] md:text-[4.2rem]">{title}</h2>
+    </div>
+  );
+}
+
 function Ticker({ items, dark = false }: { items: string[]; dark?: boolean }) {
   const row = (key: string) => (
     <div key={key} className="flex shrink-0 items-center">
@@ -216,15 +227,19 @@ export default function HomePage() {
           'Patterns you notice without even realising you notice them anymore.',
         ]} />
 
-        <section className="px-6 py-20">
-          <div className={`${WRAP} grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]`}>
-            <div className="nr text-[1.7rem] leading-[1.35] md:text-[2.1rem]">
-              <p>You&rsquo;ve already done the hard part.</p>
-              <p>You built the intelligence.</p>
-              <p className="mt-8">The problem?</p>
-              <p>Most of it is sitting there doing <em>remarkably little.</em></p>
+        <section className="px-6 py-32">
+          <div className={`${WRAP} grid gap-14 lg:grid-cols-12 lg:items-end`}>
+            <div className="lg:col-span-7">
+              <p className="text-[1.05rem] leading-[1.8]">You&rsquo;ve already done the hard part.</p>
+              <p className="text-[1.05rem] leading-[1.8]">You built the intelligence.</p>
+              <p className="mt-6 text-[1.05rem] leading-[1.8]">The problem?</p>
+              <p className="fx-rv nr mt-10 max-w-[10em] text-[2.8rem] leading-[1.06] md:text-[4rem]">
+                Most of it is sitting there doing <em>remarkably little.</em>
+              </p>
             </div>
-            <Image src="/img/hero-desk.jpg" alt="Desk with notebook and coffee in warm light" width={640} height={460} className="w-full max-w-[560px] justify-self-end object-cover" />
+            <div className="lg:col-span-4 lg:col-start-9">
+              <Image src="/img/hero-desk.jpg" alt="Desk with notebook and coffee in warm light" width={640} height={460} className="w-full object-cover" />
+            </div>
           </div>
         </section>
 
@@ -235,14 +250,10 @@ export default function HomePage() {
 
         {/* ── 02 ────────────────────────────────────────────────────── */}
         <Rule />
-        <ChapterHead n="02">Before you create more</ChapterHead>
-        <section className="px-6 pt-12 pb-20">
+        <GhostHead n="02" kicker="Before you create more" title={<>Before you create more with AI, find out what you <em>already own.</em></>} />
+        <section className="px-6 pt-16 pb-28">
           <div className={WRAP}>
-            <h2 className="nr max-w-[16em] text-[2.2rem] leading-[1.08] md:text-[3.1rem]">
-              Before you create more with AI, find out what you <em>already own.</em>
-            </h2>
-
-            <p className="mt-12 text-[1.05rem]">AI has made it absurdly easy to create.</p>
+            <p className="text-[1.05rem]">AI has made it absurdly easy to create.</p>
             <div className="mt-6">
               <Sheet cols={3} items={[
                 'More content.', 'More offers.', 'More emails.',
@@ -251,8 +262,8 @@ export default function HomePage() {
               ]} />
             </div>
 
-            <div className="mt-14 grid gap-12 lg:grid-cols-2 lg:gap-0">
-              <div className="space-y-5 text-[1.05rem] leading-[1.75] lg:pr-14">
+            <div className="mt-24 grid gap-12 lg:grid-cols-12">
+              <div className="space-y-5 text-[1.05rem] leading-[1.8] lg:col-span-5">
                 <p>But more is not automatically better.</p>
                 <p>
                   Especially when some of your most original thinking is sitting inside a
@@ -261,26 +272,31 @@ export default function HomePage() {
                   hiding inside the way you instinctively make decisions. Or locked inside
                   a methodology your clients understand — but still need you to help them apply.
                 </p>
+              </div>
+              <div className="space-y-5 text-[1.05rem] leading-[1.8] lg:col-span-4 lg:col-start-8 lg:pt-28">
                 <p>We&rsquo;re in an era of almost infinite generation.</p>
-                <p>And somehow the first instruction has been: <em className="nr">generate more.</em></p>
-              </div>
-              <div className="space-y-5 text-[1.05rem] leading-[1.75] lg:border-l lg:border-[color:var(--hair)] lg:pl-14">
-                <p className="nr text-[1.5rem] leading-[1.4] text-[color:var(--ox)]">
-                  The valuable material is rarely missing. It is usually scattered.
-                </p>
+                <p>And somehow the first instruction has been: generate more.</p>
+                <p>The valuable material is rarely missing. It is usually scattered.</p>
                 <p>I&rsquo;m much more interested in another question:</p>
-                <p className="nr text-[1.7rem] leading-[1.35]">
-                  What have you already created that your business <em>doesn&rsquo;t know how to use?</em>
-                </p>
-                <p>
-                  Because your next offer might already be in there. Your next client
-                  experience might already be in there. The missing layer in your
-                  methodology might already be in there. The answer to the question your
-                  team keeps bringing back to you might already be in there. The thing
-                  that finally makes AI useful in your business? Very possibly already in there.
-                </p>
-                <p>You just haven&rsquo;t been able to see all of it together.</p>
               </div>
+            </div>
+
+            {/* The chapter's one pull moment */}
+            <div className="fx-rv mx-auto max-w-[1080px] py-32 text-center">
+              <p className="nr text-[2.4rem] leading-[1.12] md:text-[3.6rem]">
+                What have you already created that your business <em>doesn&rsquo;t know how to use?</em>
+              </p>
+            </div>
+
+            <div className="mx-auto max-w-[36em] space-y-5 text-[1.05rem] leading-[1.8]">
+              <p>
+                Because your next offer might already be in there. Your next client
+                experience might already be in there. The missing layer in your
+                methodology might already be in there. The answer to the question your
+                team keeps bringing back to you might already be in there. The thing
+                that finally makes AI useful in your business? Very possibly already in there.
+              </p>
+              <p>You just haven&rsquo;t been able to see all of it together.</p>
             </div>
           </div>
         </section>
@@ -458,19 +474,20 @@ export default function HomePage() {
 
         {/* ── 07 · Founder Intelligence ─────────────────────────────── */}
         <Rule />
-        <ChapterHead n="07">A name for it</ChapterHead>
-        <section id="founder-intelligence-name" className="px-6 pt-12 pb-20">
-          <div className={WRAP}>
-            <p className="text-[1.1rem]">There&rsquo;s a name for what we&rsquo;re uncovering.</p>
-            <h2 className="nr mt-4 text-[2.8rem] leading-[1.02] text-[color:var(--ox)] md:text-[4.2rem]">Founder Intelligence.</h2>
-            <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-0">
-              <div className="lg:pr-14">
-                <div className="space-y-4 text-[1.05rem] leading-[1.75]">
+        <section id="founder-intelligence-name" className="px-6 pt-20 pb-28">
+          <div className={`${WRAP} relative`}>
+            <span aria-hidden="true" className="num pointer-events-none absolute -top-10 right-0 select-none text-[8rem] leading-none text-[color:var(--stone)] md:text-[15rem]">07</span>
+            <p className="lbl relative text-[color:var(--ox)]">A name for it</p>
+            <p className="relative mt-10 text-[1.05rem]">There&rsquo;s a name for what we&rsquo;re uncovering.</p>
+            <h2 className="nr relative mt-4 text-[3.2rem] leading-[0.98] md:text-[6.4rem]">Founder Intelligence.</h2>
+            <div className="mt-24 grid gap-12 lg:grid-cols-12">
+              <div className="lg:col-span-5">
+                <div className="space-y-4 text-[1.05rem] leading-[1.8]">
                   <p>It&rsquo;s the accumulated thinking behind the business.</p>
                   <p>Not simply what you know.</p>
-                  <p className="nr text-[1.7rem]"><em>How</em> you know what to do.</p>
+                  <p className="nr text-[1.6rem]"><em>How</em> you know what to do.</p>
                 </div>
-                <div className="mt-8">
+                <div className="mt-10">
                   <Ledger tight items={[
                     'How you recognise quality.',
                     'How you interpret context.',
@@ -482,12 +499,12 @@ export default function HomePage() {
                   ]} />
                 </div>
               </div>
-              <div className="flex flex-col justify-center space-y-5 text-[1.05rem] leading-[1.75] lg:border-l lg:border-[color:var(--hair)] lg:pl-14">
+              <div className="space-y-5 text-[1.05rem] leading-[1.8] lg:col-span-4 lg:col-start-9 lg:pt-32">
                 <p>Most businesses document the visible layer.</p>
                 <p>The task. The process. The checklist. Useful.</p>
                 <p>But the most valuable businesses have another layer underneath:</p>
-                <p className="nr text-[1.6rem] leading-[1.4]">the intelligence responsible for making the process <em>work well.</em></p>
-                <p className="nr text-[1.6rem] leading-[1.4] text-[color:var(--ox)]">That is the layer we are after.</p>
+                <p>the intelligence responsible for making the process work well.</p>
+                <p className="nr pt-2 text-[1.5rem] leading-[1.35] text-[color:var(--ox)]">That is the layer we are after.</p>
               </div>
             </div>
           </div>
@@ -596,13 +613,10 @@ export default function HomePage() {
 
         {/* ── 11 · When it becomes usable ───────────────────────────── */}
         <Rule />
-        <ChapterHead n="11">When it becomes usable</ChapterHead>
-        <section className="px-6 pt-12 pb-20">
+        <GhostHead n="11" kicker="When it becomes usable" title={<>When your intelligence becomes usable, <em>the business changes.</em></>} />
+        <section className="px-6 pt-16 pb-28">
           <div className={WRAP}>
-            <h2 className="nr max-w-[15em] text-[2.2rem] leading-[1.08] md:text-[3.1rem]">
-              When your intelligence becomes usable, <em>the business changes.</em>
-            </h2>
-            <div className="stagger mt-14 grid border-t border-[color:var(--hair)] sm:grid-cols-2">
+            <div className="stagger mt-10 grid gap-x-20 gap-y-24 sm:grid-cols-2">
               {[
                 ['01', 'Your clients get more of what they actually hired you for.',
                   'Not simply access to more information. More of the judgement behind the information. More help applying what you teach when the real-world situation refuses to fit neatly inside the example from Module Four.'],
@@ -613,28 +627,24 @@ export default function HomePage() {
                 ['04', 'AI stops starting from zero.',
                   'It has something far more useful than another clever prompt. It has context. Your language. Your thinking. Your standards. Your examples. Your methodology. Something distinctly yours to reason with.'],
               ].map(([n, h, body], i) => (
-                <div key={n} className={`border-b border-[color:var(--hair)] py-10 ${i % 2 === 0 ? 'sm:pr-12' : 'sm:border-l sm:border-l-[color:var(--hair)] sm:pl-12'}`}>
-                  <p className="num text-[2.2rem] text-[color:var(--ox)]">{n}</p>
-                  <p className="nr mt-2 text-[1.5rem]">{h}</p>
-                  <p className="mt-4 text-[1.02rem] leading-[1.7]">{body}</p>
+                <div key={n} className={i % 2 === 1 ? 'sm:mt-28' : ''}>
+                  <p aria-hidden="true" className="num select-none text-[5.5rem] leading-none text-[color:var(--stone)]">{n}</p>
+                  <p className="nr mt-5 max-w-[16em] text-[1.55rem] leading-[1.2]">{h}</p>
+                  <p className="mt-4 max-w-[30em] text-[1.02rem] leading-[1.75]">{body}</p>
                 </div>
               ))}
             </div>
-            <div className="mt-16 grid gap-10 lg:grid-cols-2 lg:gap-0">
-              <div className="space-y-5 text-[1.05rem] leading-[1.75] lg:pr-14">
-                <p className="nr text-[1.6rem]">And you get to see the business <em>differently.</em></p>
-                <p>This is one of my favourite parts.</p>
-                <p>Because sometimes we go looking for one thing&hellip; and find something else entirely.</p>
-              </div>
-              <div className="space-y-5 text-[1.05rem] leading-[1.75] lg:border-l lg:border-[color:var(--hair)] lg:pl-14">
-                <p>
-                  An opportunity. An offer. A connection. A method hiding inside what looked
-                  like a collection of unrelated decisions. A piece of intellectual property
-                  that has been there for years without anybody recognising what it could become.
-                </p>
-                <p>We don&rsquo;t always know what we&rsquo;re going to find.</p>
-                <p className="nr text-[1.5rem] text-[color:var(--ox)]"><em>That&rsquo;s rather the point.</em></p>
-              </div>
+            <div className="mx-auto mt-32 max-w-[36em] space-y-5 text-[1.05rem] leading-[1.8]">
+              <p className="fx-rv nr text-[1.9rem] leading-[1.25]">And you get to see the business <em>differently.</em></p>
+              <p>This is one of my favourite parts.</p>
+              <p>Because sometimes we go looking for one thing&hellip; and find something else entirely.</p>
+              <p>
+                An opportunity. An offer. A connection. A method hiding inside what looked
+                like a collection of unrelated decisions. A piece of intellectual property
+                that has been there for years without anybody recognising what it could become.
+              </p>
+              <p>We don&rsquo;t always know what we&rsquo;re going to find.</p>
+              <p className="nr pt-2 text-[1.5rem] text-[color:var(--ox)]"><em>That&rsquo;s rather the point.</em></p>
             </div>
           </div>
         </section>
