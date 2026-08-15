@@ -159,16 +159,11 @@ export default function HomePage() {
 
       {/* ── Masthead — ink band, numbered nav ───────────────────────── */}
       <header className="masthead fixed inset-x-0 top-0 z-50 bg-[color:var(--char)] text-[#FBFAF9]">
-        <div className="mx-auto flex h-[64px] max-w-[1360px] items-center justify-between px-6">
-          <a href="#top" aria-label="Envisioned by Maria-Ines — back to top">
-            <Image src="/img/logo-envisioned-white.png" alt="" width={150} height={54} className="h-[38px] w-auto" />
-          </a>
+        <div className="relative mx-auto flex h-[64px] max-w-[1360px] items-center justify-between px-6">
           <nav className="hidden items-center gap-8 lg:flex">
             {[
               ['01', 'Founder Intelligence', '#founder-intelligence'],
               ['02', 'Codified in the City', '#citc'],
-              ['03', 'Ways to Work', '#ways-to-work'],
-              ['04', 'About', '#about'],
             ].map(([n, label, href]) => (
               <a key={label} href={href} className="lbl flex items-baseline gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
                 <span className="text-[0.6rem] text-[#FBFAF9]/50">{n}</span>
@@ -176,8 +171,22 @@ export default function HomePage() {
               </a>
             ))}
           </nav>
-          <div className="flex items-center gap-6">
-            <a href={MAP_MAILTO} className="lbl bg-[color:var(--ox)] px-5 py-2.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
+          <a href="#top" aria-label="Envisioned by Maria-Ines — back to top" className="absolute left-1/2 -translate-x-1/2">
+            <Image src="/img/logo-envisioned-white.png" alt="" width={150} height={54} className="h-[36px] w-auto" />
+          </a>
+          <div className="flex items-center gap-5">
+            <nav className="hidden items-center gap-6 lg:flex">
+              {[
+                ['03', 'Ways to Work', '#ways-to-work'],
+                ['04', 'About', '#about'],
+              ].map(([n, label, href]) => (
+                <a key={label} href={href} className="lbl flex items-baseline gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
+                  <span className="text-[0.6rem] text-[#FBFAF9]/50">{n}</span>
+                  {label}
+                </a>
+              ))}
+            </nav>
+            <a href={MAP_MAILTO} className="lbl bg-[color:var(--ox)] px-4 py-2.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
               Start with the Map
             </a>
             <a href="https://app.envisioned.me/login" title="Studio login" className="lbl text-[#FBFAF9]/50 transition-colors hover:text-[#FBFAF9]">
