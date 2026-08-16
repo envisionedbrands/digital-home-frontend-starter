@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Inter, Courier_Prime } from 'next/font/google';
+import PageTracker from '@/components/analytics/PageTracker';
 import NavBar from '@/components/layout/NavBar';
 import Footer from '@/components/layout/Footer';
 import './globals.css';
@@ -31,6 +33,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${courierPrime.variable} antialiased`}>
+        {/* Analytics. Suspense because useSearchParams opts the tree into
+            client rendering otherwise — the tracker must never affect how the
+            page itself is served. */}
+        <Suspense fallback={null}>
+          <PageTracker />
+        </Suspense>
         <NavBar />
         {children}
         <Footer />

@@ -142,6 +142,63 @@ export async function POST(request: NextRequest, ctx: Ctx) {
     return NextResponse.json({ error: "Could not hold that time." }, { status: 500 });
   }
 
+  // ── Open a deal ──────────────────────────────────────────────────────
+  // A booking is a real conversation, so it belongs on the pipeline. Stages
+  // describe how far along someone is; the OFFER is a field, which is what
+  // lets one pipeline carry every offer. Never let this fail the booking —
+  // the person has already given us their time.
+  try {
+    const { data: pipeline } = await supabase
+      .from("pipelines")
+      .select("id")
+      .eq("is_default", true)
+      .maybeSingle();
+
+    if (pipeline) {
+      const { data: stages } = await supabase
+        .from("pipeline_stages")
+        .select("id, name, position")
+        .eq("pipeline_id", pipeline.id)
+        .order("position");
+
+      // A booking IS the commitment, so it lands on "Call booked" rather than
+      // the first stage. Fall back to position 1, then to the first stage.
+      const stage =
+        stages?.find((st) => /call booked/i.test(st.name)) ??
+        stages?.[1] ??
+        stages?.[0];
+
+      if (stage) {
+        // One open deal per person per offer — re-booking shouldn't stack.
+        const { data: existingDeal } = await supabase
+          .from("opportunities")
+          .select("id")
+          .eq("lead_id", leadId)
+          .eq("offer_slug", eventType.slug)
+          .eq("status", "open")
+          .maybeSingle();
+
+        if (!existingDeal) {
+          await supabase.from("opportunities").insert({
+            lead_id: leadId,
+            pipeline_id: pipeline.id,
+            stage_id: stage.id,
+            name: `${name} — ${eventType.name}`,
+            // Free calls carry no value on purpose. A made-up number would
+            // make the pipeline lie about revenue in flight.
+            value_cents: eventType.price_cents || 0,
+            currency: eventType.currency || "EUR",
+            offer_slug: eventType.slug,
+            source: "booking",
+            status: "open",
+          });
+        }
+      }
+    }
+  } catch {
+    // Deal creation is bookkeeping; a booking must never fail because of it.
+  }
+
   return NextResponse.json({
     ok: true,
     appointment_id: appt.id,
