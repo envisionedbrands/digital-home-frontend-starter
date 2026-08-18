@@ -19,9 +19,12 @@ function formatDate(dateStr: string) {
   });
 }
 
-function estimateReadingTime(body: string | null): number {
-  if (!body) return 5;
-  const words = body.replace(/<[^>]*>/g, '').split(/\s+/).length;
+// Reading time comes from the stored word_count (migration 012 keeps it correct
+// via a trigger). This page used to select every article's FULL BODY on every
+// request just to compute this number, so the query grew with the archive and
+// the bodies were thrown away. Audit finding, 2026-08-18.
+function readingTimeFromWords(words: number | null): number {
+  if (!words) return 5;
   return Math.max(1, Math.ceil(words / 200));
 }
 
@@ -81,7 +84,7 @@ export default async function BlogPage() {
     const supabase = createAdminClient();
     const { data: articles, error } = await supabase
       .from('content_objects')
-      .select('id, slug, title, content_type, excerpt, semantic_tags, published_at, featured_image_url, body')
+      .select('id, slug, title, content_type, excerpt, semantic_tags, published_at, featured_image_url, word_count')
       .eq('status', 'published')
       .in('content_type', ['article', 'guide'])
       .order('published_at', { ascending: false, nullsFirst: false });
@@ -96,7 +99,7 @@ export default async function BlogPage() {
       excerpt: a.excerpt || '',
       category: categoryOf(a.semantic_tags || [], a.content_type),
       published_at: a.published_at || a.slug,
-      reading_time: estimateReadingTime(a.body),
+      reading_time: readingTimeFromWords(a.word_count),
       image: a.featured_image_url || '',
     }));
   } catch (err) {

@@ -21,7 +21,34 @@ export async function authenticateRequest(request: NextRequest): Promise<AuthRes
   // 1. Check API key
   const apiKey = request.headers.get("x-api-key");
   if (apiKey) {
-    return validateApiKey(apiKey);
+    const result = validateApiKey(apiKey);
+
+    // The backend requires an HMAC signature (x-timestamp + x-signature) on the
+    // SAME shared secret, but this side historically accepted a bare key. That
+    // makes the scheme only as strong as its weakest acceptor: no replay
+    // protection, and a key leaked from a log is immediately usable here.
+    //
+    // Enforcing it outright would break publishing — several backend callers
+    // still send the key unsigned. So: log every unsigned-but-valid call, and
+    // gate enforcement behind API_SIGNATURE_REQUIRED. Once the logs are quiet
+    // and every caller signs, set that flag to "true" and this closes for good.
+    // Audit finding, 2026-08-18.
+    if (result.authenticated) {
+      const signed =
+        !!request.headers.get("x-signature") && !!request.headers.get("x-timestamp");
+      if (!signed) {
+        console.warn(
+          `[auth] UNSIGNED api-key request agent=${result.mode === "api-key" ? result.agent : "?"} ` +
+            `path=${request.nextUrl.pathname} method=${request.method} ` +
+            `ua=${request.headers.get("user-agent") || "none"}`
+        );
+        if (process.env.API_SIGNATURE_REQUIRED === "true") {
+          return { authenticated: false, error: "Request signature required" };
+        }
+      }
+    }
+
+    return result;
   }
 
   // 2. Check session
