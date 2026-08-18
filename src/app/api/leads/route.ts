@@ -62,22 +62,36 @@ export async function POST(request: NextRequest) {
     .single();
 
   if (existing) {
-    // Update existing lead
+    // Only send the fields that were actually supplied. Every value here used to
+    // be `|| undefined`, so a repeat capture carrying just an email produced an
+    // EMPTY update — PostgREST then matched no rows and `.single()` failed with
+    // "Cannot coerce the result to a single JSON object". Anyone who submitted a
+    // form twice got an error instead of a thank-you. Audit finding, 2026-08-18.
+    const updates: Record<string, unknown> = {};
+    if (body.first_name) updates.first_name = body.first_name;
+    if (body.last_name) updates.last_name = body.last_name;
+    if (visitorId) updates.visitor_id = visitorId;
+    if (body.capture_page) updates.capture_page = body.capture_page;
+    if (body.tags) updates.tags = body.tags;
+
+    if (Object.keys(updates).length === 0) {
+      return jsonResponse({ ok: true, id: existing.id });
+    }
+
     const { data, error } = await supabase
       .from("leads")
-      .update({
-        first_name: body.first_name || undefined,
-        last_name: body.last_name || undefined,
-        visitor_id: visitorId || undefined,
-        capture_page: body.capture_page || undefined,
-        tags: body.tags || undefined,
-      })
+      .update(updates)
       .eq("id", existing.id)
-      .select()
+      .select("id")
       .single();
 
     if (error) return errorResponse(error.message, 500);
-    return jsonResponse(data);
+    // Never echo the stored row back. This endpoint is PUBLIC and writes with
+    // the service-role key, so returning the full record handed any anonymous
+    // caller the whole CRM row for any email they could guess — name, tags,
+    // score, status, unsubscribe_token — and doubled as an oracle for "is this
+    // person on her list?". Audit finding, 2026-08-18.
+    return jsonResponse({ ok: true, id: data.id });
   }
 
   // Create new lead
@@ -95,7 +109,7 @@ export async function POST(request: NextRequest) {
       tags: body.tags || [],
       interested_offers: body.interested_offers || [],
     })
-    .select()
+    .select("id")
     .single();
 
   if (error) return errorResponse(error.message, 500);
@@ -108,5 +122,5 @@ export async function POST(request: NextRequest) {
       .eq("anonymous_id", visitorId);
   }
 
-  return jsonResponse(data, 201);
+  return jsonResponse({ ok: true, id: data.id }, 201);
 }
