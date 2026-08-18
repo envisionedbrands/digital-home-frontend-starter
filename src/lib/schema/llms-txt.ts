@@ -8,9 +8,15 @@
 
 import type { Tables } from "@/types/database";
 
-type Entity = Tables<"entities">;
-type ContentObject = Tables<"content_objects">;
-type Offer = Tables<"offers">;
+// Only the columns this generator reads. Narrowed from the full Row types so
+// callers can select just these — llms.txt used to `select("*")` and pull every
+// article's full body on every request to print a title. Audit, 2026-08-18.
+type Entity = Pick<Tables<"entities">, "name" | "description" | "entity_type" | "url">;
+type ContentObject = Pick<Tables<"content_objects">, "title" | "slug" | "excerpt" | "subtitle" | "status">;
+type Offer = Pick<
+  Tables<"offers">,
+  "name" | "description" | "tagline" | "price_display" | "cta_url" | "who_its_for" | "status"
+>;
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "http://localhost:3000";
 const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "[YOUR BRAND]";

@@ -17,9 +17,21 @@ export async function GET() {
     { data: content },
     { data: offers },
   ] = await Promise.all([
-    supabase.from("entities").select("*").order("name"),
-    supabase.from("content_objects").select("*").eq("status", "published").order("published_at", { ascending: false }),
-    supabase.from("offers").select("*").eq("status", "active").order("position_in_ladder"),
+    // Select only the columns generateLlmsTxt actually reads. `select("*")`
+    // pulled the FULL BODY of every published article on every request just to
+    // print a title, slug and excerpt — a payload that grows with the archive
+    // and is then thrown away. Audit finding, 2026-08-18.
+    supabase.from("entities").select("name, description, entity_type, url").order("name"),
+    supabase
+      .from("content_objects")
+      .select("title, slug, excerpt, subtitle, status")
+      .eq("status", "published")
+      .order("published_at", { ascending: false }),
+    supabase
+      .from("offers")
+      .select("name, description, tagline, price_display, cta_url, who_its_for, status")
+      .eq("status", "active")
+      .order("position_in_ladder"),
   ]);
 
   const txt = generateLlmsTxt(
