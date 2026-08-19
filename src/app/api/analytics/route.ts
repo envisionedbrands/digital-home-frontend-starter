@@ -21,8 +21,13 @@ import { createAdminClient } from "@/lib/supabase/server";
 import { authenticateRequest, unauthorizedResponse } from "@/lib/api/auth";
 import { jsonResponse, errorResponse, parsePagination, paginatedResponse } from "@/lib/api/response";
 import { VISITOR_COOKIE_NAME } from "@/lib/personalization/visitor";
+import { checkRateLimit } from "@/lib/api/rate-limit";
 
 export async function POST(request: NextRequest) {
+  // Public, anonymous, writes to the database — throttle before doing anything.
+  const limited = await checkRateLimit(request, "WRITE_LIMITER");
+  if (limited) return limited;
+
   const body = await request.json();
 
   if (!body.event_type) {

@@ -19,6 +19,29 @@
   "routes": [
     { "pattern": "home.envisioned.me", "custom_domain": true }
   ],
+  // Cloudflare's native rate limiters. Free, edge-local, no KV or Durable Object
+  // needed. Two tiers: WRITE_LIMITER guards the high-volume anonymous writes
+  // (lead capture, visitor + analytics beacons); STRICT_LIMITER guards the ones
+  // that cost real money or real time if abused — bookings, the assessment, and
+  // anything that sends mail. namespace_id just has to be unique and stable.
+  // Audit finding, 2026-08-18.
+  "unsafe": {
+    "bindings": [
+      {
+        "name": "WRITE_LIMITER",
+        "type": "ratelimit",
+        "namespace_id": "1001",
+        "simple": { "limit": 30, "period": 60 }
+      },
+      {
+        "name": "STRICT_LIMITER",
+        "type": "ratelimit",
+        "namespace_id": "1002",
+        "simple": { "limit": 5, "period": 60 }
+      }
+    ]
+  },
+
   // Runtime duplicates of NEXT_PUBLIC_ vars — Workers can't read NEXT_PUBLIC_ at runtime
   "vars": {
     "SUPABASE_URL": "https://aqylffhuzunpimrebgye.supabase.co",
@@ -27,6 +50,7 @@
     "NEXT_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_JumdNZ3GzN06G5oVgBR8_Q_SX8vdlbq",
     "NEXT_PUBLIC_SITE_NAME": "Envisioned Systems",
     "SITE_URL": "https://home.envisioned.me",
-    "NEXT_PUBLIC_SITE_URL": "https://home.envisioned.me"
+    "NEXT_PUBLIC_SITE_URL": "https://home.envisioned.me",
+    "CRM_BACKEND_URL": "https://app.envisioned.me"
   }
 }

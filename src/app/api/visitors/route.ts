@@ -11,6 +11,7 @@ import { NextRequest } from "next/server";
 import { createAdminClient } from "@/lib/supabase/server";
 import { authenticateRequest, unauthorizedResponse } from "@/lib/api/auth";
 import { jsonResponse, errorResponse, parsePagination, paginatedResponse } from "@/lib/api/response";
+import { checkRateLimit } from "@/lib/api/rate-limit";
 
 export async function GET(request: NextRequest) {
   const auth = await authenticateRequest(request);
@@ -41,6 +42,10 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  // Public, anonymous, writes to the database — throttle before doing anything.
+  const limited = await checkRateLimit(request, "WRITE_LIMITER");
+  if (limited) return limited;
+
   const body = await request.json();
 
   if (!body.anonymous_id) {

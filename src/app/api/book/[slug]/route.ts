@@ -10,6 +10,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/server";
 import { getEventType, getOpenings } from "@/lib/booking/query";
+import { checkRateLimit } from "@/lib/api/rate-limit";
 
 type Ctx = { params: Promise<{ slug: string }> };
 
@@ -41,6 +42,10 @@ function isEmail(v: string) {
 }
 
 export async function POST(request: NextRequest, ctx: Ctx) {
+  // Public, anonymous, writes to the database — throttle before doing anything.
+  const limited = await checkRateLimit(request, "STRICT_LIMITER");
+  if (limited) return limited;
+
   const { slug } = await ctx.params;
   const eventType = await getEventType(slug);
   if (!eventType) return NextResponse.json({ error: "Not found" }, { status: 404 });
