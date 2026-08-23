@@ -17,6 +17,7 @@ export default function EmailGateModal({
 }: EmailGateModalProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [aiLevel, setAiLevel] = useState('');
   const [consent, setConsent] = useState(true);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -30,6 +31,7 @@ export default function EmailGateModal({
       setStatus('idle');
       setName('');
       setEmail('');
+      setPhone('');
       setAiLevel('');
       setConsent(true);
       setErrorMsg('');
@@ -73,8 +75,9 @@ export default function EmailGateModal({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          first_name: name.trim() || undefined,
+          first_name: name.trim(),
           email: email.trim().toLowerCase(),
+          phone: phone.trim() || undefined,
           source: 'resources-page',
           capture_page: '/resources',
           tags: [
@@ -198,7 +201,8 @@ export default function EmailGateModal({
                   ref={inputRef}
                   id="gate-name"
                   type="text"
-                  placeholder="First name"
+                  required
+                  placeholder="First name *"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   disabled={status === 'submitting'}
@@ -212,9 +216,22 @@ export default function EmailGateModal({
                   id="gate-email"
                   type="email"
                   required
-                  placeholder="Your email"
+                  placeholder="Your email *"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  disabled={status === 'submitting'}
+                  className="w-full border border-hair-olive bg-canvas-soft px-4 py-3.5 text-[0.95rem] text-ink placeholder:text-taupe/60 focus:outline-none focus:border-olive transition-colors disabled:opacity-60"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="gate-phone" className="sr-only">Phone (optional)</label>
+                <input
+                  id="gate-phone"
+                  type="tel"
+                  placeholder="Phone (optional)"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   disabled={status === 'submitting'}
                   className="w-full border border-hair-olive bg-canvas-soft px-4 py-3.5 text-[0.95rem] text-ink placeholder:text-taupe/60 focus:outline-none focus:border-olive transition-colors disabled:opacity-60"
                 />
