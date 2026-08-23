@@ -15,7 +15,10 @@ export default function EmailGateModal({
   resourceTitle,
   downloadUrl,
 }: EmailGateModalProps) {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [aiLevel, setAiLevel] = useState('');
+  const [consent, setConsent] = useState(true);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -25,7 +28,10 @@ export default function EmailGateModal({
   useEffect(() => {
     if (open) {
       setStatus('idle');
+      setName('');
       setEmail('');
+      setAiLevel('');
+      setConsent(true);
       setErrorMsg('');
       // Small delay so the DOM is painted
       const t = setTimeout(() => inputRef.current?.focus(), 80);
@@ -67,10 +73,19 @@ export default function EmailGateModal({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          first_name: name.trim() || undefined,
           email: email.trim().toLowerCase(),
           source: 'resources-page',
           capture_page: '/resources',
-          tags: ['resource-download', 'call-intel-freebie'],
+          tags: [
+            'resource-download',
+            'call-intel-freebie',
+            ...(aiLevel ? [`ai-level-${aiLevel}`] : []),
+          ],
+          custom: {
+            ...(aiLevel ? { ai_level: aiLevel } : {}),
+            consent_email: consent,
+          },
         }),
       });
 
@@ -178,11 +193,22 @@ export default function EmailGateModal({
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="gate-email" className="sr-only">
-                  Email address
-                </label>
+                <label htmlFor="gate-name" className="sr-only">First name</label>
                 <input
                   ref={inputRef}
+                  id="gate-name"
+                  type="text"
+                  placeholder="First name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  disabled={status === 'submitting'}
+                  className="w-full border border-hair-olive bg-canvas-soft px-4 py-3.5 text-[0.95rem] text-ink placeholder:text-taupe/60 focus:outline-none focus:border-olive transition-colors disabled:opacity-60"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="gate-email" className="sr-only">Email address</label>
+                <input
                   id="gate-email"
                   type="email"
                   required
@@ -194,22 +220,54 @@ export default function EmailGateModal({
                 />
               </div>
 
+              <div>
+                <p className="text-[0.8rem] text-taupe mb-2">Where are you with AI?</p>
+                <div className="flex gap-2">
+                  {[
+                    { value: '1', label: 'Getting started' },
+                    { value: '2', label: 'Using Cowork' },
+                    { value: '3', label: 'In the Code' },
+                  ].map((opt) => (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => setAiLevel(aiLevel === opt.value ? '' : opt.value)}
+                      className={`flex-1 px-3 py-2.5 text-[0.8rem] border transition-colors ${
+                        aiLevel === opt.value
+                          ? 'border-olive bg-olive/10 text-ink'
+                          : 'border-hair-olive text-taupe hover:border-olive/50'
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
+                  className="mt-1 accent-[var(--olive)]"
+                />
+                <span className="text-[0.8rem] text-taupe leading-relaxed">
+                  I&rsquo;m happy to receive emails from Envisioned | Maria-In&eacute;s. Unsubscribe anytime.
+                </span>
+              </label>
+
               {status === 'error' && errorMsg && (
                 <p className="text-[0.85rem] text-[var(--color-error)]">{errorMsg}</p>
               )}
 
               <button
                 type="submit"
-                disabled={status === 'submitting'}
+                disabled={status === 'submitting' || !consent}
                 className="w-full bg-olive text-canvas px-6 py-3.5 text-[0.95rem] font-medium hover:bg-olive-deep transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {status === 'submitting' ? 'Sending...' : 'Send me the file'}
               </button>
             </form>
-
-            <p className="text-[0.75rem] text-taupe/70 mt-5 leading-relaxed">
-              Your email stays with us. Unsubscribe anytime.
-            </p>
           </>
         )}
       </div>
