@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import EmailGateModal from './EmailGateModal';
 
 interface Resource {
@@ -30,12 +29,10 @@ export default function ResourceCard({ resource }: { resource: Resource }) {
               style={{ background: resource.gradientFallback }}
             />
           ) : (
-            <Image
+            <img
               src={resource.image}
               alt={resource.title}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              sizes="(max-width: 768px) 100vw, 50vw"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
               onError={() => setImgError(true)}
             />
           )}
