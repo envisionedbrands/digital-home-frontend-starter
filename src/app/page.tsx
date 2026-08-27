@@ -252,6 +252,22 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* The thesis, stated once, at full size, before any argument begins.
+             Moved here from chapter 02 at MI's request — it was doing quiet work
+             in a side column when it is the whole point of the page. */}
+        <section className="px-6 py-40 text-center md:py-64">
+          <div className={WRAP}>
+            <p className="fx-rv nr text-[2.6rem] leading-[1.04] md:text-[5.2rem]">You do not need more AI.</p>
+            <p className="fx-rv nr mt-3 text-[2.6rem] leading-[1.04] text-[color:var(--ox)] md:mt-5 md:text-[5.2rem]">
+              <em>AI needs more of you.</em>
+            </p>
+            <p className="mx-auto mt-16 max-w-[34em] text-[1.05rem] leading-[1.85] md:mt-20 md:text-[1.15rem]">
+              So stop blaming it for the slop. If you do not give it substantial context,
+              it will fill the gaps with the average of everyone else&rsquo;s.
+            </p>
+          </div>
+        </section>
+
         <section className="px-6 py-40 md:py-56">
           <div className={`${WRAP} grid gap-20 lg:grid-cols-12 lg:items-end lg:gap-14`}>
             <div className="lg:col-span-7">
@@ -298,13 +314,9 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="space-y-5 text-[1.05rem] leading-[1.8] lg:col-span-4 lg:col-start-8 lg:pt-28">
-                <p className="nr text-[1.7rem] leading-[1.3]">You do not need more AI.</p>
-                <p className="nr text-[1.7rem] leading-[1.3] text-[color:var(--ox)]"><em>AI needs more of you.</em></p>
-                <p>
-                  So stop blaming it for the slop. If you do not give it substantial
-                  context, it will fill the gaps with the average of everyone else&rsquo;s.
-                </p>
-                <p>That is how the machine averages the genius out of a business.</p>
+                <p>Codification is how you stop the machine from averaging the genius out of your business.</p>
+                <p>Your intelligence is everywhere.</p>
+                <p>Except where it can work.</p>
               </div>
             </div>
 
