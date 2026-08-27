@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'The Rooms — Envisioned Systems',
+  title: 'The Rooms — Envisioned',
   description:
     'One method, five fittings: extraction, codification, deployment. The Integration Map, the Atelier, Codified in the City, the Residency, and Embedded Genius.',
 };

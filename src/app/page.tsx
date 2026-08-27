@@ -21,8 +21,10 @@ import HomeFx from '@/components/home-fx';
 
 const MAP_MAILTO = 'mailto:hello@mariaines.co?subject=The%20Integration%20Map';
 const CITC_MAILTO = 'mailto:hello@mariaines.co?subject=Codified%20in%20the%20City';
+const ATELIER_MAILTO = 'mailto:hello@mariaines.co?subject=The%20Atelier';
 const RES_MAILTO = 'mailto:hello@mariaines.co?subject=The%20Residency';
 const EG_MAILTO = 'mailto:hello@mariaines.co?subject=Embedded%20Genius';
+const STUDIO_MAILTO = 'mailto:hello@mariaines.co?subject=Codified%20Studio';
 
 const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Courier+Prime:wght@400;700&display=swap');
@@ -164,6 +166,7 @@ export default function HomePage() {
             {[
               ['01', 'Founder Intelligence', '#founder-intelligence'],
               ['02', 'Codified in the City', '#citc'],
+              ['03', 'The Atelier', '#ways-to-work'],
             ].map(([n, label, href]) => (
               <a key={label} href={href} className="lbl flex items-baseline gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
                 <span className="text-[0.6rem] text-[#FBFAF9]/50">{n}</span>
@@ -177,8 +180,8 @@ export default function HomePage() {
           <div className="flex items-center gap-5">
             <nav className="hidden items-center gap-6 lg:flex">
               {[
-                ['03', 'Ways to Work', '#ways-to-work'],
-                ['04', 'About', '#about'],
+                ['04', 'Ways to Work', '#ways-to-work'],
+                ['05', 'About', '#about'],
               ].map(([n, label, href]) => (
                 <a key={label} href={href} className="lbl flex items-baseline gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
                   <span className="text-[0.6rem] text-[#FBFAF9]/50">{n}</span>
@@ -707,13 +710,15 @@ export default function HomePage() {
             <h2 className="nr max-w-[16em] text-[2.2rem] leading-[1.08] md:text-[3rem]">
               Begin with the part that needs to become <em>usable first.</em>
             </h2>
-            <div className="stagger mt-12 grid border-t-2 border-[color:var(--ink)] sm:grid-cols-3 sm:divide-x sm:divide-[color:var(--hair)]">
+            <div className="stagger mt-12 grid border-t-2 border-[color:var(--ink)] sm:grid-cols-2 lg:grid-cols-4 sm:divide-x sm:divide-[color:var(--hair)]">
               <div className="flex flex-col py-8 sm:pr-8">
                 <p className="lbl text-[color:var(--ox)]">One</p>
-                <p className="nr mt-4 text-[1.55rem] leading-[1.25]">Not ready for the full build? Start with The Integration Map.</p>
+                <p className="nr mt-4 text-[1.55rem] leading-[1.25]">Start with The Integration Map.</p>
                 <p className="mt-4 flex-1 text-[1.02rem] leading-[1.7]">
-                  Sometimes you know there is value everywhere. You just cannot tell which
-                  part deserves your attention first.
+                  A paid diagnostic. You send the raw material. I read
+                  across your business (both the human presence and the AI legibility)
+                  and return a written roadmap with the build order and the real cost
+                  of staying scattered.
                 </p>
                 <a href={MAP_MAILTO} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
                   Start with the Map →
@@ -721,22 +726,40 @@ export default function HomePage() {
               </div>
               <div className="flex flex-col py-8 sm:px-8">
                 <p className="lbl text-[color:var(--ox)]">Two</p>
+                <p className="nr mt-4 text-[1.55rem] leading-[1.25]">Build it together in The Atelier.</p>
+                <p className="mt-4 flex-1 text-[1.02rem] leading-[1.7]">
+                  Eight weeks, live, small group. I extract your business
+                  knowledge, organise it into your Pattern Book (the organised
+                  brain your AI can actually work from), and build your first
+                  working system on top of it. A working studio for founder
+                  intelligence. Ten seats per Build, fitted in fives.
+                </p>
+                <a href={ATELIER_MAILTO} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
+                  Ask about The Atelier →
+                </a>
+              </div>
+              <div className="flex flex-col py-8 sm:pr-8 lg:px-8">
+                <p className="lbl text-[color:var(--ox)]">Three</p>
                 <p className="nr mt-4 text-[1.55rem] leading-[1.25]">Already building? Stay for The Residency.</p>
                 <p className="mt-4 flex-1 text-[1.02rem] leading-[1.7]">
-                  The interesting thing about making one part of the business more
-                  intelligent is that you start noticing all the other places where the
-                  same thinking could travel.
+                  Ninety days as your integration partner after a build day. One
+                  live sprint per month plus async access. Because the interesting thing
+                  about making one part of the business more intelligent is that you
+                  start noticing all the other places where the same thinking could
+                  travel.
                 </p>
                 <a href={RES_MAILTO} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
                   Ask about The Residency →
                 </a>
               </div>
               <div className="flex flex-col py-8 sm:pl-8">
-                <p className="lbl text-[color:var(--ox)]">Three</p>
-                <p className="nr mt-4 text-[1.55rem] leading-[1.25]">For the businesses ready to go deeper: Embedded Genius</p>
+                <p className="lbl text-[color:var(--ox)]">Four</p>
+                <p className="nr mt-4 text-[1.55rem] leading-[1.25]">For the businesses ready to go deeper: Embedded Genius.</p>
                 <p className="mt-4 flex-1 text-[1.02rem] leading-[1.7]">
-                  For selected founder-led businesses ready to make their intelligence
-                  usable across a larger part of the company.
+                  Your methodology deployed as AI tools inside your own programme.
+                  So your genius scales inside the client experience without you
+                  being in every room. For selected founder-led businesses, by
+                  enquiry only.
                 </p>
                 <a href={EG_MAILTO} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
                   Enquire about Embedded Genius →
@@ -745,6 +768,21 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* ── Free tools ────────────────────────────────────────────── */}
+        <div className={`${WRAP} px-6 py-10`}>
+          <div className="flex flex-col gap-4 border-t border-[color:var(--hair)] pt-8 sm:flex-row sm:items-baseline sm:justify-between">
+            <p className="lbl text-[color:var(--ox)]">Before you commit to anything</p>
+            <div className="flex flex-wrap gap-x-8 gap-y-2 text-[1.02rem]">
+              <a href="https://taste.envisioned.me" className="transition-colors hover:text-[color:var(--ox)]">
+                Take the Codification Interview (free) →
+              </a>
+              <a href="/resources" className="transition-colors hover:text-[color:var(--ox)]">
+                Download a skill file →
+              </a>
+            </div>
+          </div>
+        </div>
 
         {/* ── Probably for you ──────────────────────────────────────── */}
         <Rule />
@@ -851,15 +889,18 @@ export default function HomePage() {
             </a>
             <div className="mt-20 flex flex-col gap-3 border-t border-[#FBFAF9]/20 pt-8 md:flex-row md:items-baseline md:justify-between">
               <div>
-                <p className="nr text-[1.3rem]">Envisioned Brands</p>
+                <p className="nr text-[1.3rem]">Envisioned</p>
                 <p className="lbl mt-1 text-[#FBFAF9]/60">Your intelligence. Made usable.</p>
               </div>
               <div className="lbl flex flex-wrap gap-x-8 gap-y-2 text-[#FBFAF9]/70">
                 {[
                   ['01', 'Founder Intelligence', '#founder-intelligence'],
                   ['02', 'Codified in the City', '#citc'],
-                  ['03', 'Ways to Work', '#ways-to-work'],
-                  ['04', 'About', '#about'],
+                  ['03', 'The Atelier', '#ways-to-work'],
+                  ['04', 'Ways to Work', '#ways-to-work'],
+                  ['05', 'About', '#about'],
+                  ['06', 'Notes', '/notes'],
+                  ['07', 'Resources', '/resources'],
                 ].map(([n, label, href]) => (
                   <a key={label} href={href} className="flex items-baseline gap-2 hover:text-[#FBFAF9]">
                     <span className="text-[0.6rem] text-[#FBFAF9]/40">{n}</span>{label}
@@ -869,7 +910,7 @@ export default function HomePage() {
                 <a href="https://app.envisioned.me/login" title="Studio login" className="hover:text-[#FBFAF9]">Studio</a>
               </div>
             </div>
-            <p className="lbl mt-8 text-[#FBFAF9]/40">© 2026 Envisioned Brands · Written, built and run from Europe.</p>
+            <p className="lbl mt-8 text-[#FBFAF9]/40">© 2026 Envisioned · Written, built and run from Europe.</p>
           </div>
         </section>
       </main>

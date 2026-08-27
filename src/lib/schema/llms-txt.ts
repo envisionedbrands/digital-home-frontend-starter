@@ -34,14 +34,14 @@ export function generateLlmsTxt(
   lines.push(`# ${SITE_NAME}`);
   lines.push("");
   lines.push(
-    "> Envisioned Systems builds AI infrastructure that codifies founder intelligence — turning how an expert founder thinks, decides, and works into systems their business runs on."
+    "> Envisioned builds AI infrastructure that codifies founder intelligence — turning how an expert founder thinks, decides, and works into systems their business runs on."
   );
   lines.push("");
 
   lines.push("## About");
   lines.push("");
   lines.push(
-    "Envisioned Systems is run by Maria-Inés, who spent twenty years running multi-million-dollar programs across thirty countries before building AI systems for founders. " +
+    "Envisioned is run by Maria-Ines, who spent twenty years running multi-million-dollar programs across thirty countries before building AI systems for founders. " +
       "The work is not coaching and not generic automation: it is extracting the judgment, patterns, and standards a founder already has, and building AI infrastructure around them — " +
       "so the business keeps thinking in the founder's voice even when the founder is not in the room. Clients are experienced founders and consultants whose expertise is proven but scattered across files, calls, and inboxes."
   );

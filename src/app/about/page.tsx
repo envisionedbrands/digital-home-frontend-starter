@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'About — Envisioned Systems',
+  title: 'About — Envisioned',
   description:
-    'Maria-Inés builds AI infrastructure that codifies founder thinking. Venezuela taught her what breaks when everything depends on one person.',
+    'Maria-Ines builds AI infrastructure that codifies founder thinking. Venezuela taught her what breaks when everything depends on one person.',
 };
 
 export default function AboutPage() {

@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Contact — Envisioned Systems',
-  description: 'Write to Maria-Inés, begin with the Integration Map, or read the essays first.',
+  title: 'Contact — Envisioned',
+  description: 'Write to Maria-Ines, begin with the Integration Map, or read the essays first.',
 };
 
 export default function ContactPage() {

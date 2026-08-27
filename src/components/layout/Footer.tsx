@@ -25,7 +25,7 @@ export default function Footer() {
       <div className="max-w-[1140px] mx-auto">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div>
-            <p className="display text-[1.35rem] text-ink">Envisioned Brands</p>
+            <p className="display text-[1.35rem] text-ink">Envisioned</p>
             <p className="kicker mt-3 text-[0.74rem] text-olive">
               Founder intelligence, made usable.
             </p>
@@ -55,7 +55,7 @@ export default function Footer() {
         </div>
 
         <p className="kicker mt-12 text-[0.74rem] text-ink/80">
-          © 2026 Envisioned Brands. All rights reserved.
+          © 2026 Envisioned. All rights reserved.
         </p>
       </div>
     </footer>

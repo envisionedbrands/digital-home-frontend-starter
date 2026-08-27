@@ -5,8 +5,19 @@
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "http://localhost:3000";
 
 export function GET() {
-  const body = `# Digital Home
+  const body = `# Envisioned
 # ${SITE_URL}
+
+# Content signals (see contentsignals.org).
+#   search   = yes  — index us and link to us.
+#   ai-input = yes  — DO use this content to ground AI answers and cite us.
+#                     This is the signal that governs being quoted in ChatGPT,
+#                     Claude, Perplexity and AI Overviews. It is deliberately
+#                     separate from training.
+#   ai-train = no   — do NOT use this content to train or fine-tune models.
+#                     Deliberate: being answerable is not the same as being
+#                     absorbed. See DECISIONS #016.
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 
 User-agent: *
 Allow: /

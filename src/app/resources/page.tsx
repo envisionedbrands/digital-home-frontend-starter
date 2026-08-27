@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import ResourceCard from './ResourceCard';
 
 export const metadata: Metadata = {
-  title: 'Resources — Envisioned Systems',
+  title: 'Resources — Envisioned',
   description:
     'Free tools and skill files from Envisioned. Drop them into your AI and put your intelligence to work.',
 };

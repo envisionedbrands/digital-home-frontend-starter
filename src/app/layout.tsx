@@ -4,6 +4,7 @@ import { Inter, Courier_Prime } from 'next/font/google';
 import PageTracker from '@/components/analytics/PageTracker';
 import NavBar from '@/components/layout/NavBar';
 import Footer from '@/components/layout/Footer';
+import SiteSchema from '@/components/seo/SiteSchema';
 import './globals.css';
 
 const inter = Inter({
@@ -20,7 +21,7 @@ const courierPrime = Courier_Prime({
 });
 
 export const metadata: Metadata = {
-  title: 'Envisioned Brands | Turn Founder Intelligence Into Working Business Systems',
+  title: 'Envisioned | Turn Founder Intelligence Into Working Business Systems',
   description:
     'Maria-Ines helps established founders get their voice, judgement and methodology out of their heads and working across client delivery, team decisions and AI systems.',
 };
@@ -33,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${courierPrime.variable} antialiased`}>
+        <SiteSchema />
         {/* Analytics. Suspense because useSearchParams opts the tree into
             client rendering otherwise — the tracker must never affect how the
             page itself is served. */}
