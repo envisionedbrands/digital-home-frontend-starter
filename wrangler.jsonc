@@ -16,7 +16,27 @@
   // SUBDOMAIN on purpose: the apex envisioned.me keeps serving the existing
   // site untouched, and a subdomain needs no Next.js basePath (a /path mount
   // would break every asset and internal link).
+  // CANONICAL IS www.envisioned.me (2026-08-27). The bare apex route was
+  // accepted by wrangler but never actually took effect — the apex kept
+  // serving the old WP Engine install while www served this Worker, with
+  // identical route config. Rather than leave the sitemap advertising a
+  // hostname that returns a 2024 membership site, canonical moved to www,
+  // which demonstrably works. The apex route stays declared below so it
+  // starts working the moment whatever is blocking it is cleared; flipping
+  // canonical back is then a one-line change.
+  //
+  // Original note: envisioned.me is the intended canonical home (2026-08-27). The apex was still
+  // pointing at an abandoned WP Engine install (default demo content, last
+  // touched Aug 2024) that described a membership business she no longer runs
+  // — so the strongest domain was telling search engines and LLMs the wrong
+  // thing while the real site sat on a subdomain nothing linked to.
+  //
+  // These are ZONE ROUTES, not custom domains: the hostname is already proxied
+  // through Cloudflare, so the Worker simply runs in front of the old origin.
+  // No DNS was changed, and deleting these two lines puts WordPress back.
   "routes": [
+    { "pattern": "envisioned.me/*", "zone_name": "envisioned.me" },
+    { "pattern": "www.envisioned.me/*", "zone_name": "envisioned.me" },
     { "pattern": "home.envisioned.me", "custom_domain": true }
   ],
   // Cloudflare's native rate limiters. Free, edge-local, no KV or Durable Object
@@ -49,8 +69,8 @@
     "NEXT_PUBLIC_SUPABASE_URL": "https://aqylffhuzunpimrebgye.supabase.co",
     "NEXT_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_JumdNZ3GzN06G5oVgBR8_Q_SX8vdlbq",
     "NEXT_PUBLIC_SITE_NAME": "Envisioned",
-    "SITE_URL": "https://home.envisioned.me",
-    "NEXT_PUBLIC_SITE_URL": "https://home.envisioned.me",
+    "SITE_URL": "https://www.envisioned.me",
+    "NEXT_PUBLIC_SITE_URL": "https://www.envisioned.me",
     "CRM_BACKEND_URL": "https://app.envisioned.me"
   }
 }
