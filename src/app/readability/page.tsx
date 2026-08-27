@@ -53,6 +53,7 @@ export default function ReadabilityPage() {
   const [result, setResult] = useState<Result | null>(null);
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
+  const [captureNote, setCaptureNote] = useState('');
 
   async function run(e: React.FormEvent) {
     e.preventDefault();
@@ -75,18 +76,36 @@ export default function ReadabilityPage() {
 
   async function capture(e: React.FormEvent) {
     e.preventDefault();
-    if (!email) return;
-    await fetch('/api/leads', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        email,
-        source: 'readability-audit',
-        capture_page: '/readability',
-        tags: ['readability-audit', result ? `score-${result.score}` : 'score-unknown'],
-      }),
-    }).catch(() => {});
-    setSent(true);
+    if (!email || !result) return;
+    try {
+      // Sends the report AND captures the lead. Says only what actually
+      // happened — the previous version claimed "check your inbox" whether or
+      // not anything had been sent, and nothing ever was.
+      const res = await fetch('/api/presence/report', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          url: result.url,
+          score: result.score,
+          verdict: result.verdict,
+          checks: result.checks,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setCaptureNote(data.error || 'That did not go through. Try again?');
+        return;
+      }
+      setSent(true);
+      setCaptureNote(
+        data.sent
+          ? ''
+          : 'Saved — but the email did not go out just now, so I will send it by hand. Sorry about that.'
+      );
+    } catch {
+      setCaptureNote('That did not go through. Try again?');
+    }
   }
 
   return (
@@ -162,7 +181,14 @@ export default function ReadabilityPage() {
 
             <div className="mt-16 border-t-2 border-[color:var(--ink)] pt-8">
               {sent ? (
-                <p className="nr text-[1.4rem]">Sent. Check your inbox.</p>
+                <div>
+                  <p className="nr text-[1.4rem]">
+                    {captureNote ? 'Got it.' : 'Sent. Check your inbox.'}
+                  </p>
+                  {captureNote && (
+                    <p className="mt-2 text-[0.95rem] text-[color:var(--ink)]/70">{captureNote}</p>
+                  )}
+                </div>
               ) : (
                 <>
                   <p className="nr text-[1.5rem] leading-[1.35]">
@@ -185,6 +211,9 @@ export default function ReadabilityPage() {
                       Send it to me
                     </button>
                   </form>
+                  {captureNote && (
+                    <p className="mt-3 text-[0.95rem] text-[color:var(--bad)]">{captureNote}</p>
+                  )}
                 </>
               )}
               <p className="mt-10 text-[0.95rem] text-[color:var(--ink)]/70">
