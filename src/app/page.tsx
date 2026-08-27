@@ -213,11 +213,13 @@ export default function HomePage() {
             <div aria-hidden="true" className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 62% 52% at 50% 46%, rgba(30,30,30,0.42) 0%, rgba(30,30,30,0.18) 62%, rgba(30,30,30,0) 100%)' }} />
             <Image src="/img/logo-envisioned-white.png" alt="Envisioned by Maria-Ines" width={300} height={108} priority className="hero-logo h-a relative w-[190px] md:w-[250px]" />
             <div className="photo-em relative flex w-full max-w-[1080px] flex-1 flex-col items-center justify-center text-center">
-              <h1 className="h-b nr max-w-[20em] text-balance text-[2.15rem] leading-[1.12] text-[#FBFAF9] md:text-[3.05rem]">
-                {/* First sentence holds together as one line on desktop and is
-                     free to wrap on phones, where forcing it would overflow. */}
-                <span className="md:whitespace-nowrap">You own a proven body of work.</span>{' '}
-                <em className="md:whitespace-nowrap">None of it is doing any work for you.</em>
+              <h1 className="h-b nr w-full leading-[1.14] text-[#FBFAF9]">
+                <span className="block whitespace-nowrap text-[clamp(1.05rem,4.1vw,3.1rem)]">
+                  You own a proven body of work.
+                </span>
+                <em className="mt-1 block whitespace-nowrap text-[clamp(1.05rem,4.1vw,3.1rem)]">
+                  None of it is doing any work for you.
+                </em>
               </h1>
               <p
                 className="typeband hero-tw h-c mt-10 min-h-[1.6em] text-[1.3rem] text-[#FBFAF9]/95 md:text-[1.85rem]"
@@ -225,8 +227,8 @@ export default function HomePage() {
               >
                 Years of ideas.
               </p>
-              <p className="h-e nr mt-10 text-[1.35rem] text-[#FBFAF9] md:text-[1.75rem]">
-                All of it filed. <em>None of it earning its keep.</em>
+              <p className="h-e nr mt-10 text-balance text-[clamp(1.1rem,2.3vw,1.75rem)] text-[#FBFAF9]">
+                All of it filed away. <em>None of it earning its keep.</em>
               </p>
               <p className="h-e mt-8 max-w-[36em] text-[1.05rem] leading-[1.75] text-[#FBFAF9]/85 md:text-[1.15rem]">
                 Meanwhile the most sophisticated tool you have ever had access to is being
