@@ -20,8 +20,28 @@ import {
   detectDeviceType,
 } from "@/lib/personalization/visitor";
 
+/**
+ * One site, one hostname. The Worker answers on both www.envisioned.me and the
+ * older home.envisioned.me, which meant identical content on two hosts and
+ * split search authority. Everything consolidates onto the canonical host with
+ * a permanent redirect that preserves path and query.
+ * Audit finding, 2026-08-27.
+ */
+const CANONICAL_HOST = 'www.envisioned.me';
+const REDIRECT_HOSTS = new Set(['home.envisioned.me']);
+
 export function middleware(request: NextRequest) {
   const { nextUrl, headers } = request;
+
+  const host = headers.get('host')?.toLowerCase() ?? '';
+  if (REDIRECT_HOSTS.has(host)) {
+    const target = new URL(request.url);
+    target.host = CANONICAL_HOST;
+    target.protocol = 'https:';
+    target.port = '';
+    return NextResponse.redirect(target, 301);
+  }
+
   const referrer = headers.get("referer");
   const userAgent = headers.get("user-agent");
 

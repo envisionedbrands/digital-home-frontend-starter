@@ -21,6 +21,13 @@ const courierPrime = Courier_Prime({
 });
 
 export const metadata: Metadata = {
+  // metadataBase + a relative canonical makes every route declare itself as the
+  // canonical URL. The site answers on two hostnames (www and home), so without
+  // this, search engines saw identical content twice with nothing saying which
+  // one wins — split authority and possible duplicate-content treatment.
+  // Audit finding, 2026-08-27.
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.envisioned.me'),
+  alternates: { canonical: './' },
   title: 'Envisioned | Turn Founder Intelligence Into Working Business Systems',
   description:
     'Maria-Ines helps established founders get their voice, judgement and methodology out of their heads and working across client delivery, team decisions and AI systems.',

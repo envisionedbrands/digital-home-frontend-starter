@@ -102,8 +102,38 @@ export default async function ArticlePage({
     .order('published_at', { ascending: false, nullsFirst: false })
     .limit(3);
 
+  // ── Article structured data ───────────────────────────────────────────
+  // Lives in the TEMPLATE, so every article published from now on carries it
+  // without anyone remembering. The site-wide graph identifies the business;
+  // this identifies the PIECE — headline, dates, and an author edge pointing at
+  // the same Person @id — which is what lets an answer engine attribute a quote
+  // to Maria-Ines rather than to an anonymous page. Audit finding, 2026-08-27.
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.envisioned.me';
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${SITE}/blog/${slug}#article`,
+    headline: article.title,
+    description: article.excerpt || undefined,
+    datePublished: publishedAt || undefined,
+    dateModified: article.updated_at || publishedAt || undefined,
+    image: article.featured_image_url || undefined,
+    wordCount: article.word_count || undefined,
+    keywords: (article.semantic_tags || []).join(', ') || undefined,
+    inLanguage: 'en',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/blog/${slug}` },
+    author: { '@id': `${SITE}/#maria-ines` },
+    publisher: { '@id': `${SITE}/#envisioned` },
+    isPartOf: { '@id': `${SITE}/#website` },
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+
       {/* ── Article header ───────────────────────────────────── */}
       <section className="pt-36 pb-10 px-6">
         <div className="mx-auto max-w-[760px] text-center">
