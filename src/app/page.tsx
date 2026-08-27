@@ -214,8 +214,8 @@ export default function HomePage() {
             <Image src="/img/logo-envisioned-white.png" alt="Envisioned by Maria-Ines" width={300} height={108} priority className="hero-logo h-a relative w-[190px] md:w-[250px]" />
             <div className="photo-em relative flex w-full max-w-[880px] flex-1 flex-col items-center justify-center text-center">
               <h1 className="h-b nr max-w-[15em] text-balance text-[2.3rem] leading-[1.08] text-[#FBFAF9] md:text-[3.6rem]">
-                Your business knows too much to keep{' '}
-                <em className="whitespace-nowrap">starting from zero.</em>
+                You own a body of work.{' '}
+                <em className="whitespace-nowrap">None of it is working for you.</em>
               </h1>
               <p
                 className="typeband hero-tw h-c mt-10 min-h-[1.6em] text-[1.3rem] text-[#FBFAF9]/95 md:text-[1.85rem]"
@@ -223,10 +223,13 @@ export default function HomePage() {
               >
                 Years of ideas.
               </p>
-              <p className="h-e mt-10 max-w-[34em] text-[1.1rem] leading-[1.7] text-[#FBFAF9]/90 md:text-[1.2rem]">
-                Envisioned finds the judgement, methods, standards and intellectual
-                property scattered across an established founder-led business, and turns
-                them into platform-agnostic systems your team, clients and AI can actually use.
+              <p className="h-e nr mt-10 text-[1.35rem] text-[#FBFAF9] md:text-[1.75rem]">
+                All of it filed. <em>None of it earning its keep.</em>
+              </p>
+              <p className="h-e mt-8 max-w-[36em] text-[1.05rem] leading-[1.75] text-[#FBFAF9]/85 md:text-[1.15rem]">
+                Meanwhile the most sophisticated tool you have ever had access to is being
+                asked to help you from a blank chat box, every morning, knowing nothing
+                about any of it.
               </p>
               <a href={CITC_MAILTO} className="pointer-events-auto h-d lbl mt-12 flex items-center gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
                 Start with the Integration Map <span aria-hidden="true">↗</span>
@@ -295,9 +298,13 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="space-y-5 text-[1.05rem] leading-[1.8] lg:col-span-4 lg:col-start-8 lg:pt-28">
-                <p>Codification is how you stop the machine from averaging the genius out of your business.</p>
-                <p>Your intelligence is everywhere.</p>
-                <p>Except where it can work.</p>
+                <p className="nr text-[1.7rem] leading-[1.3]">You do not need more AI.</p>
+                <p className="nr text-[1.7rem] leading-[1.3] text-[color:var(--ox)]"><em>AI needs more of you.</em></p>
+                <p>
+                  So stop blaming it for the slop. If you do not give it substantial
+                  context, it will fill the gaps with the average of everyone else&rsquo;s.
+                </p>
+                <p>That is how the machine averages the genius out of a business.</p>
               </div>
             </div>
 
@@ -661,8 +668,13 @@ export default function HomePage() {
               ))}
             </div>
             <div className="mx-auto mt-32 max-w-[36em] space-y-5 text-[1.05rem] leading-[1.8]">
-              <p className="fx-rv nr text-[1.9rem] leading-[1.25]">And you get to spend less time <em>reconstructing what you know.</em></p>
-              <p>More time deciding where it should go next.</p>
+              <p className="fx-rv nr text-[1.9rem] leading-[1.25]">And you get to sit in the <em>director&rsquo;s chair.</em></p>
+              <p>
+                Your systems understand your standards, preserve your discernment, and
+                carry your ideas into the world. You keep authorship. You stop being the
+                only thing implementation can pass through.
+              </p>
+              <p>Your thinking compounds instead of circulating.</p>
               <p>
                 Sometimes we go looking for one thing and find something else entirely. An
                 opportunity. An offer. A method hiding inside what looked like a collection
