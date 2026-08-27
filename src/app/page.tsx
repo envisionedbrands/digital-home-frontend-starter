@@ -164,9 +164,8 @@ export default function HomePage() {
         <div className="relative mx-auto flex h-[64px] max-w-[1360px] items-center justify-between px-6">
           <nav className="hidden items-center gap-8 lg:flex">
             {[
-              ['01', 'Founder Intelligence', '#founder-intelligence'],
-              ['02', 'Codified in the City', '#citc'],
-              ['03', 'The Atelier', '#ways-to-work'],
+              ['01', 'About', '#about'],
+              ['02', 'Offers', '#ways-to-work'],
             ].map(([n, label, href]) => (
               <a key={label} href={href} className="lbl flex items-baseline gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
                 <span className="text-[0.6rem] text-[#FBFAF9]/50">{n}</span>
@@ -180,8 +179,7 @@ export default function HomePage() {
           <div className="flex items-center gap-5">
             <nav className="hidden items-center gap-6 lg:flex">
               {[
-                ['04', 'Ways to Work', '#ways-to-work'],
-                ['05', 'About', '#about'],
+                ['03', 'Articles', '/blog'],
               ].map(([n, label, href]) => (
                 <a key={label} href={href} className="lbl flex items-baseline gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
                   <span className="text-[0.6rem] text-[#FBFAF9]/50">{n}</span>
@@ -227,12 +225,16 @@ export default function HomePage() {
               </a>
             </div>
           </div>
+          {/* The two cover frames overlap rather than queue: the first PINS
+               (sticky) while the second scrolls up over the top of it, so the
+               second image reveals itself across the first instead of following
+               it. Later sibling in the DOM paints above the sticky one. */}
           <div className="relative z-0 -mt-[100vh]">
-            <div className="relative h-screen overflow-hidden">
+            <div className="sticky top-0 h-screen overflow-hidden">
               <Image src="/img/hero-postcard.jpg" alt="Tuscan window with shutters, espresso and notebook in golden morning light" fill priority className="hero-zoom object-cover" />
               <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(30,30,30,0.52) 0%, rgba(30,30,30,0.30) 45%, rgba(30,30,30,0.58) 100%)' }} />
             </div>
-            <div className="relative h-[85vh] overflow-hidden">
+            <div className="relative h-[95vh] overflow-hidden shadow-[0_-40px_80px_-20px_rgba(30,30,30,0.55)]">
               <Image src="/img/movement-drive.jpg" alt="Driving through the Tuscan countryside" fill className="object-cover" />
               <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(30,30,30,0.55) 0%, rgba(30,30,30,0.35) 50%, rgba(30,30,30,0.62) 100%)' }} />
             </div>
@@ -883,13 +885,12 @@ export default function HomePage() {
               </div>
               <div className="lbl flex flex-wrap gap-x-8 gap-y-2 text-[#FBFAF9]/70">
                 {[
-                  ['01', 'Founder Intelligence', '#founder-intelligence'],
-                  ['02', 'Codified in the City', '#citc'],
-                  ['03', 'The Atelier', '#ways-to-work'],
-                  ['04', 'Ways to Work', '#ways-to-work'],
-                  ['05', 'About', '#about'],
-                  ['06', 'Notes', '/notes'],
-                  ['07', 'Resources', '/resources'],
+                  ['01', 'About', '#about'],
+                  ['02', 'Offers', '#ways-to-work'],
+                  ['03', 'Articles', '/blog'],
+                  ['04', 'Codified in the City', '#citc'],
+                  ['05', 'Founder Intelligence', '#founder-intelligence'],
+                  ['06', 'Resources', '/resources'],
                 ].map(([n, label, href]) => (
                   <a key={label} href={href} className="flex items-baseline gap-2 hover:text-[#FBFAF9]">
                     <span className="text-[0.6rem] text-[#FBFAF9]/40">{n}</span>{label}
