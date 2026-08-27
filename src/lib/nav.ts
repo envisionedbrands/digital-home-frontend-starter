@@ -15,7 +15,7 @@ export type NavItem = { n: string; label: string; href: string };
 /** Left of the logo on the homepage masthead. */
 export const NAV_LEFT: NavItem[] = [
   { n: '01', label: 'About', href: '/#about' },
-  { n: '02', label: 'Offers', href: '/#ways-to-work' },
+  { n: '02', label: 'Work Together', href: '/#ways-to-work' },
 ];
 
 /** Right of the logo, before the button. */
@@ -30,8 +30,12 @@ export const NAV_ITEMS: NavItem[] = [...NAV_LEFT, ...NAV_RIGHT];
 /** The quiet operator link. Kept separate: it is not for visitors. */
 export const STUDIO = { label: 'Studio', href: 'https://app.envisioned.me/login' };
 
-/** The one call to action. */
+/**
+ * The one call to action. It books a real slot rather than opening an email —
+ * a mailto asks the visitor to compose something and wait; the booking page
+ * shows only times she is actually free and confirms on the spot.
+ */
 export const PRIMARY_CTA = {
-  label: 'Start with the Map',
-  href: 'mailto:hello@mariaines.co?subject=The%20Integration%20Map',
+  label: 'Book a call',
+  href: '/book/envisioned-match',
 };

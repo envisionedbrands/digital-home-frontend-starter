@@ -100,7 +100,7 @@ export default function ServicesPage() {
             do that work.
           </p>
           <Link
-            href="/contact"
+            href="/book/envisioned-match"
             className="text-[1.02rem] italic text-olive hover:text-olive-deep transition-colors"
           >
             Begin the reading &rarr;

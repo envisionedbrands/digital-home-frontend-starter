@@ -20,12 +20,14 @@ import { NAV_LEFT, NAV_RIGHT, STUDIO, PRIMARY_CTA } from '@/lib/nav';
  * bands, ivory over photos). The global NavBar/Footer return null on "/".
  */
 
-const MAP_MAILTO = 'mailto:hello@mariaines.co?subject=The%20Integration%20Map';
-const CITC_MAILTO = 'mailto:hello@mariaines.co?subject=Codified%20in%20the%20City';
-const ATELIER_MAILTO = 'mailto:hello@mariaines.co?subject=The%20Atelier';
-const RES_MAILTO = 'mailto:hello@mariaines.co?subject=The%20Residency';
-const EG_MAILTO = 'mailto:hello@mariaines.co?subject=Embedded%20Genius';
-const STUDIO_MAILTO = 'mailto:hello@mariaines.co?subject=Codified%20Studio';
+/**
+ * Every offer CTA books a real slot — no mailto anywhere. The booking page is
+ * native (src/app/book/[slug]), backed by booking_event_types in Supabase, so
+ * the only times shown are times she is genuinely available.
+ * Codified in the City has its own site, so it links there instead.
+ */
+const BOOK = '/book/envisioned-match';
+const CITC_HREF = 'https://codifiedinthecity.com';
 
 const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Courier+Prime:wght@400;700&display=swap');
@@ -726,7 +728,7 @@ export default function HomePage() {
                 <p className="photo-em mt-4 max-w-[30em] text-[1.05rem] text-[#FBFAF9]/85">
                   One private day. Your real intelligence. A working system. <em className="nr">The lunch is part of the point.</em>
                 </p>
-                <a href={CITC_MAILTO} className="lbl mt-8 inline-block bg-[color:var(--ox)] px-6 py-3 text-[#FBFAF9] transition-opacity hover:opacity-90">
+                <a href={CITC_HREF} className="lbl mt-8 inline-block bg-[color:var(--ox)] px-6 py-3 text-[#FBFAF9] transition-opacity hover:opacity-90">
                   Explore Codified in the City ↗
                 </a>
               </div>
@@ -752,7 +754,7 @@ export default function HomePage() {
                   and return a written roadmap with the build order and the real cost
                   of staying scattered.
                 </p>
-                <a href={MAP_MAILTO} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
+                <a href={BOOK} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
                   Start with the Map →
                 </a>
               </div>
@@ -766,7 +768,7 @@ export default function HomePage() {
                   working system on top of it. A working studio for founder
                   intelligence. Ten seats per Build, fitted in fives.
                 </p>
-                <a href={ATELIER_MAILTO} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
+                <a href={BOOK} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
                   Ask about The Atelier →
                 </a>
               </div>
@@ -780,7 +782,7 @@ export default function HomePage() {
                   start noticing all the other places where the same thinking could
                   travel.
                 </p>
-                <a href={RES_MAILTO} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
+                <a href={BOOK} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
                   Ask about The Residency →
                 </a>
               </div>
@@ -793,7 +795,7 @@ export default function HomePage() {
                   being in every room. For selected founder-led businesses, by
                   enquiry only.
                 </p>
-                <a href={EG_MAILTO} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
+                <a href={BOOK} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
                   Enquire about Embedded Genius →
                 </a>
               </div>
@@ -914,7 +916,7 @@ export default function HomePage() {
               A private diagnostic of the human intelligence and AI readiness inside your
               business, and the most valuable place to begin.
             </p>
-            <a href={MAP_MAILTO} className="lbl mt-10 inline-block bg-[color:var(--ox)] px-7 py-3.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
+            <a href={BOOK} className="lbl mt-10 inline-block bg-[color:var(--ox)] px-7 py-3.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
               Start with the Integration Map ↗
             </a>
             <div className="mt-20 flex flex-col gap-3 border-t border-[#FBFAF9]/20 pt-8 md:flex-row md:items-baseline md:justify-between">
@@ -925,7 +927,7 @@ export default function HomePage() {
               <div className="lbl flex flex-wrap gap-x-8 gap-y-2 text-[#FBFAF9]/70">
                 {[
                   ['01', 'About', '/#about'],
-                  ['02', 'Offers', '/#ways-to-work'],
+                  ['02', 'Work Together', '/#ways-to-work'],
                   ['03', 'Articles', '/blog'],
                   ['04', 'Resources', '/resources'],
                   ['05', 'Codified in the City', '/#citc'],
