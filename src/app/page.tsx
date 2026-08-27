@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import HomeFx from '@/components/home-fx';
+import { NAV_LEFT, NAV_RIGHT, STUDIO, PRIMARY_CTA } from '@/lib/nav';
 
 /**
  * Homepage — the Chronicle front page (chronicle.northfolk.co, a Showit
@@ -174,10 +175,7 @@ export default function HomePage() {
       <header className="masthead fixed inset-x-0 top-0 z-50 bg-[color:var(--char)] text-[#FBFAF9]">
         <div className="relative mx-auto grid h-[64px] max-w-[1360px] grid-cols-[1fr_auto_1fr] items-center gap-6 px-6">
           <nav className="hidden items-center justify-end gap-8 pr-8 lg:flex">
-            {[
-              ['01', 'About', '#about'],
-              ['02', 'Offers', '#ways-to-work'],
-            ].map(([n, label, href]) => (
+            {NAV_LEFT.map(({ n, label, href }) => (
               <a key={label} href={href} className="lbl flex items-baseline gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
                 <span className="text-[0.6rem] text-[#FBFAF9]/50">{n}</span>
                 {label}
@@ -189,20 +187,18 @@ export default function HomePage() {
           </a>
           <div className="flex items-center justify-start gap-6 pl-8">
             <nav className="hidden items-center gap-6 lg:flex">
-              {[
-                ['03', 'Articles', '/blog'],
-              ].map(([n, label, href]) => (
+              {NAV_RIGHT.map(({ n, label, href }) => (
                 <a key={label} href={href} className="lbl flex items-baseline gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
                   <span className="text-[0.6rem] text-[#FBFAF9]/50">{n}</span>
                   {label}
                 </a>
               ))}
             </nav>
-            <a href="https://app.envisioned.me/login" title="Studio login" className="lbl text-[#FBFAF9]/55 transition-colors hover:text-[#FBFAF9]">
-              Studio
+            <a href={STUDIO.href} title="Studio login" className="lbl text-[#FBFAF9]/55 transition-colors hover:text-[#FBFAF9]">
+              {STUDIO.label}
             </a>
-            <a href={MAP_MAILTO} className="lbl whitespace-nowrap bg-[color:var(--ox)] px-4 py-2.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
-              Start with the Map
+            <a href={PRIMARY_CTA.href} className="lbl whitespace-nowrap bg-[color:var(--ox)] px-4 py-2.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
+              {PRIMARY_CTA.label}
             </a>
           </div>
         </div>
@@ -897,12 +893,11 @@ export default function HomePage() {
               </div>
               <div className="lbl flex flex-wrap gap-x-8 gap-y-2 text-[#FBFAF9]/70">
                 {[
-                  ['01', 'About', '#about'],
-                  ['02', 'Offers', '#ways-to-work'],
+                  ['01', 'About', '/#about'],
+                  ['02', 'Offers', '/#ways-to-work'],
                   ['03', 'Articles', '/blog'],
-                  ['04', 'Codified in the City', '#citc'],
-                  ['05', 'Founder Intelligence', '#founder-intelligence'],
-                  ['06', 'Resources', '/resources'],
+                  ['04', 'Resources', '/resources'],
+                  ['05', 'Codified in the City', '/#citc'],
                 ].map(([n, label, href]) => (
                   <a key={label} href={href} className="flex items-baseline gap-2 hover:text-[#FBFAF9]">
                     <span className="text-[0.6rem] text-[#FBFAF9]/40">{n}</span>{label}

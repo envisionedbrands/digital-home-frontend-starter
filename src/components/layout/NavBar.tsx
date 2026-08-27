@@ -4,13 +4,9 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const NAV_LINKS = [
-  { href: '/#the-work', label: 'The Work' },
-  { href: 'https://codifiedinthecity.com', label: 'Codified in the City' },
-  { href: '/#ways-to-work', label: 'Ways to Work' },
-  { href: '/about', label: 'About' },
-  { href: '/blog', label: 'Notes' },
-];
+import { NAV_ITEMS, STUDIO, PRIMARY_CTA } from '@/lib/nav';
+
+const NAV_LINKS = NAV_ITEMS.map((i) => ({ href: i.href, label: i.label }));
 
 export default function NavBar() {
   const pathname = usePathname();
@@ -40,7 +36,6 @@ export default function NavBar() {
           <span className="display text-[1.45rem] tracking-[0.02em]">
             Envisioned
           </span>
-          <span className="kicker hidden sm:inline">Brands</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
@@ -67,18 +62,18 @@ export default function NavBar() {
               </Link>
             )
           )}
-          <Link
-            href="/founder-access"
-            className="text-[0.95rem] bg-olive text-canvas px-7 py-2.5 hover:bg-olive-deep transition-colors tracking-[0.04em]"
-          >
-            Start Here
-          </Link>
           <a
-            href="https://envisioned-intelligent-websites-backend.wandering-mouse-6d47.workers.dev/login"
+            href={STUDIO.href}
             className="text-[0.85rem] text-taupe hover:text-ink transition-colors tracking-[0.04em]"
             title="Studio login"
           >
-            Studio
+            {STUDIO.label}
+          </a>
+          <a
+            href={PRIMARY_CTA.href}
+            className="whitespace-nowrap text-[0.95rem] bg-olive text-canvas px-7 py-2.5 hover:bg-olive-deep transition-colors tracking-[0.04em]"
+          >
+            {PRIMARY_CTA.label}
           </a>
         </div>
       </div>
