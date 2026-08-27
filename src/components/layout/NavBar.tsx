@@ -65,7 +65,7 @@ export default function NavBar() {
           <a
             href={STUDIO.href}
             className="text-[0.85rem] text-taupe hover:text-ink transition-colors tracking-[0.04em]"
-            title="Studio login"
+            title="Client login"
           >
             {STUDIO.label}
           </a>

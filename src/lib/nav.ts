@@ -27,8 +27,8 @@ export const NAV_RIGHT: NavItem[] = [
 /** Every text item, in reading order — for navs that do not split around a logo. */
 export const NAV_ITEMS: NavItem[] = [...NAV_LEFT, ...NAV_RIGHT];
 
-/** The quiet operator link. Kept separate: it is not for visitors. */
-export const STUDIO = { label: 'Studio', href: 'https://app.envisioned.me/login' };
+/** The quiet client login. Kept separate: it is not for first-time visitors. */
+export const STUDIO = { label: 'Clients', href: 'https://app.envisioned.me/login' };
 
 /**
  * The one call to action. It books a real slot rather than opening an email —
@@ -36,6 +36,6 @@ export const STUDIO = { label: 'Studio', href: 'https://app.envisioned.me/login'
  * shows only times she is actually free and confirms on the spot.
  */
 export const PRIMARY_CTA = {
-  label: 'Book a call',
+  label: 'Start with the Map',
   href: '/book/envisioned-match',
 };
