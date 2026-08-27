@@ -212,10 +212,12 @@ export default function HomePage() {
             {/* Traveling scrim — legibility never depends on the photo behind */}
             <div aria-hidden="true" className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 62% 52% at 50% 46%, rgba(30,30,30,0.42) 0%, rgba(30,30,30,0.18) 62%, rgba(30,30,30,0) 100%)' }} />
             <Image src="/img/logo-envisioned-white.png" alt="Envisioned by Maria-Ines" width={300} height={108} priority className="hero-logo h-a relative w-[190px] md:w-[250px]" />
-            <div className="photo-em relative flex w-full max-w-[880px] flex-1 flex-col items-center justify-center text-center">
-              <h1 className="h-b nr max-w-[15em] text-balance text-[2.3rem] leading-[1.08] text-[#FBFAF9] md:text-[3.6rem]">
-                You own a body of work.{' '}
-                <em>None of it is doing any work for you.</em>
+            <div className="photo-em relative flex w-full max-w-[1080px] flex-1 flex-col items-center justify-center text-center">
+              <h1 className="h-b nr max-w-[20em] text-balance text-[2.15rem] leading-[1.12] text-[#FBFAF9] md:text-[3.05rem]">
+                {/* First sentence holds together as one line on desktop and is
+                     free to wrap on phones, where forcing it would overflow. */}
+                <span className="md:whitespace-nowrap">You own a proven body of work.</span>{' '}
+                <em className="md:whitespace-nowrap">None of it is doing any work for you.</em>
               </h1>
               <p
                 className="typeband hero-tw h-c mt-10 min-h-[1.6em] text-[1.3rem] text-[#FBFAF9]/95 md:text-[1.85rem]"
