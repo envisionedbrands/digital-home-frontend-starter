@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   // Audit finding, 2026-08-27.
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.envisioned.me'),
   alternates: { canonical: './' },
-  title: 'Envisioned | Turn Founder Intelligence Into Working Business Systems',
+  title: 'Envisioned | Founder Intelligence, Made Usable',
   description:
-    'Maria-Ines helps established founders get their voice, judgement and methodology out of their heads and working across client delivery, team decisions and AI systems.',
+    'Envisioned turns the judgement, methods and intellectual property inside founder-led businesses into platform-agnostic systems your team, clients and AI can actually use.',
 };
 
 export default function RootLayout({

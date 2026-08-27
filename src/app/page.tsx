@@ -209,7 +209,7 @@ export default function HomePage() {
             <Image src="/img/logo-envisioned-white.png" alt="Envisioned by Maria-Ines" width={300} height={108} priority className="hero-logo h-a relative w-[190px] md:w-[250px]" />
             <div className="photo-em relative flex w-full max-w-[880px] flex-1 flex-col items-center justify-center text-center">
               <h1 className="h-b nr max-w-[13em] text-[2.5rem] leading-[1.06] text-[#FBFAF9] md:text-[3.8rem]">
-                Your business is already sitting on <em>extraordinary value.</em>
+                Your business knows too much to keep <em>starting from zero.</em>
               </h1>
               <p
                 className="typeband hero-tw h-c mt-10 min-h-[1.6em] text-[1.3rem] text-[#FBFAF9]/95 md:text-[1.85rem]"
@@ -218,11 +218,12 @@ export default function HomePage() {
                 Years of ideas.
               </p>
               <p className="h-e mt-10 max-w-[34em] text-[1.1rem] leading-[1.7] text-[#FBFAF9]/90 md:text-[1.2rem]">
-                We find it, organise it, and put it to work — so you, your team, your
-                clients and AI can use more of what you&rsquo;ve spent years creating.
+                Envisioned finds the judgement, methods, standards and intellectual
+                property scattered across an established founder-led business, and turns
+                them into platform-agnostic systems your team, clients and AI can actually use.
               </p>
               <a href={CITC_MAILTO} className="pointer-events-auto h-d lbl mt-12 flex items-center gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
-                Explore Codified in the City <span aria-hidden="true">↗</span>
+                Start with the Integration Map <span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>
@@ -241,11 +242,10 @@ export default function HomePage() {
         <section className="px-6 py-32">
           <div className={`${WRAP} grid gap-14 lg:grid-cols-12 lg:items-end`}>
             <div className="lg:col-span-7">
-              <p className="text-[1.05rem] leading-[1.8]">You&rsquo;ve already done the hard part.</p>
-              <p className="text-[1.05rem] leading-[1.8]">You built the intelligence.</p>
-              <p className="mt-6 text-[1.05rem] leading-[1.8]">The problem?</p>
-              <p className="fx-rv nr mt-10 max-w-[10em] text-[2.8rem] leading-[1.06] md:text-[4rem]">
-                Most of it is sitting there doing <em>remarkably little.</em>
+              <p className="text-[1.05rem] leading-[1.8]">You have already done the hard part.</p>
+              <p className="text-[1.05rem] leading-[1.8]">You earned the intelligence.</p>
+              <p className="fx-rv nr mt-10 max-w-[12em] text-[2.8rem] leading-[1.06] md:text-[4rem]">
+                Now the business needs to learn how to <em>carry it.</em>
               </p>
             </div>
             <div className="lg:col-span-4 lg:col-start-9">
@@ -261,34 +261,33 @@ export default function HomePage() {
 
         {/* ── 02 ────────────────────────────────────────────────────── */}
         <Rule />
-        <GhostHead n="02" kicker="Before you create more" title={<>Before you create more with AI, find out what you <em>already own.</em></>} />
+        <GhostHead n="02" kicker="What the machine cannot see" title={<>What AI cannot see, <em>it replaces.</em></>} />
         <section className="px-6 pt-16 pb-28">
           <div className={WRAP}>
-            <p className="text-[1.05rem]">AI has made it absurdly easy to create.</p>
+            <p className="text-[1.05rem]">AI will not leave the unknown parts of your business untouched. It will guess.</p>
             <div className="mt-6">
               <Sheet cols={3} items={[
-                'More content.', 'More offers.', 'More emails.',
-                'More PDFs.', 'More assistants.', 'More agents.',
-                'More things to add to the enormous pile of things your business already has.',
+                'Your judgement.', 'Your standards.', 'Your taste.',
+                'Your exceptions.', 'Your instincts.', 'Your hard-won ways of seeing.',
+                'Every part you have never articulated gets quietly replaced by probability.',
               ]} />
             </div>
 
             <div className="mt-24 grid gap-12 lg:grid-cols-12">
               <div className="space-y-5 text-[1.05rem] leading-[1.8] lg:col-span-5">
-                <p>But more is not automatically better.</p>
+                <p>And probability pulls everything towards the middle.</p>
                 <p>
-                  Especially when some of your most original thinking is sitting inside a
-                  masterclass you taught four years ago. Or buried in a client call nobody
-                  has listened to since. Or scattered across 200 pieces of content. Or
-                  hiding inside the way you instinctively make decisions. Or locked inside
-                  a methodology your clients understand — but still need you to help them apply.
+                  The language sounds polished, but not like you. The decision looks
+                  reasonable, but it is not the decision you would make. The work is
+                  technically correct, and unmistakably generic. That is how ten years of
+                  earned intelligence gets sanded down into something anybody could have
+                  produced.
                 </p>
               </div>
               <div className="space-y-5 text-[1.05rem] leading-[1.8] lg:col-span-4 lg:col-start-8 lg:pt-28">
-                <p>We&rsquo;re in an era of almost infinite generation.</p>
-                <p>And somehow the first instruction has been: generate more.</p>
-                <p>The valuable material is rarely missing. It is usually scattered.</p>
-                <p>I&rsquo;m much more interested in another question:</p>
+                <p>Codification is how you stop the machine from averaging the genius out of your business.</p>
+                <p>Your intelligence is everywhere.</p>
+                <p>Except where it can work.</p>
               </div>
             </div>
 
@@ -297,7 +296,7 @@ export default function HomePage() {
             <div className="relative -mx-6 lg:mx-0">
               <div className="sticky top-0 z-0 flex h-screen items-center justify-center px-6">
                 <p className="quote-tw nr mx-auto max-w-[1080px] text-center text-[2.4rem] leading-[1.14] md:text-[3.6rem]">
-                  What have you already created that your business <em>doesn&rsquo;t know how to use?</em>
+                  Your business is surrounded by its own intelligence and still <em>starved of context.</em>
                 </p>
               </div>
               <div className="pointer-events-none relative z-10 -mt-[100vh]">
@@ -315,13 +314,13 @@ export default function HomePage() {
 
             <div className="mx-auto max-w-[36em] space-y-5 text-[1.05rem] leading-[1.8]">
               <p>
-                Because your next offer might already be in there. Your next client
-                experience might already be in there. The missing layer in your
-                methodology might already be in there. The answer to the question your
-                team keeps bringing back to you might already be in there. The thing
-                that finally makes AI useful in your business? Very possibly already in there.
+                It is inside the masterclass you taught four years ago. Inside the client
+                call where you explained the thing better than you ever have before, and
+                then forgot you said it. Inside two hundred pieces of content, twelve
+                years of decisions and the methodology that evolved so gradually you no
+                longer notice half of what makes it exceptional.
               </p>
-              <p>You just haven&rsquo;t been able to see all of it together.</p>
+              <p>So the work keeps returning to you.</p>
             </div>
           </div>
         </section>
@@ -331,44 +330,45 @@ export default function HomePage() {
           <Image src="/img/lived-intelligence.jpg" alt="Working across a table, marking up documents" fill className="object-cover" />
           <div className="absolute inset-0 bg-[#1E1E1E]/45" />
           <p className="photo-em nr absolute inset-x-6 bottom-10 mx-auto max-w-[1280px] text-[1.5rem] text-[#FBFAF9] md:text-[2rem]">
-            Judgement. Context. Patterns. <em>The invisible architecture of the work.</em>
+            Judgement. Context. Standards. <em>The invisible architecture underneath.</em>
           </p>
         </div>
 
         {/* ── 03 ────────────────────────────────────────────────────── */}
         <Rule />
-        <ChapterHead n="03">What is distinctly yours</ChapterHead>
+        <ChapterHead n="03">Everywhere except where it can work</ChapterHead>
         <section className="px-6 pt-12 pb-20">
           <div className={WRAP}>
             <h2 className="nr max-w-[15em] text-[2.2rem] leading-[1.08] md:text-[3.1rem]">
-              We don&rsquo;t start with the machine. We start with what is <em>distinctly yours.</em>
+              Your intelligence is everywhere. <em>Except where it can work.</em>
             </h2>
 
-            <p className="mt-12 text-[1.05rem]">Your business has accumulated far more than documents.</p>
+            <p className="mt-12 text-[1.05rem]">It is inside the way you work, not the files you keep.</p>
             <div className="mt-6">
               <Sheet cols={3} items={[
-                'It has accumulated judgement.', 'Context.', 'Patterns.',
-                'Language.', 'Standards.', 'Exceptions.',
-                'Client intelligence.', 'Ways of solving problems.', 'Things you believe.',
-                'Things you refuse to do.',
-                'Things experience taught you that no generic prompt could possibly know.',
+                'The way you recognise quality.',
+                'The question you ask when everybody else is looking in the wrong direction.',
+                'The exception you spot before the process breaks.',
+                'The decision your team keeps bringing back to you.',
+                'The standards you protect without being asked.',
+                'The trade-off you make without noticing you made it.',
               ]} />
             </div>
 
             <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-0">
               <div className="space-y-5 text-[1.05rem] leading-[1.75] lg:pr-14">
+                <p>Your team can follow the process until something unusual happens.</p>
                 <p>
-                  And because you have been living inside that intelligence for years,
-                  some of the most valuable parts have become almost invisible to you.
+                  Your clients can access the programme until real life refuses to
+                  resemble Module Four.
                 </p>
-                <p>You don&rsquo;t necessarily think: <em className="nr">&ldquo;That&rsquo;s intellectual property.&rdquo;</em></p>
-                <p>You think: <em className="nr">&ldquo;Obviously I&rsquo;d do it this way.&rdquo;</em></p>
+                <p>Your AI can read the files and still produce something that makes you think:</p>
               </div>
               <div className="flex flex-col justify-center space-y-5 text-[1.05rem] leading-[1.75] lg:border-l lg:border-[color:var(--hair)] lg:pl-14">
-                <p>Except it isn&rsquo;t obvious.</p>
-                <p>It&rsquo;s obvious <em className="nr">to you.</em></p>
+                <p className="nr text-[1.7rem] leading-[1.35]"><em>Technically fine. Absolutely not.</em></p>
+                <p>You are not short on ideas. You are not bad at execution.</p>
                 <p className="nr text-[1.5rem] leading-[1.4] text-[color:var(--ox)]">
-                  That distinction is where things get interesting.
+                  And you are not the problem your business needs to remove.
                 </p>
               </div>
             </div>
@@ -377,33 +377,33 @@ export default function HomePage() {
 
         {/* ── 04 ────────────────────────────────────────────────────── */}
         <Rule />
-        <ChapterHead n="04">The thinking you earned</ChapterHead>
+        <ChapterHead n="04">What the business has never learned to carry</ChapterHead>
         <section className="px-6 pt-12 pb-20">
           <div className={WRAP}>
             <h2 className="nr max-w-[17em] text-[2.2rem] leading-[1.08] md:text-[3rem]">
-              The internet does not need another thousand pieces of AI-generated sameness.
-              It needs the thinking you earned <em>before the machine arrived.</em>
+              The infrastructure around you has simply never learned how to
+              <em> carry what you know.</em>
             </h2>
             <div className="mt-12 grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-0">
               <div className="lg:pr-14">
                 <Ledger items={[
-                  'The lesson you learned after the client project went spectacularly wrong.',
-                  'The pattern you’ve seen across 300 customers.',
-                  'The strange question you always ask that gets to the answer faster.',
-                  'The framework that evolved slowly across ten years.',
-                  'The opinion you arrived at after changing your mind three times.',
-                  'The judgement your team keeps borrowing from you.',
-                  'The insight you gave spontaneously on a Zoom call and then forgot you ever said.',
+                  'Documents are evidence of it.',
+                  'Processes are expressions of it.',
+                  'Content leaves traces of it.',
+                  'Most businesses document the visible layer: the task, the process, the checklist.',
+                  'Useful, but incomplete.',
+                  'Because someone can follow every step and still miss the judgement that makes the result good.',
                 ]} />
               </div>
               <div className="flex flex-col justify-center space-y-5 text-[1.05rem] leading-[1.75] lg:border-l lg:border-[color:var(--hair)] lg:pl-14">
-                <p className="nr text-[1.7rem] leading-[1.35]">That is the good stuff.</p>
-                <p className="nr text-[1.7rem] leading-[1.35]">That is what makes the business <em>yours.</em></p>
-                <p>And now we have technology capable of helping us do radically more with it.</p>
-                <p>Not replace it.</p>
-                <p>Not flatten it.</p>
-                <p>Not generate a cheaper imitation of it.</p>
-                <p className="nr rose-beat text-[2.2rem]"><em>Use it.</em></p>
+                <p>
+                  You have lived inside that judgement for so long that its most valuable
+                  parts may be almost invisible to you.
+                </p>
+                <p>You do not think, <em className="nr">&ldquo;That is intellectual property.&rdquo;</em></p>
+                <p>You think, <em className="nr">&ldquo;Obviously I would do it this way.&rdquo;</em></p>
+                <p>Except it is not obvious. It is obvious to you.</p>
+                <p className="nr rose-beat text-[2rem]">That distinction is where <em>Envisioned begins.</em></p>
               </div>
             </div>
           </div>
@@ -411,20 +411,20 @@ export default function HomePage() {
 
         {/* ── 05 ────────────────────────────────────────────────────── */}
         <Rule />
-        <ChapterHead n="05">Not actually new</ChapterHead>
+        <ChapterHead n="05">Temporary tools, permanent work</ChapterHead>
         <section className="px-6 pt-12 pb-16">
           <div className={WRAP}>
             <h2 className="nr max-w-[16em] text-[2.2rem] leading-[1.08] md:text-[3rem]">
-              What if the most exciting thing AI helps you create next&hellip; <em>isn&rsquo;t actually new?</em>
+              Your tools are temporary. <em>Your body of work is not.</em>
             </h2>
             <div className="stagger mt-12 grid border-y border-[color:var(--ink)]/30 sm:grid-cols-2 sm:divide-x sm:divide-[color:var(--hair)] lg:grid-cols-3">
               {[
-                'Maybe an old programme becomes an interactive client experience that can guide someone through your methodology while they’re implementing it.',
-                'Maybe hundreds of client calls reveal patterns you’ve never had the ability to see across the whole body of work.',
-                'Maybe years of content become something you can actually question, connect and build from instead of a graveyard of posts you vaguely remember writing.',
-                'Maybe the questions you’ve answered repeatedly become intelligent support your clients can access without waiting five days for your next call.',
-                'Maybe the judgement your team borrows from you becomes clear enough that they can make more of those calls themselves.',
-                'Maybe something you created years ago becomes commercially valuable again because the technology around it has finally caught up.',
+                'Platforms change their pricing, permissions, policies and capabilities.',
+                'Products disappear. Models improve.',
+                'The tool that feels indispensable today may be irrelevant two years from now.',
+                'Platforms can rent you convenience.',
+                'They should not own the only usable copy of your intelligence.',
+                'Envisioned builds platform-agnostically wherever possible.',
               ].map((t, i) => (
                 <div key={t} className="flex flex-col gap-4 py-8 sm:px-8 sm:first:pl-0">
                   <span className="idx">{String(i + 1).padStart(2, '0')}</span>
@@ -434,63 +434,62 @@ export default function HomePage() {
             </div>
             <div className="mt-14 grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-end">
               <div className="nr max-w-[26em] text-[1.6rem] leading-[1.4]">
-                <p>And maybe, once you can see what is actually inside this business&hellip;</p>
-                <p className="mt-3">you stop feeling like you need to keep <em>inventing from scratch.</em></p>
+                <p>The value should live in the thinking and structure of your business.</p>
+                <p className="mt-3">Not inside a platform you cannot control or <em>easily leave.</em></p>
               </div>
               <p className="max-w-[30em] text-[1.02rem] leading-[1.7] text-[color:var(--ink)]/75 lg:justify-self-end">
-                Old work becomes newly useful when the surrounding technology catches up.
+                Your stack can change without taking your business&rsquo;s memory with it.
               </p>
             </div>
           </div>
         </section>
 
-        <Ticker items={['Find it.', 'Honour it.', 'Make it usable.', 'Then add the leverage.']} dark />
+        <Ticker items={['Find it.', 'Codify it.', 'Put it to work.']} dark />
 
         {/* ── 06 · This is Envisioned ───────────────────────────────── */}
         <Rule />
-        <ChapterHead n="06">This is Envisioned</ChapterHead>
+        <ChapterHead n="06">How the work is done</ChapterHead>
         <section className="px-6 pt-12 pb-20">
           <div className={WRAP}>
-            <h2 className="nr text-[2.2rem] leading-[1.08] md:text-[3.1rem]">This is Envisioned.</h2>
+            <h2 className="nr text-[2.2rem] leading-[1.08] md:text-[3.1rem]">Find it. Codify it. Put it to work.</h2>
             <div className="mt-10 grid gap-12 lg:grid-cols-[1.1fr_1fr]">
               <div>
-                <p className="text-[1.05rem] leading-[1.75]">We work with established founders who have already built something worth making more usable.</p>
+                <p className="text-[1.05rem] leading-[1.75]">We go looking across the business you have already built, not only at the polished assets.</p>
                 <div className="mt-6">
                   <Sheet cols={2} items={[
-                    'You have expertise.', 'You have a body of work.',
-                    'You have methodologies.', 'You have years of client experience.',
-                    'You have opinions.', 'Standards.', 'Decisions.', 'Intellectual property.',
-                    'Probably enough folders to qualify as a small archaeological site.',
+                    'The recordings.', 'The client work.',
+                    'The old programmes.', 'The messy documents.',
+                    'The repeated questions.', 'The exceptions.', 'The decisions.',
+                    'The things you say casually that turn out to explain half your method.',
                   ]} />
                 </div>
-                <p className="mt-8 text-[1.05rem] leading-[1.75]">What you may not have is a way for the business to see, connect and use all of that intelligence.</p>
-                <p className="nr mt-4 text-[1.5rem] text-[color:var(--ox)]">That is where we come in.</p>
+                <p className="mt-8 text-[1.05rem] leading-[1.75]">We find the intelligence carrying the greatest value now, connect the patterns, extract the judgement and make the implicit thinking explicit enough to work with.</p>
+                <p className="nr mt-4 text-[1.5rem] text-[color:var(--ox)]">A living source of context your business can reason from.</p>
               </div>
               <Image src="/img/city-cafe.jpg" alt="Espresso at a café table in the city" width={720} height={520} className="h-full w-full object-cover" />
             </div>
 
-            <p className="nr mt-20 text-[2rem] md:text-[2.6rem]">Find it. Organise it. <em>Put it to work.</em></p>
+            <p className="nr mt-20 text-[2rem] md:text-[2.6rem]">The point is not to document more of your business. The point is to make more of it <em>usable.</em></p>
             <div className="stagger mt-10 grid border-t-2 border-[color:var(--ink)] sm:grid-cols-3 sm:divide-x sm:divide-[color:var(--hair)]">
               <div className="py-6 sm:pr-10">
-                <p className="lbl text-[color:var(--ox)]">We find it</p>
+                <p className="lbl text-[color:var(--ox)]">Find it</p>
                 <div className="mt-4 space-y-4 text-[1.02rem] leading-[1.7]">
-                  <p>We go looking across the business you&rsquo;ve already built. Not only at the polished assets.</p>
-                  <p>The recordings. The client work. The old programmes. The messy documents. The repeated questions. The exceptions. The decisions. The things you say casually that turn out to explain half your method.</p>
+                  <p>Across the offers, methods, content, client experience and systems you already have.</p>
+                  <p>Including the parts nobody thought to write down, because they were obvious to you.</p>
                 </div>
               </div>
               <div className="py-6 sm:px-10">
-                <p className="lbl text-[color:var(--ox)]">We organise it</p>
+                <p className="lbl text-[color:var(--ox)]">Codify it</p>
                 <div className="mt-4 space-y-4 text-[1.02rem] leading-[1.7]">
-                  <p>We make the valuable thinking visible enough to work with.</p>
                   <p>Not another dumping ground. Not a gigantic folder called &ldquo;knowledge base&rdquo; that nobody opens.</p>
-                  <p>We create enough structure for the intelligence to become usable.</p>
+                  <p>Enough structure that the judgement itself becomes something a person or a machine can follow.</p>
                 </div>
               </div>
               <div className="py-6 sm:pl-10">
-                <p className="lbl text-[color:var(--ox)]">Then we put it to work</p>
+                <p className="lbl text-[color:var(--ox)]">Put it to work</p>
                 <div className="mt-4 space-y-4 text-[1.02rem] leading-[1.7]">
-                  <p>This is the important part. Because beautifully organised information that still sits there doing nothing is just a tidier form of waste.</p>
-                  <p>The intelligence goes somewhere. Into the client experience. Into the way your team makes decisions. Into your content and intellectual property. Into the systems running the business. Into AI that finally has something meaningful to work with. Into an idea you didn&rsquo;t know was hiding there. Into whatever can create the most value now.</p>
+                  <p>Because beautifully organised information that still sits there doing nothing is merely a tidier form of waste.</p>
+                  <p>Into a stronger client experience. Clearer decisions for your team. An interactive methodology. Reusable intellectual property. AI that finally has something meaningful to work with.</p>
                 </div>
               </div>
             </div>
@@ -503,32 +502,32 @@ export default function HomePage() {
           <div className={`${WRAP} relative`}>
             <span aria-hidden="true" className="num pointer-events-none absolute -top-10 right-0 select-none text-[8rem] leading-none text-[color:var(--stone)] md:text-[15rem]">07</span>
             <p className="lbl relative text-[color:var(--ox)]">A name for it</p>
-            <p className="relative mt-10 text-[1.05rem]">There&rsquo;s a name for what we&rsquo;re uncovering.</p>
+            <p className="relative mt-10 text-[1.05rem]">Not simply what you know. How you know what to do.</p>
             <h2 className="nr relative mt-4 text-[3.2rem] leading-[0.98] md:text-[6.4rem]">Founder Intelligence.</h2>
             <div className="mt-24 grid gap-12 lg:grid-cols-12">
               <div className="lg:col-span-5">
                 <div className="space-y-4 text-[1.05rem] leading-[1.8]">
-                  <p>It&rsquo;s the accumulated thinking behind the business.</p>
-                  <p>Not simply what you know.</p>
-                  <p className="nr text-[1.6rem]"><em>How</em> you know what to do.</p>
+                  <p>It is the invisible architecture underneath the work.</p>
+                  <p>Not the task. Not the checklist.</p>
+                  <p className="nr text-[1.6rem]">The judgement that makes the result <em>good.</em></p>
                 </div>
                 <div className="mt-10">
                   <Ledger tight items={[
                     'How you recognise quality.',
                     'How you interpret context.',
-                    'How you adapt your methodology.',
                     'How you make trade-offs.',
+                    'How you adapt your methodology.',
                     'How you know when the normal rule does not apply.',
-                    'How you see things other people miss.',
-                    'How you make the work yours.',
+                    'How you protect the standards that make the work yours.',
+                    'How you see what other people miss.',
                   ]} />
                 </div>
               </div>
               <div className="space-y-5 text-[1.05rem] leading-[1.8] lg:col-span-4 lg:col-start-9 lg:pt-32">
-                <p>Most businesses document the visible layer.</p>
-                <p>The task. The process. The checklist. Useful.</p>
-                <p>But the most valuable businesses have another layer underneath:</p>
-                <p>the intelligence responsible for making the process work well.</p>
+                <p>Documents are evidence of it.</p>
+                <p>Processes are expressions of it.</p>
+                <p>Content leaves traces of it.</p>
+                <p>But none of them are the thing itself.</p>
                 <p className="nr pt-2 text-[1.5rem] leading-[1.35] text-[color:var(--ox)]">That is the layer we are after.</p>
               </div>
             </div>
@@ -537,30 +536,29 @@ export default function HomePage() {
 
         {/* ── 08 ────────────────────────────────────────────────────── */}
         <Rule />
-        <ChapterHead n="08">Information is not intelligence</ChapterHead>
+        <ChapterHead n="08">When it stops coming back to you</ChapterHead>
         <section className="px-6 pt-12 pb-20">
           <div className={WRAP}>
             <h2 className="nr max-w-[17em] text-[2.2rem] leading-[1.08] md:text-[3rem]">
-              Because having the information is not the same as being able to <em>use the intelligence.</em>
+              When the business can use what it knows, everything stops <em>coming back to you.</em>
             </h2>
             <div className="mt-12 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-0">
               <div className="lg:pr-14">
                 <Ledger items={[
-                  'You can have the SOP and still need the founder.',
-                  'You can have the course and still need the founder.',
-                  'You can have the brand guide and still produce work that feels completely wrong.',
-                  'You can have every podcast episode archived and still have no idea what you said about a particular subject three years ago.',
-                  'You can upload twenty files to AI and still receive an answer that makes you think:',
+                  'Your clients receive more of what they actually hired you for — not simply more information, but the judgement behind it.',
+                  'Your team stops having to reverse-engineer you.',
+                  'Your body of work begins compounding instead of disappearing.',
+                  'AI stops guessing who you are.',
+                  'Your ideas stop waiting for your capacity.',
                 ]} />
-                <p className="nr pt-5 text-[1.6rem]"><em>Technically fine. Absolutely not.</em></p>
+                <p className="nr pt-5 text-[1.6rem]"><em>And the work stops routing through you.</em></p>
               </div>
               <div className="flex flex-col justify-center space-y-5 text-[1.05rem] leading-[1.75] lg:border-l lg:border-[color:var(--hair)] lg:pl-14">
-                <p>The problem isn&rsquo;t always missing information.</p>
-                <p>Sometimes the business is drowning in information.</p>
-                <p className="nr text-[1.7rem]">The missing layer is <em>context.</em></p>
-                <p>Connection. Judgement. Meaning.</p>
-                <p>That is why generic prompts so often produce generic work.</p>
-                <p>AI cannot magically understand a business that has never made its own intelligence available.</p>
+                <p>Old workshops stop being old workshops.</p>
+                <p>Content stops disappearing the day after publication.</p>
+                <p>Client conversations reveal patterns.</p>
+                <p>Ideas begin connecting across years instead of living in separate digital boxes.</p>
+                <p className="nr text-[1.7rem]">AI works with your language, standards and boundaries — <em>not the statistical average of a business like yours.</em></p>
               </div>
             </div>
           </div>
@@ -568,51 +566,45 @@ export default function HomePage() {
 
         {/* ── 09 · Leverage ─────────────────────────────────────────── */}
         <Rule />
-        <ChapterHead n="09">Where AI gets exciting</ChapterHead>
+        <ChapterHead n="09">Before you build anything</ChapterHead>
         <section className="px-6 pt-12 pb-20">
           <div className={WRAP}>
             <h2 className="nr max-w-[15em] text-[2.2rem] leading-[1.08] md:text-[3rem]">
-              And this is where AI gets <em>genuinely exciting.</em>
+              Before you build anything, see what your business <em>already knows.</em>
             </h2>
             <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-0">
               <div className="space-y-5 text-[1.05rem] leading-[1.75] lg:pr-14">
-                <p>Not as a content machine.</p>
-                <p>Not as a shortcut to producing more mediocre things faster.</p>
-                <p className="nr text-[2rem] text-[color:var(--ox)]">As <em>leverage.</em></p>
+                <p>Your business does not need another collection of AI tools.</p>
                 <p>
-                  A way to interact with years of knowledge that used to be practically
-                  impossible to work across. A way to make expertise available at the
-                  moment someone actually needs it. A way for a small founder-led company
-                  to build capabilities that once required researchers, writers, analysts,
-                  technologists and entire teams.
+                  It needs a clear view of the intelligence it already holds, where that
+                  intelligence is getting lost, and what should become usable first.
                 </p>
-                <p>That matters.</p>
+                <p className="nr text-[2rem] text-[color:var(--ox)]">The <em>Integration Map.</em></p>
                 <p>
-                  Especially to those of us who have spent years building without
-                  unlimited capital, enormous departments or rooms full of people whose
-                  sole job was to extend our capacity.
+                  A private diagnostic of the human intelligence and AI readiness inside
+                  your business. You send me the raw material. I read across your offers,
+                  methods, content, client experience, systems and the places where
+                  everything still leads back to you.
                 </p>
+                <p>Then I return a written roadmap.</p>
               </div>
               <div className="lg:border-l lg:border-[color:var(--hair)] lg:pl-14">
                 <div className="space-y-5 text-[1.05rem] leading-[1.75]">
-                  <p className="nr text-[1.6rem] leading-[1.4]">AI has changed the economics of leverage.</p>
-                  <p className="nr text-[1.6rem] leading-[1.4]">And I want more <em>women</em> using that leverage.</p>
-                  <p>Not because every woman needs to become obsessed with artificial intelligence.</p>
-                  <p>Not because technology deserves another fan club.</p>
-                  <p>
-                    Because when we understand these tools well enough to use them
-                    consciously, we get to decide what we do with the leverage.
-                  </p>
+                  <p className="nr text-[1.6rem] leading-[1.4]">Not another AI audit filled with tools to investigate later.</p>
+                  <p className="nr text-[1.6rem] leading-[1.4]">A clear view of what you <em>already own.</em></p>
+                  <p>And the most valuable place to begin.</p>
                 </div>
                 <div className="mt-8">
                   <Ledger tight items={[
-                    'What we build.', 'Who we help.', 'Whose ideas travel.',
-                    'Whose methodologies become more accessible.',
-                    'Whose businesses become more capable.',
-                    'Whose intelligence gets represented in the systems people increasingly use to work, learn and make decisions.',
+                    'What valuable Founder Intelligence is already there.',
+                    'Where it is trapped, fragmented or invisible.',
+                    'Where AI is currently being forced to guess.',
+                    'What should be codified first.',
+                    'What could become possible once it is usable.',
+                    'The right build order, without tying the plan to one platform.',
                   ]} />
                 </div>
-                <p className="nr mt-8 text-[1.6rem]">That matters to me. <em>A lot.</em></p>
+                <p className="nr mt-8 text-[1.6rem]">Start with the <em>Integration Map.</em></p>
               </div>
             </div>
           </div>
@@ -620,37 +612,36 @@ export default function HomePage() {
 
         {/* ── 10 ────────────────────────────────────────────────────── */}
         <Rule />
-        <ChapterHead n="10">What becomes possible</ChapterHead>
+        <ChapterHead n="10">Worthy of what is already there</ChapterHead>
         <section className="px-6 pt-12 pb-20">
           <div className={WRAP}>
             <h2 className="nr max-w-[16em] text-[2.2rem] leading-[1.08] md:text-[3rem]">
-              You do not need to become an AI expert. But I do want you to know <em>what becomes possible.</em>
+              I am not here to make you an AI person. I am here to make AI <em>worthy of the intelligence already inside your business.</em>
             </h2>
             <div className="mt-12 max-w-[36em] space-y-6 text-[1.05rem] leading-[1.75]">
-              <p>Because there is a huge difference between:</p>
-              <p className="nr border-l-2 border-[color:var(--hair)] pl-6 text-[1.5rem]">&ldquo;Look what AI can make.&rdquo;</p>
-              <p>and:</p>
-              <p className="nr border-l-2 border-[color:var(--ox)] pl-6 text-[1.7rem] text-[color:var(--ox)]">&ldquo;Look what AI can make possible <em>with what I already know.</em>&rdquo;</p>
-              <p>That second question is where Envisioned lives.</p>
+              <p>I do not want AI to help more women produce average work faster.</p>
+              <p className="nr border-l-2 border-[color:var(--hair)] pl-6 text-[1.5rem]">I want it to help their hard-won intelligence become more powerful, portable and useful.</p>
+              <p>I care about technology.</p>
+              <p className="nr border-l-2 border-[color:var(--ox)] pl-6 text-[1.7rem] text-[color:var(--ox)]">But I care far more about what humans can do when technology extends their capacity <em>without erasing their judgement.</em></p>
             </div>
           </div>
         </section>
 
         {/* ── 11 · When it becomes usable ───────────────────────────── */}
         <Rule />
-        <GhostHead n="11" kicker="When it becomes usable" title={<>When your intelligence becomes usable, <em>the business changes.</em></>} />
+        <GhostHead n="11" kicker="What changes" title={<>Your ideas stop waiting for <em>your capacity.</em></>} />
         <section className="px-6 pt-16 pb-28">
           <div className={WRAP}>
             <div className="stagger mt-10 grid gap-x-20 gap-y-24 sm:grid-cols-2">
               {[
-                ['01', 'Your clients get more of what they actually hired you for.',
-                  'Not simply access to more information. More of the judgement behind the information. More help applying what you teach when the real-world situation refuses to fit neatly inside the example from Module Four.'],
+                ['01', 'Your clients receive more of what they actually hired you for.',
+                  'Not simply more information. More of the judgement behind it. More useful help when the clean example meets a very unclean reality.'],
                 ['02', 'Your team stops having to reverse-engineer you.',
-                  'They can access more of the context behind your decisions instead of following the process until something unusual happens and then sending the whole problem back upstairs.'],
-                ['03', 'Your body of work starts working again.',
-                  'Old workshops stop being old workshops. Content stops disappearing the day after you publish it. Past client conversations become usable intelligence. Ideas start connecting across years instead of living in separate digital boxes.'],
-                ['04', 'AI stops starting from zero.',
-                  'It has something far more useful than another clever prompt. It has context. Your language. Your thinking. Your standards. Your examples. Your methodology. Something distinctly yours to reason with.'],
+                  'They can access more of the context behind your decisions instead of following the process until something unusual happens and sending the whole problem back upstairs.'],
+                ['03', 'Your body of work begins compounding.',
+                  'Old workshops stop being old workshops. Content stops disappearing the day after publication. Client conversations reveal patterns. Ideas begin connecting across years instead of living in separate digital boxes.'],
+                ['04', 'AI stops guessing who you are.',
+                  'It works with your language, standards, examples, boundaries and decisions — not the statistical average of what a business like yours might say.'],
               ].map(([n, h, body], i) => (
                 <div key={n} className={i % 2 === 1 ? 'sm:mt-28' : ''}>
                   <p aria-hidden="true" className="num select-none text-[5.5rem] leading-none text-[color:var(--stone)]">{n}</p>
@@ -660,16 +651,16 @@ export default function HomePage() {
               ))}
             </div>
             <div className="mx-auto mt-32 max-w-[36em] space-y-5 text-[1.05rem] leading-[1.8]">
-              <p className="fx-rv nr text-[1.9rem] leading-[1.25]">And you get to see the business <em>differently.</em></p>
-              <p>This is one of my favourite parts.</p>
-              <p>Because sometimes we go looking for one thing&hellip; and find something else entirely.</p>
+              <p className="fx-rv nr text-[1.9rem] leading-[1.25]">And you get to spend less time <em>reconstructing what you know.</em></p>
+              <p>More time deciding where it should go next.</p>
               <p>
-                An opportunity. An offer. A connection. A method hiding inside what looked
-                like a collection of unrelated decisions. A piece of intellectual property
-                that has been there for years without anybody recognising what it could become.
+                Sometimes we go looking for one thing and find something else entirely. An
+                opportunity. An offer. A method hiding inside what looked like a collection
+                of unrelated decisions. A piece of intellectual property that has been
+                there for years without anybody recognising what it could become.
               </p>
-              <p>We don&rsquo;t always know what we&rsquo;re going to find.</p>
-              <p className="nr pt-2 text-[1.5rem] text-[color:var(--ox)]"><em>That&rsquo;s rather the point.</em></p>
+              <p>We do not always know what we are going to find.</p>
+              <p className="nr pt-2 text-[1.5rem] text-[color:var(--ox)]"><em>That is rather the point.</em></p>
             </div>
           </div>
         </section>
@@ -786,25 +777,24 @@ export default function HomePage() {
 
         {/* ── Probably for you ──────────────────────────────────────── */}
         <Rule />
-        <ChapterHead n="13">Probably for you if</ChapterHead>
+        <ChapterHead n="13">What you already own</ChapterHead>
         <section className="px-6 pt-12 pb-20">
           <div className={WRAP}>
             <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
               <div>
                 <h2 className="nr text-[2.2rem] leading-[1.08] md:text-[3rem]">
-                  This is probably for you if&hellip;
+                  Your business has already paid for this intelligence.
                 </h2>
-                <p className="nr mt-10 text-[1.7rem]">Good.</p>
-                <p className="nr text-[1.7rem] text-[color:var(--ox)]"><em>That is exactly where I like to start.</em></p>
+                <p className="nr mt-10 text-[1.7rem]">In years. In experiments. In mistakes. In clients. In decisions. In work.</p>
+                <p className="nr text-[1.7rem] text-[color:var(--ox)]"><em>It should not stay trapped in your head.</em></p>
               </div>
               <Ledger items={[
-                'You’ve been in business long enough to know you have more valuable material than you know what to do with.',
-                'You have a proven methodology, distinctive expertise or body of work that people already pay for.',
-                'You’ve started experimenting with AI and can see the potential — but you’re underwhelmed by generic outputs and increasingly allergic to generic advice.',
-                'You’re less interested in “100 prompts to save five hours a week” and more interested in what becomes possible when technology actually understands your business.',
-                'You care about protecting what makes your work yours.',
-                'You want your team and clients to benefit from more of what you know.',
-                'And you have a sneaking suspicion that some of the best things you’ll build next may already be hiding inside what you built before.',
+                'Scattered across your digital history.',
+                'Flattened into generic output by a machine that cannot yet see it.',
+                'Waiting inside a masterclass, a call recording, a methodology that evolved so gradually you stopped noticing it.',
+                'Held in the judgement your team keeps bringing back to you.',
+                'Earned once, and paid for many times over.',
+                'And still not carried by the business that depends on it.',
               ]} />
             </div>
           </div>
@@ -821,37 +811,36 @@ export default function HomePage() {
             </div>
             <div className="space-y-5 text-[1.05rem] leading-[1.75]">
               <h2 className="nr text-[2.4rem] leading-[1.1] md:text-[3rem]">I&rsquo;m Maria-Ines.</h2>
-              <p>And I am fairly obsessed with the intelligence people don&rsquo;t realise they have.</p>
+              <p>And I am fairly obsessed with the intelligence people do not realise they have.</p>
               <p>
                 My career has moved through international development, photography, brand
-                strategy, founder-led businesses and AI. Different industries. Same fascination.
+                strategy, founder-led businesses and AI. Different industries. Same question:
               </p>
               <p className="nr text-[1.5rem] leading-[1.4]">
                 What do people know that the systems around them <em>fail to capture?</em>
               </p>
-              <p>What gets lost? What gets overlooked? What becomes possible when you finally make it visible?</p>
               <p>
-                I&rsquo;m a visual thinker. A pattern spotter. A strategist. A builder. And
-                the person who will absolutely stop you halfway through a sentence because
-                the thing you just said casually is probably more important than the
-                polished answer you prepared.
+                I am a visual thinker, a pattern spotter, a strategist and a builder. I am
+                also the person who will stop you halfway through a sentence because the
+                thing you just said casually is probably more valuable than the polished
+                answer you prepared.
               </p>
               <p>I care about technology.</p>
-              <p>But I care much more about what humans decide to do with it.</p>
               <p>
-                And I care deeply about more women having access to the kind of leverage
-                that once belonged almost exclusively to organisations with more money,
-                more people and more infrastructure.
+                But I care far more about what humans can do when technology extends their
+                capacity without erasing their judgement.
               </p>
-              <p>Because when more of us can make our intelligence travel&hellip;</p>
+              <p>I do not want AI to help more women produce average work faster.</p>
               <div className="pt-2">
                 <Ledger tight items={[
-                  'We build differently.', 'We help differently.', 'We participate differently.',
-                  'We create opportunities that weren’t available before.',
-                  'And we get to imagine forms of impact that previously required resources many of us simply did not have.',
+                  'I want it to help their hard-won intelligence become more powerful.',
+                  'More portable.',
+                  'More useful.',
+                  'I am not here to make you an AI person.',
+                  'I am here to make AI worthy of the intelligence already inside your business.',
                 ]} />
               </div>
-              <p className="nr pt-3 text-[1.5rem] text-[color:var(--ox)]">That is the future I&rsquo;m interested in.</p>
+              <p className="nr pt-3 text-[1.5rem] text-[color:var(--ox)]">That is the future I am interested in.</p>
             </div>
           </div>
         </section>
@@ -862,35 +851,35 @@ export default function HomePage() {
           <div className={WRAP}>
             <div className="max-w-[38em] space-y-5 text-[1.05rem] leading-[1.75]">
               <p className="nr text-[1.7rem] leading-[1.35]">
-                So no, I don&rsquo;t think you need to create more just because AI makes it easy.
+                It should not remain trapped in your head, scattered across your digital
+                history, or flattened into generic output by a machine that cannot yet see it.
               </p>
               <p className="nr text-[1.7rem] leading-[1.35]">
-                I think we should start with what you&rsquo;ve <em>already earned.</em>
+                Let&rsquo;s find it. Codify it. And <em>put it to work.</em>
               </p>
-              <p>The years. The experience. The mistakes. The ideas. The judgement. The work. The human intelligence.</p>
             </div>
           </div>
         </section>
 
-        <Ticker items={['Find it.', 'Honour it.', 'Make it usable.', 'Then add the leverage.']} />
+        <Ticker items={['Find it.', 'Codify it.', 'Put it to work.']} />
 
         <section className="dk bg-[color:var(--char)] px-6 py-24 text-[#FBFAF9]">
           <div className={WRAP}>
-            <p className="nr text-[1.4rem] text-[#FBFAF9]/80">And after that?</p>
+            <p className="nr text-[1.4rem] text-[#FBFAF9]/80">Before you build anything&hellip;</p>
             <h2 className="nr mt-3 max-w-[14em] text-[2.6rem] leading-[1.08] md:text-[3.8rem]">
-              Let&rsquo;s see what becomes <em>possible.</em>
+              See what your business <em>already knows.</em>
             </h2>
             <p className="mt-8 max-w-[30em] text-[1.1rem] leading-[1.7] text-[#FBFAF9]/85">
-              Your business is already sitting on extraordinary value. We find it,
-              organise it and put it to work.
+              A private diagnostic of the human intelligence and AI readiness inside your
+              business, and the most valuable place to begin.
             </p>
-            <a href={CITC_MAILTO} className="lbl mt-10 inline-block bg-[color:var(--ox)] px-7 py-3.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
-              Explore Codified in the City ↗
+            <a href={MAP_MAILTO} className="lbl mt-10 inline-block bg-[color:var(--ox)] px-7 py-3.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
+              Start with the Integration Map ↗
             </a>
             <div className="mt-20 flex flex-col gap-3 border-t border-[#FBFAF9]/20 pt-8 md:flex-row md:items-baseline md:justify-between">
               <div>
                 <p className="nr text-[1.3rem]">Envisioned</p>
-                <p className="lbl mt-1 text-[#FBFAF9]/60">Your intelligence. Made usable.</p>
+                <p className="lbl mt-1 text-[#FBFAF9]/60">Founder intelligence, made usable.</p>
               </div>
               <div className="lbl flex flex-wrap gap-x-8 gap-y-2 text-[#FBFAF9]/70">
                 {[
