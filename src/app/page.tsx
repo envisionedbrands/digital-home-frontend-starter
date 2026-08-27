@@ -86,24 +86,35 @@ function Rule() {
   return <div className={`heavy ${WRAP} mx-6 lg:mx-auto`} />;
 }
 
-function ChapterHead({ n, children }: { n: string; children: React.ReactNode }) {
+/**
+ * ONE chapter opener for the whole page, modelled on section 07 — the one MI
+ * singled out. Ghost numeral bled right, Courier kicker, then the display line.
+ * Everything routes through this, so the numerals are a single size and every
+ * opener starts on the same left edge. Previously 02 was visibly larger than 03
+ * because they were two different components with different scales.
+ */
+function Opener({ n, kicker, title }: { n: string; kicker?: React.ReactNode; title?: React.ReactNode }) {
   return (
-    <div className={`${WRAP} flex items-baseline justify-between px-6 pt-6`}>
-      <span className="lbl text-[color:var(--ox)]">{children}</span>
-      <span className="num text-[2rem] leading-none text-[color:var(--ink)]/60">{n}</span>
+    <div className={`${WRAP} relative px-6 pt-28 md:pt-40`}>
+      <span
+        aria-hidden="true"
+        className="num pointer-events-none absolute -top-4 right-0 select-none text-[5.5rem] leading-none text-[color:var(--stone)] md:-top-12 md:text-[12rem]"
+      >
+        {n}
+      </span>
+      {kicker && <p className="lbl relative text-[color:var(--ox)]">{kicker}</p>}
+      {title && (
+        <h2 className="nr relative mt-8 max-w-[13em] text-balance text-[2.1rem] leading-[1.09] md:mt-12 md:text-[3.6rem]">
+          {title}
+        </h2>
+      )}
     </div>
   );
 }
 
-/** Art-directed chapter opener — ghost numeral as a design object. */
-function GhostHead({ n, kicker, title }: { n: string; kicker: string; title: React.ReactNode }) {
-  return (
-    <div className={`${WRAP} relative px-6 pt-20`}>
-      <span aria-hidden="true" className="num pointer-events-none absolute -top-10 right-0 select-none text-[8rem] leading-none text-[color:var(--stone)] md:text-[15rem]">{n}</span>
-      <p className="lbl relative text-[color:var(--ox)]">{kicker}</p>
-      <h2 className="nr relative mt-10 max-w-[12em] text-[2.6rem] leading-[1.05] md:text-[4.2rem]">{title}</h2>
-    </div>
-  );
+/** Kicker-only opener (kept so existing call sites read the same). */
+function ChapterHead({ n, children }: { n: string; children: React.ReactNode }) {
+  return <Opener n={n} kicker={children} />;
 }
 
 function Ticker({ items, dark = false }: { items: string[]; dark?: boolean }) {
@@ -161,8 +172,8 @@ export default function HomePage() {
 
       {/* ── Masthead — ink band, numbered nav ───────────────────────── */}
       <header className="masthead fixed inset-x-0 top-0 z-50 bg-[color:var(--char)] text-[#FBFAF9]">
-        <div className="relative mx-auto flex h-[64px] max-w-[1360px] items-center justify-between px-6">
-          <nav className="hidden items-center gap-8 lg:flex">
+        <div className="relative mx-auto grid h-[64px] max-w-[1360px] grid-cols-[1fr_auto_1fr] items-center gap-6 px-6">
+          <nav className="hidden items-center justify-end gap-8 pr-8 lg:flex">
             {[
               ['01', 'About', '#about'],
               ['02', 'Offers', '#ways-to-work'],
@@ -173,10 +184,10 @@ export default function HomePage() {
               </a>
             ))}
           </nav>
-          <a href="#top" aria-label="Envisioned by Maria-Ines — back to top" className="absolute left-1/2 -translate-x-1/2">
+          <a href="#top" aria-label="Envisioned by Maria-Ines — back to top" className="justify-self-center">
             <Image src="/img/logo-envisioned-white.png" alt="" width={150} height={54} className="h-[36px] w-auto" />
           </a>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center justify-start gap-6 pl-8">
             <nav className="hidden items-center gap-6 lg:flex">
               {[
                 ['03', 'Articles', '/blog'],
@@ -187,11 +198,11 @@ export default function HomePage() {
                 </a>
               ))}
             </nav>
-            <a href={MAP_MAILTO} className="lbl bg-[color:var(--ox)] px-4 py-2.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
-              Start with the Map
-            </a>
-            <a href="https://app.envisioned.me/login" title="Studio login" className="lbl text-[#FBFAF9]/50 transition-colors hover:text-[#FBFAF9]">
+            <a href="https://app.envisioned.me/login" title="Studio login" className="lbl text-[#FBFAF9]/55 transition-colors hover:text-[#FBFAF9]">
               Studio
+            </a>
+            <a href={MAP_MAILTO} className="lbl whitespace-nowrap bg-[color:var(--ox)] px-4 py-2.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
+              Start with the Map
             </a>
           </div>
         </div>
@@ -206,8 +217,9 @@ export default function HomePage() {
             <div aria-hidden="true" className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 62% 52% at 50% 46%, rgba(30,30,30,0.42) 0%, rgba(30,30,30,0.18) 62%, rgba(30,30,30,0) 100%)' }} />
             <Image src="/img/logo-envisioned-white.png" alt="Envisioned by Maria-Ines" width={300} height={108} priority className="hero-logo h-a relative w-[190px] md:w-[250px]" />
             <div className="photo-em relative flex w-full max-w-[880px] flex-1 flex-col items-center justify-center text-center">
-              <h1 className="h-b nr max-w-[13em] text-[2.5rem] leading-[1.06] text-[#FBFAF9] md:text-[3.8rem]">
-                Your business knows too much to keep <em>starting from zero.</em>
+              <h1 className="h-b nr max-w-[15em] text-balance text-[2.3rem] leading-[1.08] text-[#FBFAF9] md:text-[3.6rem]">
+                Your business knows too much to keep{' '}
+                <em className="whitespace-nowrap">starting from zero.</em>
               </h1>
               <p
                 className="typeband hero-tw h-c mt-10 min-h-[1.6em] text-[1.3rem] text-[#FBFAF9]/95 md:text-[1.85rem]"
@@ -241,12 +253,12 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="px-6 py-32">
-          <div className={`${WRAP} grid gap-14 lg:grid-cols-12 lg:items-end`}>
+        <section className="px-6 py-40 md:py-56">
+          <div className={`${WRAP} grid gap-20 lg:grid-cols-12 lg:items-end lg:gap-14`}>
             <div className="lg:col-span-7">
               <p className="text-[1.05rem] leading-[1.8]">You have already done the hard part.</p>
               <p className="text-[1.05rem] leading-[1.8]">You earned the intelligence.</p>
-              <p className="fx-rv nr mt-10 max-w-[12em] text-[2.8rem] leading-[1.06] md:text-[4rem]">
+              <p className="fx-rv nr mt-20 max-w-[12em] text-balance text-[2.6rem] leading-[1.08] md:mt-28 md:text-[4rem]">
                 Now the business needs to learn how to <em>carry it.</em>
               </p>
             </div>
@@ -256,15 +268,15 @@ export default function HomePage() {
           </div>
         </section>
 
-        <div className="dk bg-[color:var(--char)] py-6 text-center">
-          <p className="nr text-[1.4rem] text-[#FBFAF9] md:text-[1.7rem]">Founder intelligence, <em>made usable.</em></p>
-          <p className="lbl mt-2 text-[#FBFAF9]/50">E / B</p>
+        <div className="px-6 py-24 text-center md:py-32">
+          <p className="nr text-[1.7rem] text-[color:var(--ox)] md:text-[2.2rem]">Founder intelligence, made usable.</p>
+          <p className="lbl mt-4 text-[color:var(--ink)]/45">E / B</p>
         </div>
 
         {/* ── 02 ────────────────────────────────────────────────────── */}
         <Rule />
-        <GhostHead n="02" kicker="What the machine cannot see" title={<>What AI cannot see, <em>it replaces.</em></>} />
-        <section className="px-6 pt-16 pb-28">
+        <Opener n="02" kicker="What the machine cannot see" title={<>What AI cannot see, <em>it replaces.</em></>} />
+        <section className="px-6 pt-14 pb-32 md:pb-44">
           <div className={WRAP}>
             <p className="text-[1.05rem]">AI will not leave the unknown parts of your business untouched. It will guess.</p>
             <div className="mt-6">
@@ -296,39 +308,40 @@ export default function HomePage() {
             {/* The chapter's one pull moment — pinned while photography
                  passes over it (the Aperol move). Courier-italic accent trial. */}
             <div className="relative -mx-6 lg:mx-0">
-              <div className="sticky top-0 z-0 flex h-screen items-center justify-center px-6">
+              <div className="sticky top-0 z-10 flex h-screen items-center justify-center px-6">
                 <p className="quote-tw nr mx-auto max-w-[1080px] text-center text-[2.4rem] leading-[1.14] md:text-[3.6rem]">
-                  Your business is surrounded by its own intelligence and still <em>starved of context.</em>
+                  Your business is surrounded by its own intelligence.<br />
+                  <em>And still cannot reach it.</em>
                 </p>
               </div>
-              <div className="pointer-events-none relative z-10 -mt-[100vh]">
-                <div className="flex h-[75vh] items-center pl-[6%]">
+              {/* The frames pass BESIDE the pinned line, never across it: they sit
+                   behind (z-0) and are inset from the centre column, so the quote
+                   is never covered while it is pinned. */}
+              <div className="pointer-events-none relative -z-10 -mt-[100vh]">
+                <div className="flex h-[75vh] items-start pt-[8vh] pl-[4%]">
                   <Image src="/img/hero-desk.jpg" alt="Desk with notebook and coffee in warm light" width={420} height={300} className="w-[240px] border border-[color:var(--ink)]/15 object-cover md:w-[380px]" />
                 </div>
-                <div className="flex h-[80vh] items-center justify-end pr-[8%]">
+                <div className="flex h-[80vh] items-end justify-end pb-[10vh] pr-[5%]">
                   <Image src="/img/city-cafe.jpg" alt="Espresso at a café table in the city" width={460} height={330} className="w-[260px] border border-[color:var(--ink)]/15 object-cover md:w-[420px]" />
                 </div>
-                <div className="flex h-[70vh] items-center justify-center">
+                <div className="flex h-[70vh] items-start justify-start pt-[6vh] pl-[10%]">
                   <Image src="/img/lived-intelligence.jpg" alt="Working across a table, marking up documents" width={420} height={300} className="w-[230px] border border-[color:var(--ink)]/15 object-cover md:w-[360px]" />
                 </div>
               </div>
             </div>
 
             <div className="mx-auto max-w-[36em] space-y-5 text-[1.05rem] leading-[1.8]">
-              <p>
-                It is inside the masterclass you taught four years ago. Inside the client
-                call where you explained the thing better than you ever have before, and
-                then forgot you said it. Inside two hundred pieces of content, twelve
-                years of decisions and the methodology that evolved so gradually you no
-                longer notice half of what makes it exceptional.
-              </p>
-              <p>So the work keeps returning to you.</p>
+              <p>Inside the masterclass you taught four years ago.</p>
+              <p>Inside the client call where you explained it better than you ever have, and then forgot you said it.</p>
+              <p>Inside two hundred pieces of content and twelve years of decisions.</p>
+              <p>Inside a methodology that evolved so gradually you no longer notice half of what makes it exceptional.</p>
+              <p className="nr pt-6 text-[1.6rem] leading-[1.35]">So the work keeps <em>returning to you.</em></p>
             </div>
           </div>
         </section>
 
         {/* Act break */}
-        <div data-px className="relative h-[420px] w-full overflow-hidden">
+        <div data-px className="relative h-[70vh] min-h-[520px] w-full overflow-hidden">
           <Image src="/img/lived-intelligence.jpg" alt="Working across a table, marking up documents" fill className="object-cover" />
           <div className="absolute inset-0 bg-[#1E1E1E]/45" />
           <p className="photo-em nr absolute inset-x-6 bottom-10 mx-auto max-w-[1280px] text-[1.5rem] text-[#FBFAF9] md:text-[2rem]">
@@ -339,13 +352,13 @@ export default function HomePage() {
         {/* ── 03 ────────────────────────────────────────────────────── */}
         <Rule />
         <ChapterHead n="03">Everywhere except where it can work</ChapterHead>
-        <section className="px-6 pt-12 pb-20">
+        <section className="px-6 pt-14 pb-32 md:pb-44">
           <div className={WRAP}>
-            <h2 className="nr max-w-[15em] text-[2.2rem] leading-[1.08] md:text-[3.1rem]">
+            <h2 className="nr max-w-[13em] text-balance text-[2.1rem] leading-[1.09] md:text-[3.6rem]">
               Your intelligence is everywhere. <em>Except where it can work.</em>
             </h2>
 
-            <p className="mt-12 text-[1.05rem]">It is inside the way you work, not the files you keep.</p>
+            <p className="mt-16 text-[1.05rem] md:mt-20">It is inside the way you work, not the files you keep.</p>
             <div className="mt-6">
               <Sheet cols={3} items={[
                 'The way you recognise quality.',
@@ -357,7 +370,7 @@ export default function HomePage() {
               ]} />
             </div>
 
-            <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-0">
+            <div className="mt-20 grid gap-14 md:mt-28 lg:grid-cols-2 lg:gap-0">
               <div className="space-y-5 text-[1.05rem] leading-[1.75] lg:pr-14">
                 <p>Your team can follow the process until something unusual happens.</p>
                 <p>
@@ -380,13 +393,13 @@ export default function HomePage() {
         {/* ── 04 ────────────────────────────────────────────────────── */}
         <Rule />
         <ChapterHead n="04">What the business has never learned to carry</ChapterHead>
-        <section className="px-6 pt-12 pb-20">
+        <section className="px-6 pt-14 pb-32 md:pb-44">
           <div className={WRAP}>
-            <h2 className="nr max-w-[17em] text-[2.2rem] leading-[1.08] md:text-[3rem]">
+            <h2 className="nr max-w-[13em] text-balance text-[2.1rem] leading-[1.09] md:text-[3.6rem]">
               The infrastructure around you has simply never learned how to
               <em> carry what you know.</em>
             </h2>
-            <div className="mt-12 grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-0">
+            <div className="mt-20 grid gap-16 md:mt-28 lg:grid-cols-[1.15fr_1fr] lg:gap-0">
               <div className="lg:pr-14">
                 <Ledger items={[
                   'Documents are evidence of it.',
@@ -414,9 +427,9 @@ export default function HomePage() {
         {/* ── 05 ────────────────────────────────────────────────────── */}
         <Rule />
         <ChapterHead n="05">Temporary tools, permanent work</ChapterHead>
-        <section className="px-6 pt-12 pb-16">
+        <section className="px-6 pt-14 pb-32 md:pb-44">
           <div className={WRAP}>
-            <h2 className="nr max-w-[16em] text-[2.2rem] leading-[1.08] md:text-[3rem]">
+            <h2 className="nr max-w-[13em] text-balance text-[2.1rem] leading-[1.09] md:text-[3.6rem]">
               Your tools are temporary. <em>Your body of work is not.</em>
             </h2>
             <div className="stagger mt-12 grid border-y border-[color:var(--ink)]/30 sm:grid-cols-2 sm:divide-x sm:divide-[color:var(--hair)] lg:grid-cols-3">
@@ -451,10 +464,10 @@ export default function HomePage() {
         {/* ── 06 · This is Envisioned ───────────────────────────────── */}
         <Rule />
         <ChapterHead n="06">How the work is done</ChapterHead>
-        <section className="px-6 pt-12 pb-20">
+        <section className="px-6 pt-14 pb-32 md:pb-44">
           <div className={WRAP}>
-            <h2 className="nr text-[2.2rem] leading-[1.08] md:text-[3.1rem]">Find it. Codify it. Put it to work.</h2>
-            <div className="mt-10 grid gap-12 lg:grid-cols-[1.1fr_1fr]">
+            <h2 className="nr max-w-[13em] text-balance text-[2.1rem] leading-[1.09] md:text-[3.6rem]">Find it. Codify it. Put it to work.</h2>
+            <div className="mt-16 grid gap-16 lg:mt-24 lg:grid-cols-[1.1fr_1fr]">
               <div>
                 <p className="text-[1.05rem] leading-[1.75]">We go looking across the business you have already built, not only at the polished assets.</p>
                 <div className="mt-6">
@@ -471,8 +484,8 @@ export default function HomePage() {
               <Image src="/img/city-cafe.jpg" alt="Espresso at a café table in the city" width={720} height={520} className="h-full w-full object-cover" />
             </div>
 
-            <p className="nr mt-20 text-[2rem] md:text-[2.6rem]">The point is not to document more of your business. The point is to make more of it <em>usable.</em></p>
-            <div className="stagger mt-10 grid border-t-2 border-[color:var(--ink)] sm:grid-cols-3 sm:divide-x sm:divide-[color:var(--hair)]">
+            <p className="nr mt-32 max-w-[16em] text-balance text-[2.1rem] leading-[1.15] md:mt-44 md:text-[3rem]">The point is not to document more of your business. The point is to make more of it <em>usable.</em></p>
+            <div className="stagger mt-16 grid border-t-2 border-[color:var(--ink)] sm:grid-cols-3 sm:divide-x sm:divide-[color:var(--hair)]">
               <div className="py-6 sm:pr-10">
                 <p className="lbl text-[color:var(--ox)]">Find it</p>
                 <div className="mt-4 space-y-4 text-[1.02rem] leading-[1.7]">
@@ -503,9 +516,8 @@ export default function HomePage() {
         <section id="founder-intelligence-name" className="px-6 pt-20 pb-28">
           <div className={`${WRAP} relative`}>
             <span aria-hidden="true" className="num pointer-events-none absolute -top-10 right-0 select-none text-[8rem] leading-none text-[color:var(--stone)] md:text-[15rem]">07</span>
-            <p className="lbl relative text-[color:var(--ox)]">A name for it</p>
-            <p className="relative mt-10 text-[1.05rem]">Not simply what you know. How you know what to do.</p>
-            <h2 className="nr relative mt-4 text-[3.2rem] leading-[0.98] md:text-[6.4rem]">Founder Intelligence.</h2>
+                <p className="relative mt-10 text-[1.05rem]">Not simply what you know. How you know what to do.</p>
+            <h2 className="nr relative mt-8 text-[2.8rem] leading-[1.02] md:mt-12 md:text-[5rem]">Founder Intelligence.</h2>
             <div className="mt-24 grid gap-12 lg:grid-cols-12">
               <div className="lg:col-span-5">
                 <div className="space-y-4 text-[1.05rem] leading-[1.8]">
@@ -539,12 +551,12 @@ export default function HomePage() {
         {/* ── 08 ────────────────────────────────────────────────────── */}
         <Rule />
         <ChapterHead n="08">When it stops coming back to you</ChapterHead>
-        <section className="px-6 pt-12 pb-20">
+        <section className="px-6 pt-14 pb-32 md:pb-44">
           <div className={WRAP}>
-            <h2 className="nr max-w-[17em] text-[2.2rem] leading-[1.08] md:text-[3rem]">
+            <h2 className="nr max-w-[13em] text-balance text-[2.1rem] leading-[1.09] md:text-[3.6rem]">
               When the business can use what it knows, everything stops <em>coming back to you.</em>
             </h2>
-            <div className="mt-12 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-0">
+            <div className="mt-20 grid gap-16 md:mt-28 lg:grid-cols-[1.1fr_1fr] lg:gap-0">
               <div className="lg:pr-14">
                 <Ledger items={[
                   'Your clients receive more of what they actually hired you for — not simply more information, but the judgement behind it.',
@@ -569,12 +581,12 @@ export default function HomePage() {
         {/* ── 09 · Leverage ─────────────────────────────────────────── */}
         <Rule />
         <ChapterHead n="09">Before you build anything</ChapterHead>
-        <section className="px-6 pt-12 pb-20">
+        <section className="px-6 pt-14 pb-32 md:pb-44">
           <div className={WRAP}>
             <h2 className="nr max-w-[15em] text-[2.2rem] leading-[1.08] md:text-[3rem]">
               Before you build anything, see what your business <em>already knows.</em>
             </h2>
-            <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-0">
+            <div className="mt-20 grid gap-16 md:mt-28 lg:grid-cols-2 lg:gap-0">
               <div className="space-y-5 text-[1.05rem] leading-[1.75] lg:pr-14">
                 <p>Your business does not need another collection of AI tools.</p>
                 <p>
@@ -615,9 +627,9 @@ export default function HomePage() {
         {/* ── 10 ────────────────────────────────────────────────────── */}
         <Rule />
         <ChapterHead n="10">Worthy of what is already there</ChapterHead>
-        <section className="px-6 pt-12 pb-20">
+        <section className="px-6 pt-14 pb-32 md:pb-44">
           <div className={WRAP}>
-            <h2 className="nr max-w-[16em] text-[2.2rem] leading-[1.08] md:text-[3rem]">
+            <h2 className="nr max-w-[13em] text-balance text-[2.1rem] leading-[1.09] md:text-[3.6rem]">
               I am not here to make you an AI person. I am here to make AI <em>worthy of the intelligence already inside your business.</em>
             </h2>
             <div className="mt-12 max-w-[36em] space-y-6 text-[1.05rem] leading-[1.75]">
@@ -631,8 +643,8 @@ export default function HomePage() {
 
         {/* ── 11 · When it becomes usable ───────────────────────────── */}
         <Rule />
-        <GhostHead n="11" kicker="What changes" title={<>Your ideas stop waiting for <em>your capacity.</em></>} />
-        <section className="px-6 pt-16 pb-28">
+        <Opener n="11" kicker="What changes" title={<>Your ideas stop waiting for <em>your capacity.</em></>} />
+        <section className="px-6 pt-14 pb-32 md:pb-44">
           <div className={WRAP}>
             <div className="stagger mt-10 grid gap-x-20 gap-y-24 sm:grid-cols-2">
               {[
@@ -671,7 +683,7 @@ export default function HomePage() {
 
         {/* ── CITC band ─────────────────────────────────────────────── */}
         <section id="citc" className="relative overflow-hidden">
-          <div data-px className="relative h-[560px] w-full overflow-hidden">
+          <div data-px className="relative h-[88vh] min-h-[640px] w-full overflow-hidden">
             <Image src="/img/atmosphere-terrace.jpg" alt="Terrace table in Mediterranean light" fill className="object-cover" />
             <div className="absolute inset-0 bg-[#1E1E1E]/55" />
             <div className="absolute inset-0 flex items-center px-6">
@@ -700,7 +712,7 @@ export default function HomePage() {
         <ChapterHead n="12">Ways to work together</ChapterHead>
         <section id="ways-to-work" className="px-6 pt-12 pb-20">
           <div className={WRAP}>
-            <h2 className="nr max-w-[16em] text-[2.2rem] leading-[1.08] md:text-[3rem]">
+            <h2 className="nr max-w-[13em] text-balance text-[2.1rem] leading-[1.09] md:text-[3.6rem]">
               Begin with the part that needs to become <em>usable first.</em>
             </h2>
             <div className="stagger mt-12 grid border-t-2 border-[color:var(--ink)] sm:grid-cols-2 lg:grid-cols-4 sm:divide-x sm:divide-[color:var(--hair)]">
@@ -780,7 +792,7 @@ export default function HomePage() {
         {/* ── Probably for you ──────────────────────────────────────── */}
         <Rule />
         <ChapterHead n="13">What you already own</ChapterHead>
-        <section className="px-6 pt-12 pb-20">
+        <section className="px-6 pt-14 pb-32 md:pb-44">
           <div className={WRAP}>
             <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
               <div>
