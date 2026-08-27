@@ -12,15 +12,21 @@
 
 export type NavItem = { n: string; label: string; href: string };
 
-/** Left of the logo on the homepage masthead. */
+/**
+ * Left of the logo on the homepage masthead.
+ *
+ * Three items left, one right: the right side also carries Clients and the
+ * primary button, so an even 2/2 split of the text items left it visibly
+ * heavier. Articles moved across to balance the masthead.
+ */
 export const NAV_LEFT: NavItem[] = [
   { n: '01', label: 'About', href: '/#about' },
   { n: '02', label: 'Work Together', href: '/#ways-to-work' },
+  { n: '03', label: 'Articles', href: '/blog' },
 ];
 
-/** Right of the logo, before the button. */
+/** Right of the logo, before Clients and the button. */
 export const NAV_RIGHT: NavItem[] = [
-  { n: '03', label: 'Articles', href: '/blog' },
   { n: '04', label: 'Resources', href: '/resources' },
 ];
 
