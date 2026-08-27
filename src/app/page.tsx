@@ -215,7 +215,7 @@ export default function HomePage() {
             <div className="photo-em relative flex w-full max-w-[880px] flex-1 flex-col items-center justify-center text-center">
               <h1 className="h-b nr max-w-[15em] text-balance text-[2.3rem] leading-[1.08] text-[#FBFAF9] md:text-[3.6rem]">
                 You own a body of work.{' '}
-                <em className="whitespace-nowrap">None of it is working for you.</em>
+                <em>None of it is doing any work for you.</em>
               </h1>
               <p
                 className="typeband hero-tw h-c mt-10 min-h-[1.6em] text-[1.3rem] text-[#FBFAF9]/95 md:text-[1.85rem]"
@@ -231,7 +231,10 @@ export default function HomePage() {
                 asked to help you from a blank chat box, every morning, knowing nothing
                 about any of it.
               </p>
-              <a href={CITC_MAILTO} className="pointer-events-auto h-d lbl mt-12 flex items-center gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
+              <a
+                href={PRIMARY_CTA.href}
+                className="pointer-events-auto h-d lbl mt-14 inline-flex items-center gap-2 bg-[color:var(--ox)] px-7 py-4 text-[#FBFAF9] shadow-[0_12px_34px_-14px_rgba(30,30,30,0.85)] transition-opacity hover:opacity-90"
+              >
                 Start with the Integration Map <span aria-hidden="true">↗</span>
               </a>
             </div>
