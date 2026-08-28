@@ -27,6 +27,10 @@ import { NAV_LEFT, NAV_RIGHT, STUDIO, PRIMARY_CTA } from '@/lib/nav';
  * Codified in the City has its own site, so it links there instead.
  */
 const BOOK = '/book/envisioned-match';
+// The FREE front door. Named per the map spec (§9): public name is "The AI
+// Readiness Map"; "Integration Map" is the PAID offer and appears only in the
+// offers section and at the free map's own close.
+const MAP = 'https://map.envisioned.me';
 const CITC_HREF = 'https://codifiedinthecity.com';
 
 const CSS = `
@@ -238,10 +242,10 @@ export default function HomePage() {
                 about any of it.
               </p>
               <a
-                href={PRIMARY_CTA.href}
+                href={MAP}
                 className="pointer-events-auto h-d lbl mt-14 inline-flex items-center gap-2 bg-[color:var(--ox)] px-7 py-4 text-[#FBFAF9] shadow-[0_12px_34px_-14px_rgba(30,30,30,0.85)] transition-opacity hover:opacity-90"
               >
-                Start with the Integration Map <span aria-hidden="true">↗</span>
+                Take the AI Readiness Map <span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>
@@ -755,7 +759,7 @@ export default function HomePage() {
                   of staying scattered.
                 </p>
                 <a href={BOOK} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
-                  Start with the Map →
+                  Enquire about the Integration Map →
                 </a>
               </div>
               <div className="flex flex-col py-8 sm:px-8">
@@ -916,8 +920,8 @@ export default function HomePage() {
               A private diagnostic of the human intelligence and AI readiness inside your
               business, and the most valuable place to begin.
             </p>
-            <a href={BOOK} className="lbl mt-10 inline-block bg-[color:var(--ox)] px-7 py-3.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
-              Start with the Integration Map ↗
+            <a href={MAP} className="lbl mt-10 inline-block bg-[color:var(--ox)] px-7 py-3.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
+              Take the AI Readiness Map ↗
             </a>
             <div className="mt-20 flex flex-col gap-3 border-t border-[#FBFAF9]/20 pt-8 md:flex-row md:items-baseline md:justify-between">
               <div>

@@ -37,11 +37,19 @@ export const NAV_ITEMS: NavItem[] = [...NAV_LEFT, ...NAV_RIGHT];
 export const STUDIO = { label: 'Clients', href: 'https://app.envisioned.me/login' };
 
 /**
- * The one call to action. It books a real slot rather than opening an email —
- * a mailto asks the visitor to compose something and wait; the booking page
- * shows only times she is actually free and confirms on the spot.
+ * The one call to action: the FREE diagnostic, not the paid offer.
+ *
+ * The commercial spine (map-diagnostic-spec §2): the machine's hours are free,
+ * her hours are €1,500. The AI Readiness Map is the front door and sells the
+ * paid Integration Map at its own close, so nothing is booked or bought here.
+ *
+ * Naming is locked by that spec (§9): the public name is "The AI Readiness Map";
+ * "Integration Map" belongs only at the door of the paid offer. These buttons
+ * used to say "Start with the Integration Map" and open a booking, which
+ * advertised the €1,500 offer at the front door and asked for a calendar slot
+ * for something that is async and free.
  */
 export const PRIMARY_CTA = {
-  label: 'Start with the Map',
-  href: '/book/envisioned-match',
+  label: 'Take the Map',
+  href: 'https://map.envisioned.me',
 };
