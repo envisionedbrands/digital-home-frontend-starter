@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import HomeFx from '@/components/home-fx';
-import { NAV_LEFT, NAV_RIGHT, STUDIO, PRIMARY_CTA } from '@/lib/nav';
+import { NAV_LEFT, NAV_RIGHT, STUDIO, PRIMARY_CTA, FOOTER_GROUPS } from '@/lib/nav';
 
 /**
  * Homepage — the Chronicle front page (chronicle.northfolk.co, a Showit
@@ -945,25 +945,32 @@ export default function HomePage() {
             <a href={MAP} className="lbl mt-10 inline-block bg-[color:var(--ox)] px-7 py-3.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
               Take the AI Readiness Map ↗
             </a>
-            <div className="mt-20 flex flex-col gap-3 border-t border-[#FBFAF9]/20 pt-8 md:flex-row md:items-baseline md:justify-between">
+            {/* Grouped, aligned. Was one flat wrapping row of seven links that
+                broke wherever the line ran out. Groups come from FOOTER_GROUPS
+                so this band and the shared Footer always list the same site. */}
+            <div className="mt-20 grid gap-12 border-t border-[#FBFAF9]/20 pt-10 md:grid-cols-[0.7fr_3.3fr] md:gap-14">
               <div>
                 <p className="nr text-[1.3rem]">Envisioned</p>
-                <p className="lbl mt-1 text-[#FBFAF9]/60">Founder intelligence, made usable.</p>
+                <p className="lbl mt-2 text-[#FBFAF9]/60">Founder intelligence, made usable.</p>
+                <a href="mailto:hello@mariaines.co" className="lbl mt-5 inline-block text-[#FBFAF9]/70 transition-colors hover:text-[#FBFAF9]">
+                  hello@mariaines.co
+                </a>
               </div>
-              <div className="lbl flex flex-wrap gap-x-8 gap-y-2 text-[#FBFAF9]/70">
-                {[
-                  ['01', 'About', '/#about'],
-                  ['02', 'Work Together', '/#ways-to-work'],
-                  ['03', 'Articles', '/blog'],
-                  ['04', 'Resources', '/resources'],
-                  ['05', 'Codified in the City', '/#citc'],
-                ].map(([n, label, href]) => (
-                  <a key={label} href={href} className="flex items-baseline gap-2 hover:text-[#FBFAF9]">
-                    <span className="text-[0.6rem] text-[#FBFAF9]/40">{n}</span>{label}
-                  </a>
+              <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4">
+                {FOOTER_GROUPS.map((group) => (
+                  <nav key={group.title} aria-label={group.title}>
+                    <p className="lbl text-[color:var(--sage)]">{group.title}</p>
+                    <ul className="mt-4 space-y-2.5">
+                      {group.items.map((item) => (
+                        <li key={item.label}>
+                          <a href={item.href} className="text-[0.95rem] text-[#FBFAF9]/70 transition-colors hover:text-[#FBFAF9]">
+                            {item.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
                 ))}
-                <a href="mailto:hello@mariaines.co" className="hover:text-[#FBFAF9]">hello@mariaines.co</a>
-                <a href={STUDIO.href} title="Client login" className="hover:text-[#FBFAF9]">{STUDIO.label}</a>
               </div>
             </div>
             <p className="lbl mt-8 text-[#FBFAF9]/40">© 2026 Envisioned · Written, built and run from Europe.</p>

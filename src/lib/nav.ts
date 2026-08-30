@@ -53,3 +53,54 @@ export const PRIMARY_CTA = {
   label: 'Take the Map',
   href: 'https://map.envisioned.me',
 };
+
+/**
+ * The footer, in groups.
+ *
+ * Both footers (the homepage's dark band and the shared Footer on every other
+ * page) were flat, ungrouped lists that wrapped wherever the line ran out, and
+ * they disagreed: the shared one still said "Notes" for the blog, sent three
+ * different offers to /contact, and never mentioned the free Map at all.
+ *
+ * Grouped by what the visitor is trying to do, not by what we sell:
+ * start something free -> buy something -> read -> practical.
+ */
+export type FooterGroup = { title: string; items: NavItem[] };
+
+export const FOOTER_GROUPS: FooterGroup[] = [
+  {
+    title: 'Start here',
+    items: [
+      { n: '', label: 'The AI Readiness Map', href: 'https://map.envisioned.me' },
+      { n: '', label: 'The Readability Audit', href: '/readability' },
+      { n: '', label: 'Founder Access Diagnostic', href: '/founder-access' },
+    ],
+  },
+  {
+    title: 'Work together',
+    items: [
+      { n: '', label: 'The Integration Map', href: '/services' },
+      { n: '', label: 'The Atelier', href: '/services' },
+      { n: '', label: 'Codified in the City', href: 'https://codifiedinthecity.com' },
+      { n: '', label: 'Codified Live', href: 'https://codifiedinthecity.com' },
+      { n: '', label: 'Codified Studio', href: '/services' },
+    ],
+  },
+  {
+    title: 'Read',
+    items: [
+      { n: '', label: 'Articles', href: '/blog' },
+      { n: '', label: 'Resources', href: '/resources' },
+      { n: '', label: 'About', href: '/about' },
+    ],
+  },
+  {
+    title: 'Practical',
+    items: [
+      { n: '', label: 'Contact', href: '/contact' },
+      { n: '', label: 'FAQ', href: '/faq' },
+      { n: '', label: 'AI Transparency', href: '/ai-transparency' },
+      { n: '', label: 'Clients', href: STUDIO.href },
+    ],
+  },
+];
