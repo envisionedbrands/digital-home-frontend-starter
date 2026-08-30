@@ -80,7 +80,7 @@ export default function FAQPage() {
     <>
       <FaqSchema />
       <main className="min-h-screen px-6 pt-40 pb-32 flex flex-col justify-center">
-        <div className="max-w-[900px] mx-auto w-full">
+        <div className="max-w-[1140px] mx-auto w-full">
           <p className="kicker mb-8">FAQ</p>
 
           <h1 className="display text-4xl md:text-6xl xl:text-7xl text-ink mb-8">

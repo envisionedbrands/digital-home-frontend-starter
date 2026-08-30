@@ -4,13 +4,26 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'AI Transparency — Envisioned',
   description:
-    'How Envisioned uses AI, what stays human, and the policy on training, retrieval, and attribution. The standing disclosure.',
+    'Who holds the judgement, how AI supports the work, and the policy on training, retrieval and attribution. The standing disclosure.',
 };
 
+/**
+ * Vendor names deliberately removed (MI, 2026-08-27).
+ *
+ * The page used to name the specific model and image tool. Checked against the
+ * EU AI Act: Article 50 requires disclosing THAT content is AI-generated, never
+ * WHICH system produced it, and the text obligation carries an exemption where
+ * the content has had human review and a person holds editorial responsibility.
+ * So naming vendors was voluntary. It is now stated as a choice, with the thing
+ * that actually matters (who holds the judgement) said out loud instead.
+ *
+ * Voice: first person throughout. The page previously slid between "I build"
+ * and "Maria-Ines conducts", which read as though someone else wrote it.
+ */
 export default function AITransparencyPage() {
   return (
-    <main className="min-h-screen px-6 pt-40 pb-32 flex flex-col justify-center">
-      <div className="max-w-[900px] mx-auto w-full">
+    <main className="min-h-screen px-6 pt-40 pb-32">
+      <div className="max-w-[1140px] mx-auto w-full">
         <p className="kicker mb-8">AI Transparency</p>
 
         <h1 className="display text-4xl md:text-6xl xl:text-7xl text-ink mb-8">
@@ -26,20 +39,63 @@ export default function AITransparencyPage() {
           </p>
         </div>
 
-        {/* ── What AI does here ── */}
+        {/* ── Whose judgement ── */}
         <div className="border-t border-hair-olive pt-10 mb-16">
-          <p className="kicker mb-6">What AI does here</p>
+          <p className="kicker mb-6">Whose judgement this is</p>
           <div className="max-w-[40em] space-y-5 text-[1.08rem] text-taupe leading-[1.75]">
             <p>
-              AI (Claude by Anthropic) handles research, drafting, scheduling,
-              data analysis, and client system builds. Every client engagement
-              uses AI as a delivery layer. AI-generated images are produced
-              with Nano Banana 2 (Google) and reviewed against a 12-point
-              creative direction checklist before publication.
+              Before the AI question, the one that actually matters: whose
+              thinking are you reading?
             </p>
             <p>
-              The infrastructure I build for clients is AI-powered by design.
-              That is not an add-on. It is the product.
+              I spent years in international consulting, managing projects worth
+              millions, including work with the Australian Red Cross. Then a
+              decade in the online space as a brand and personal brand
+              photographer, and as a strategist for founder-led businesses.
+            </p>
+            <p>
+              Twenty years of deciding what matters in the frame, and years
+              before that of running programmes where getting it wrong had
+              consequences. That is where the judgement in this work comes from.
+            </p>
+          </div>
+        </div>
+
+        {/* ── My ideas are my own ── */}
+        <div className="border-t border-hair-olive pt-10 mb-16">
+          <p className="kicker mb-6">My ideas are my own</p>
+          <div className="max-w-[40em] space-y-5 text-[1.08rem] text-taupe leading-[1.75]">
+            <p>
+              The thinking, the positioning, the frameworks, the opinions, the
+              decisions about what is worth saying at all. Mine. Every one of
+              them existed before the tool and would survive without it.
+            </p>
+            <p className="text-ink">
+              AI did not give me a point of view. It found me with one already.
+            </p>
+          </div>
+        </div>
+
+        {/* ── How AI supports the work ── */}
+        <div className="border-t border-hair-olive pt-10 mb-16">
+          <p className="kicker mb-6">How AI supports the work</p>
+          <div className="max-w-[40em] space-y-5 text-[1.08rem] text-taupe leading-[1.75]">
+            <p>
+              Everything published here starts as my own point of view. Usually
+              spoken out loud, argued through, or written badly first. AI helps
+              me extract it, draft from it, and shape it so it is readable by
+              people and retrievable by machines.
+            </p>
+            <p className="text-ink">
+              The judgement is extracted from me. It is not generated for me.
+            </p>
+            <p>
+              It also does the work that never needed a human in the first
+              place: research, scheduling, data analysis, first drafts of the
+              parts nobody enjoys, and the build work inside client systems.
+              Images on this site are AI-generated and reviewed against a
+              twelve-point creative direction checklist before anything is
+              published.
             </p>
           </div>
         </div>
@@ -49,14 +105,32 @@ export default function AITransparencyPage() {
           <p className="kicker mb-6">What stays human</p>
           <div className="max-w-[40em] space-y-5 text-[1.08rem] text-taupe leading-[1.75]">
             <p>
-              Strategy. Client architecture. Pricing. Voice. Final decisions.
-              Maria-Ines conducts every call, builds every system, and runs
-              every VIP day personally. She is the architect, not a label on
-              someone else&rsquo;s assembly line.
+              Strategy. Client architecture. Pricing. Voice. Final decisions. I
+              conduct every call, build every system and run every VIP day
+              myself. I am the architect, not a label on someone else&rsquo;s
+              assembly line.
             </p>
             <p>
-              AI does not decide what gets built, who it gets built for, or
-              what standards it must meet. A human does. Every time.
+              AI does not decide what gets built, who it gets built for, or what
+              standards it has to meet. I do. Every time.
+            </p>
+          </div>
+        </div>
+
+        {/* ── On naming tools ── */}
+        <div className="border-t border-hair-olive pt-10 mb-16">
+          <p className="kicker mb-6">On naming tools</p>
+          <div className="max-w-[40em] space-y-5 text-[1.08rem] text-taupe leading-[1.75]">
+            <p>
+              I do not publish a list of which models I use, and no rule
+              requires me to. Transparency law asks whether content is
+              AI-assisted and whether a human is accountable for it. It does not
+              ask for the brand name on the tool.
+            </p>
+            <p>
+              The tools change every few months anyway. What does not change is
+              who holds the judgement and who reviews the work before it reaches
+              you. Both answers are on this page.
             </p>
           </div>
         </div>
@@ -78,9 +152,8 @@ export default function AITransparencyPage() {
               .
             </p>
             <p>
-              GPTBot, ClaudeBot, Google-Extended, and PerplexityBot are allowed
-              for retrieval. If you are building a model and scraping this site
-              for training data, you do not have permission.
+              Retrieval crawlers are allowed. If you are building a model and
+              scraping this site for training data, you do not have permission.
             </p>
           </div>
         </div>
@@ -90,10 +163,9 @@ export default function AITransparencyPage() {
           <p className="kicker mb-6">Client data</p>
           <div className="max-w-[40em] space-y-5 text-[1.08rem] text-taupe leading-[1.75]">
             <p>
-              Client data is processed through AI to build their
-              infrastructure. It is never shared across clients, never used in
-              marketing without explicit permission, and never uploaded to
-              training datasets.
+              Client data is processed through AI to build their infrastructure.
+              It is never shared across clients, never used in marketing without
+              explicit permission, and never uploaded to training datasets.
             </p>
             <p>
               Each client&rsquo;s codified intelligence belongs to them. Full
