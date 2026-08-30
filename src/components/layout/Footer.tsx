@@ -13,6 +13,8 @@ const FOOTER_LINKS = [
   { href: '/about', label: 'About' },
   { href: '/blog', label: 'Notes' },
   { href: '/contact', label: 'Contact' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/ai-transparency', label: 'AI Transparency' },
 ];
 
 export default function Footer() {
