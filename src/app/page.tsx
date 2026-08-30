@@ -858,36 +858,58 @@ export default function HomePage() {
             </div>
             <div className="space-y-5 text-[1.05rem] leading-[1.75]">
               <h2 className="nr text-[2.4rem] leading-[1.1] md:text-[3rem]">I&rsquo;m Maria-Ines.</h2>
-              <p>And I am fairly obsessed with the intelligence people do not realise they have.</p>
               <p>
-                My career has moved through international development, photography, brand
-                strategy, founder-led businesses and AI. Different industries. Same question:
+                I am Venezuelan. A woman of colour. A mother. A former humanitarian worker. A
+                photographer who spent more than twenty years learning how to see. A strategist.
+                And now, a builder of intelligent business systems.
               </p>
+              <p>
+                My career has moved through international development, more than thirty
+                countries, photography, personal branding, founder-led businesses and AI.
+              </p>
+              <p>The industries changed. The question stayed remarkably consistent:</p>
               <p className="nr text-[1.5rem] leading-[1.4]">
-                What do people know that the systems around them <em>fail to capture?</em>
+                What do people know that the systems around them <em>fail to recognise?</em>
               </p>
               <p>
-                I am a visual thinker, a pattern spotter, a strategist and a builder. I am
-                also the person who will stop you halfway through a sentence because the
-                thing you just said casually is probably more valuable than the polished
-                answer you prepared.
+                I have seen valuable knowledge dismissed because it arrived with the wrong
+                accent, from the wrong geography, inside the wrong body or without the
+                institutional authority required to make people listen.
               </p>
-              <p>I care about technology.</p>
+              <p>I see the same pattern emerging in AI.</p>
               <p>
-                But I care far more about what humans can do when technology extends their
-                capacity without erasing their judgement.
+                When a machine cannot see your judgement, context, standards and lived
+                experience, it substitutes probability. And probability pulls the work towards
+                the middle.
               </p>
-              <p>I do not want AI to help more women produce average work faster.</p>
-              <div className="pt-2">
-                <Ledger tight items={[
-                  'I want it to help their hard-won intelligence become more powerful.',
-                  'More portable.',
-                  'More useful.',
-                  'I am not here to make you an AI person.',
-                  'I am here to make AI worthy of the intelligence already inside your business.',
-                ]} />
-              </div>
-              <p className="nr pt-3 text-[1.5rem] text-[color:var(--ox)]">That is the future I am interested in.</p>
+              <p className="nr pt-5 text-[2.1rem] leading-[1.12] text-[color:var(--ox)] md:text-[2.8rem]">
+                DON&rsquo;T AVERAGE HER.
+              </p>
+              <p>
+                Women cannot afford to watch this technology develop from the sidelines. We
+                need enough knowledge to question it, direct it, intervene in it and
+                participate in deciding what gets built.
+              </p>
+              <p>That does not mean every woman needs to become an AI expert.</p>
+              <p>
+                It means the intelligence shaping the world must contain more of the women
+                already shaping businesses, communities, ideas and culture.
+              </p>
+              <p>That is why I created Envisioned.</p>
+              <p>
+                I find the intelligence your business has not yet learned to carry. I codify it
+                without flattening it. Then I build the structures and systems that allow it to
+                travel further without removing your judgement from the result.
+              </p>
+              <p className="nr pt-4 text-[1.35rem] leading-[1.45]">
+                Your ideas should not have to wait for your capacity.
+              </p>
+              <p className="nr text-[1.35rem] leading-[1.45]">
+                Your business should not be working from a thinner version of you.
+              </p>
+              <p className="nr text-[1.55rem] leading-[1.4] text-[color:var(--ox)]">
+                And AI should have to rise to the level of the intelligence you already earned.
+              </p>
             </div>
           </div>
         </section>
