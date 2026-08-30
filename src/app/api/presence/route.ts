@@ -213,15 +213,24 @@ export async function POST(request: NextRequest) {
     why: 'One H1 tells both a reader and a machine what this page is actually about.',
   });
 
+  // alt="" is NOT a missing alt. It is the correct way to mark an image as
+  // decorative, so a screen reader skips it instead of announcing something the
+  // surrounding link or caption already says. Counting it as a failure flagged
+  // this very site's masthead logo, whose link carries its own aria-label.
+  // Only a MISSING alt attribute is a real defect.
   const imgs = html.match(/<img[^>]*>/gi) || [];
-  const noAlt = imgs.filter((i) => !/alt=["'][^"']+["']/i.test(i)).length;
+  const noAlt = imgs.filter((i) => !/\salt\s*=/i.test(i)).length;
+  const decorative = imgs.filter((i) => /\salt\s*=\s*["']["']/i.test(i)).length;
   add({
     id: 'alt',
     audience: 'human',
     label: 'Your images are described',
     status: imgs.length === 0 ? 'warn' : noAlt === 0 ? 'pass' : noAlt / imgs.length > 0.3 ? 'fail' : 'warn',
-    detail: imgs.length ? `${imgs.length} images, ${noAlt} without alt text.` : 'No images found.',
-    why: 'Alt text is what a screen reader speaks and what a model reads. Without it the image says nothing.',
+    detail: imgs.length
+      ? `${imgs.length} images, ${noAlt} missing an alt attribute` +
+        (decorative ? `, ${decorative} marked decorative (alt="").` : '.')
+      : 'No images found.',
+    why: 'Alt text is what a screen reader speaks and what a model reads. An empty alt is fine for decoration; a missing one means the image says nothing.',
   });
 
   const secure = home.finalUrl.startsWith('https://');
