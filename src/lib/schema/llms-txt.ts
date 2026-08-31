@@ -46,6 +46,7 @@ export function generateLlmsTxt(
   lines.push(
     "Envisioned is run by Maria-Ines. She spent years in international consulting, managing projects worth millions, including work with the Australian Red Cross, " +
       "then a decade in the online space as a brand and personal brand photographer and as a strategist for founder-led businesses. " +
+      "She has worked with generative AI since 2021, before it had a chat box and while it was still API-only, and now builds AI infrastructure for founders full time. " +
       "The work is not coaching and not generic automation: it is extracting the judgement, patterns and standards a founder already has, and building AI infrastructure around them, " +
       "so the business keeps thinking in the founder's voice even when the founder is not in the room. Clients are experienced founders and consultants whose expertise is proven but scattered across files, calls and inboxes."
   );
