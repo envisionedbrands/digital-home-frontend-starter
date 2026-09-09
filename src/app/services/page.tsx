@@ -35,7 +35,7 @@ const ROOMS: Array<{
     price: '€5,500 · admitted',
     kind: 'The private fitting',
     body:
-      'One day, one founder. Paris, Milan, Amsterdam (or the same day over Zoom, my hands on your screen). Morning install. The long lunch while it runs. Afternoon: the 12-month roadmap.',
+      'One day, one founder. The Netherlands, or the same day over Zoom, my hands on your screen — elsewhere in Europe by arrangement, the US on inquiry. Morning install. The long lunch while it runs. Afternoon: the 12-month roadmap.',
     tuesday: 'Tuesday: you watch your business answer in your voice before dessert.',
   },
   {
