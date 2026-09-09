@@ -83,7 +83,6 @@ export const FOOTER_GROUPS: FooterGroup[] = [
       { n: '', label: 'The Atelier', href: '/services' },
       { n: '', label: 'Codified in the City', href: 'https://codifiedinthecity.com' },
       { n: '', label: 'Codified Live', href: 'https://codifiedinthecity.com' },
-      { n: '', label: 'Codified Studio', href: '/services' },
     ],
   },
   {
