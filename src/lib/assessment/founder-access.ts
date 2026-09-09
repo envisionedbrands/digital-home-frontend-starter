@@ -481,31 +481,37 @@ export function recommendOffer(
     };
   }
 
-  if (
-    q.business_context === 'programme' &&
-    (q.highest_value_application === 'client_delivery' ||
-      q.highest_value_application === 'licensing_transfer') &&
-    (stage === 'Transferable' || stage === 'Codified')
-  ) {
-    return {
-      ...OFFERS.embedded_genius,
-      why: 'You have a programme, a transferable method, and you want it working inside client delivery. That is the case where your methodology stops being documentation and gets deployed as tools your members actually use.',
-    };
-  }
+  // Embedded Genius, The Atelier and The Residency are all off the visible
+  // surfaces 2026-09-09 on MI's go ("only the free Map, the €1,500 Integration
+  // Map, and Codified in the City for now — we'll rule on the others later").
+  // Not deleted, just not recommended to a real visitor while paused/pending —
+  // each rule falls through to the next one instead. Restore any of the three
+  // independently once she rules on it.
+  // if (
+  //   q.business_context === 'programme' &&
+  //   (q.highest_value_application === 'client_delivery' ||
+  //     q.highest_value_application === 'licensing_transfer') &&
+  //   (stage === 'Transferable' || stage === 'Codified')
+  // ) {
+  //   return {
+  //     ...OFFERS.embedded_genius,
+  //     why: 'You have a programme, a transferable method, and you want it working inside client delivery. That is the case where your methodology stops being documentation and gets deployed as tools your members actually use.',
+  //   };
+  // }
 
-  if (q.preferred_build_mode === 'guided_build') {
-    return {
-      ...OFFERS.atelier,
-      why: 'You want to build it yourself, with someone who has done it before sitting next to you. The Atelier is eight weeks of fittings: you leave with your own Pattern Book and the first system built by your own hands.',
-    };
-  }
+  // if (q.preferred_build_mode === 'guided_build') {
+  //   return {
+  //     ...OFFERS.atelier,
+  //     why: 'You want to build it yourself, with someone who has done it before sitting next to you. The Atelier is eight weeks of fittings: you leave with your own Pattern Book and the first system built by your own hands.',
+  //   };
+  // }
 
-  if (stage === 'Codified') {
-    return {
-      ...OFFERS.residency,
-      why: 'The architecture exists. What changes outcomes now is adoption and maintenance — a monthly build sprint against the next highest-value application, rather than another round of capture.',
-    };
-  }
+  // if (stage === 'Codified') {
+  //   return {
+  //     ...OFFERS.residency,
+  //     why: 'The architecture exists. What changes outcomes now is adoption and maintenance — a monthly build sprint against the next highest-value application, rather than another round of capture.',
+  //   };
+  // }
 
   return {
     ...OFFERS.citc,

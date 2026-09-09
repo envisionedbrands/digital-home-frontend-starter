@@ -80,7 +80,9 @@ export const FOOTER_GROUPS: FooterGroup[] = [
     title: 'Work together',
     items: [
       { n: '', label: 'The Integration Map', href: '/services' },
-      { n: '', label: 'The Atelier', href: '/services' },
+      // The Atelier — paused 2026-09-02 (DECISIONS #021), removed from footer
+      // nav 2026-09-09 on MI's explicit go. Site-wide, since every page reads
+      // this file. Restore this line when the pause lifts.
       { n: '', label: 'Codified in the City', href: 'https://codifiedinthecity.com' },
       { n: '', label: 'Codified Live', href: 'https://codifiedinthecity.com' },
     ],
