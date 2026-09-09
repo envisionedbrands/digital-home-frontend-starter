@@ -748,8 +748,8 @@ export default function HomePage() {
             <h2 className="nr max-w-[13em] text-balance text-[2.1rem] leading-[1.09] md:text-[3.6rem]">
               Begin with the part that needs to become <em>usable first.</em>
             </h2>
-            <div className="stagger mt-12 grid border-t-2 border-[color:var(--ink)] sm:grid-cols-2 lg:grid-cols-4 sm:divide-x sm:divide-[color:var(--hair)]">
-              <div className="flex flex-col py-8 sm:pr-8">
+            <div className="stagger mt-12 grid border-t-2 border-[color:var(--ink)]">
+              <div className="flex flex-col py-8">
                 <p className="lbl text-[color:var(--ox)]">One</p>
                 <p className="nr mt-4 text-[1.55rem] leading-[1.25]">Start with The Integration Map.</p>
                 <p className="mt-4 flex-1 text-[1.02rem] leading-[1.7]">
@@ -760,47 +760,6 @@ export default function HomePage() {
                 </p>
                 <a href={BOOK} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
                   Enquire about the Integration Map →
-                </a>
-              </div>
-              <div className="flex flex-col py-8 sm:px-8">
-                <p className="lbl text-[color:var(--ox)]">Two</p>
-                <p className="nr mt-4 text-[1.55rem] leading-[1.25]">Build it together in The Atelier.</p>
-                <p className="mt-4 flex-1 text-[1.02rem] leading-[1.7]">
-                  Eight weeks, live, small group. I extract your business
-                  knowledge, organise it into your Pattern Book (the organised
-                  brain your AI can actually work from), and build your first
-                  working system on top of it. A working studio for founder
-                  intelligence. Ten seats per Build, fitted in fives.
-                </p>
-                <a href={BOOK} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
-                  Ask about The Atelier →
-                </a>
-              </div>
-              <div className="flex flex-col py-8 sm:pr-8 lg:px-8">
-                <p className="lbl text-[color:var(--ox)]">Three</p>
-                <p className="nr mt-4 text-[1.55rem] leading-[1.25]">Already building? Stay for The Residency.</p>
-                <p className="mt-4 flex-1 text-[1.02rem] leading-[1.7]">
-                  Ninety days as your integration partner after a build day. One
-                  live sprint per month plus async access. Because the interesting thing
-                  about making one part of the business more intelligent is that you
-                  start noticing all the other places where the same thinking could
-                  travel.
-                </p>
-                <a href={BOOK} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
-                  Ask about The Residency →
-                </a>
-              </div>
-              <div className="flex flex-col py-8 sm:pl-8">
-                <p className="lbl text-[color:var(--ox)]">Four</p>
-                <p className="nr mt-4 text-[1.55rem] leading-[1.25]">For the businesses ready to go deeper: Embedded Genius.</p>
-                <p className="mt-4 flex-1 text-[1.02rem] leading-[1.7]">
-                  Your methodology deployed as AI tools inside your own programme.
-                  So your genius scales inside the client experience without you
-                  being in every room. For selected founder-led businesses, by
-                  enquiry only.
-                </p>
-                <a href={BOOK} className="lbl mt-6 text-[color:var(--ink)] transition-colors hover:text-[color:var(--ox)]">
-                  Enquire about Embedded Genius →
                 </a>
               </div>
             </div>

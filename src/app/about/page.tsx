@@ -34,7 +34,7 @@ export default function AboutPage() {
           </p>
           <p>
             Today I build AI infrastructure for women whose businesses run on
-            their judgment: mentors with a named method, founders whose standards
+            their judgement: mentors with a named method, founders whose standards
             are the product. The work is extraction (getting the thinking out of
             your head), codification (writing it where humans and machines can
             both read it), and deployment (tools that carry your standards into

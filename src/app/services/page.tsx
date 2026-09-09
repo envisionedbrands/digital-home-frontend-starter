@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'The Rooms — Envisioned',
   description:
-    'One method, five fittings: extraction, codification, deployment. The Integration Map, the Atelier, Codified in the City, the Residency, and Embedded Genius.',
+    'One method, two fittings: extraction, codification, deployment. The Integration Map and Codified in the City.',
 };
 
 const ROOMS: Array<{
@@ -23,36 +23,12 @@ const ROOMS: Array<{
     tuesday: 'Tuesday: you stop guessing what to build first; the map says.',
   },
   {
-    name: 'The Atelier',
-    price: 'Admitted · details on application',
-    kind: 'The group fitting',
-    body:
-      'Live, capped, fitted in small rooms. Eight weeks, six fittings. You leave with your pattern codified and the spec for your first tool.',
-    tuesday: 'Tuesday: your clients stop stalling between calls, without needing more of you.',
-  },
-  {
     name: 'Codified in the City / Codified Live',
     price: '€5,500 · admitted',
     kind: 'The private fitting',
     body:
       'One day, one founder. The Netherlands, or the same day over Zoom, my hands on your screen — elsewhere in Europe by arrangement, the US on inquiry. Morning install. The long lunch while it runs. Afternoon: the 12-month roadmap.',
     tuesday: 'Tuesday: you watch your business answer in your voice before dessert.',
-  },
-  {
-    name: 'The Residency',
-    price: '€1,250/month × 3',
-    kind: 'The alterations',
-    body:
-      'Ninety days of adoption after the build. Monthly sprint, async access. Sold only at the end of a build day.',
-    tuesday: 'Tuesday: the system survives contact with your real week.',
-  },
-  {
-    name: 'Embedded Genius',
-    price: '€12,000',
-    kind: 'The commission',
-    body:
-      'Your methodology, deployed as AI tools inside your own program, for your clients&rsquo; hands.',
-    tuesday: 'Tuesday: your standards teach when you&rsquo;re not on the call.',
   },
 ];
 
@@ -65,7 +41,7 @@ export default function ServicesPage() {
         <h1 className="display text-4xl md:text-6xl xl:text-7xl text-ink mb-8">
           One method.
           <br />
-          Five fittings.
+          Two fittings.
         </h1>
 
         <p className="text-xl text-ink-soft max-w-[38em] leading-[1.75] mb-20">

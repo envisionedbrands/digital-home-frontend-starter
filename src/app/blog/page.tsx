@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'The Journal — Envisioned',
   description:
-    'Essays and field notes on codifying founder intelligence: AI infrastructure, judgment, and businesses that run without their founder in every room.',
+    'Essays and field notes on codifying founder intelligence: AI infrastructure, judgement, and businesses that run without their founder in every room.',
 };
 
 function formatDate(dateStr: string) {

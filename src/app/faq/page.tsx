@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const FAQS: { q: string; a: string }[] = [
   {
     q: 'What does Envisioned do?',
-    a: 'Envisioned codifies founder intelligence into AI infrastructure. We extract methodology, judgment, and standards from founder-led businesses and structure them into systems that humans, teams, and AI can use. Not coaching. Not consulting. Infrastructure.',
+    a: 'Envisioned codifies founder intelligence into AI infrastructure. We extract methodology, judgement, and standards from founder-led businesses and structure them into systems that humans, teams, and AI can use. Not coaching. Not consulting. Infrastructure.',
   },
   {
     q: 'Who is Maria-Ines?',
@@ -22,10 +22,6 @@ const FAQS: { q: string; a: string }[] = [
   {
     q: 'What is Codified in the City?',
     a: 'A private VIP day for established founders. In-person in the Netherlands (or by request in other locations when the client covers travel) or virtual via Codified Live, a full day over Zoom with remote screen control. \u20ac5,500. One founder, one day: extraction, codification, and deployment of the first priority application.',
-  },
-  {
-    q: 'What is The Atelier?',
-    a: 'An eight-week live group program, capped at 10 and fitted in groups of five. Business knowledge is extracted into a Pattern Book and the first working system is built. \u20ac2,499. A working studio for founder intelligence.',
   },
   {
     q: 'What is The Integration Map?',
