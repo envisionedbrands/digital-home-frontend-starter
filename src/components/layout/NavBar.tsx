@@ -35,7 +35,7 @@ export default function NavBar() {
         {/* Plain anchor on purpose: the homepage is served by a different Worker
             (founder-intelligence-home), so the logo must do a full page load,
             not a client-side route to this app's own "/" page. */}
-        <a href="/" className="flex items-baseline gap-3 text-ink">
+        <a href="https://www.envisioned.me/" className="flex items-baseline gap-3 text-ink">
           <span className="display text-[1.45rem] tracking-[0.02em]">
             Envisioned
           </span>
