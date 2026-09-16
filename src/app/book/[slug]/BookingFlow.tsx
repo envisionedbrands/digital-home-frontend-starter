@@ -443,7 +443,7 @@ export default function BookingFlow({ eventType, ownerTimezone }: Props) {
               rows={4}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="Be as specific as you can. The vague version wastes both our time."
+              placeholder="Anything you want me to know before we meet? You'll receive further instructions by email after booking."
               className="mt-2 w-full border border-[color:var(--stone-deep)] bg-transparent px-4 py-3 text-[1.02rem] leading-[1.6] placeholder:text-[color:var(--taupe)] focus:border-[color:var(--olive)] focus:outline-none"
             />
           </div>
