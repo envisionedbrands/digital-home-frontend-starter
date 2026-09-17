@@ -96,6 +96,7 @@ export async function POST(request: NextRequest) {
   const result = answers && score(answers);
   if (!result) return NextResponse.json({ error: 'Answer all ten questions first' }, { status: 400, headers: CORS });
   const sessionId = clean(body.session_id, 100) || crypto.randomUUID();
+  const via = clean(body.via, 10) === 'dm' ? 'dm' : 'web';
   const completedAt = new Date().toISOString();
 
   const payload = {
@@ -104,7 +105,7 @@ export async function POST(request: NextRequest) {
     source: ASSESSMENT_KEY,
     page: '/safe-ai/',
     form: 'safe-ai-results',
-    tags: ['safe-ai-completed', `safe-ai-stage-${result.stageSlug}`],
+    tags: ['safe-ai-completed', `safe-ai-stage-${result.stageSlug}`, `safe-ai-via-${via}`],
     custom: {
       safe_ai_score: String(result.raw),
       safe_ai_protection: String(result.protection),
@@ -115,6 +116,7 @@ export async function POST(request: NextRequest) {
       safe_ai_first_move: result.firstMove,
       safe_ai_version: ASSESSMENT_VERSION,
       safe_ai_completed_at: completedAt,
+      safe_ai_via: via,
     },
     assessment: {
       assessment_key: ASSESSMENT_KEY,
@@ -138,7 +140,8 @@ export async function POST(request: NextRequest) {
       console.error('safe-ai capture failed', res.status, (await res.text().catch(() => '')).slice(0, 300));
       return NextResponse.json({ error: 'Could not send right now' }, { status: 502, headers: CORS });
     }
-    return NextResponse.json({ ok: true, stage: result.stage }, { headers: CORS });
+    const out = (await res.json().catch(() => ({}))) as { created?: boolean };
+    return NextResponse.json({ ok: true, stage: result.stage, known: out.created === false }, { headers: CORS });
   } catch (e) {
     console.error('safe-ai capture error', e);
     return NextResponse.json({ error: 'Could not send right now' }, { status: 502, headers: CORS });
