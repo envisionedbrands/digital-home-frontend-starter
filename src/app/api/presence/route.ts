@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
   const limited = await checkRateLimit(request, 'STRICT_LIMITER');
   if (limited) return limited;
 
-  const body = await request.json().catch(() => ({}));
+  const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
   const origin = normalise(String(body.url || ''));
   if (!origin) return Response.json({ error: 'Enter a valid website address.' }, { status: 400 });
 

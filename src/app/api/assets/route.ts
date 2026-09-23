@@ -22,7 +22,11 @@ export async function POST(request: NextRequest) {
   if (!auth.authenticated) return unauthorizedResponse(auth.error);
   if (auth.mode !== "api-key") return errorResponse("Machine auth required", 403);
 
-  const body = await request.json();
+  const body = (await request.json()) as {
+    filename?: string;
+    content_type?: string;
+    content_base64?: string;
+  };
   const { filename, content_type: contentType, content_base64: contentBase64 } = body || {};
   if (!filename || !contentType || !contentBase64) {
     return errorResponse("filename, content_type and content_base64 are required");

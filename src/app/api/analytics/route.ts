@@ -22,13 +22,14 @@ import { authenticateRequest, unauthorizedResponse } from "@/lib/api/auth";
 import { jsonResponse, errorResponse, parsePagination, paginatedResponse } from "@/lib/api/response";
 import { VISITOR_COOKIE_NAME } from "@/lib/personalization/visitor";
 import { checkRateLimit } from "@/lib/api/rate-limit";
+import type { InsertTables } from "@/types/database";
 
 export async function POST(request: NextRequest) {
   // Public, anonymous, writes to the database — throttle before doing anything.
   const limited = await checkRateLimit(request, "WRITE_LIMITER");
   if (limited) return limited;
 
-  const body = await request.json();
+  const body = (await request.json()) as Partial<InsertTables<"analytics_events">>;
 
   if (!body.event_type) {
     return errorResponse("event_type is required");

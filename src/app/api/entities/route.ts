@@ -12,7 +12,9 @@ import { NextRequest } from "next/server";
 import { createAdminClient } from "@/lib/supabase/server";
 import { authenticateRequest, unauthorizedResponse } from "@/lib/api/auth";
 import { jsonResponse, errorResponse } from "@/lib/api/response";
-import type { Enums } from "@/types/database";
+import type { Enums, InsertTables } from "@/types/database";
+
+type EntityInsert = InsertTables<"entities">;
 
 export async function GET(request: NextRequest) {
   const auth = await authenticateRequest(request);
@@ -79,7 +81,7 @@ export async function POST(request: NextRequest) {
   const auth = await authenticateRequest(request);
   if (!auth.authenticated) return unauthorizedResponse(auth.error);
 
-  const body = await request.json();
+  const body = (await request.json()) as EntityInsert;
 
   if (!body.slug || !body.name || !body.entity_type || !body.schema_type) {
     return errorResponse("slug, name, entity_type, and schema_type are required");

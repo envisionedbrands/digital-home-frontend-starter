@@ -84,7 +84,8 @@ export default function HomeFx() {
         const caret = document.createElement('span');
         caret.className = 'caret';
         caret.setAttribute('aria-hidden', 'true');
-        twEl.append(text, caret);
+        twEl.appendChild(text);
+        twEl.appendChild(caret);
         twEl.setAttribute('aria-label', items.join(' '));
         let item = 0;
         let pos = 0;

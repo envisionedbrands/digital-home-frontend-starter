@@ -64,7 +64,7 @@ export default function ReadabilityPage() {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ url }),
       });
-      const data = await res.json();
+      const data: Result & { error?: string } = await res.json();
       if (!res.ok) setError(data.error || 'Something went wrong. Try again.');
       else setResult(data);
     } catch {
@@ -92,7 +92,7 @@ export default function ReadabilityPage() {
           checks: result.checks,
         }),
       });
-      const data = await res.json();
+      const data: { error?: string; sent?: boolean } = await res.json();
       if (!res.ok) {
         setCaptureNote(data.error || 'That did not go through. Try again?');
         return;

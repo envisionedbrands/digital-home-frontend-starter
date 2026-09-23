@@ -7,6 +7,9 @@ import { NextRequest } from "next/server";
 import { createAdminClient } from "@/lib/supabase/server";
 import { authenticateRequest, unauthorizedResponse } from "@/lib/api/auth";
 import { jsonResponse, errorResponse } from "@/lib/api/response";
+import type { InsertTables } from "@/types/database";
+
+type RelationshipInsert = InsertTables<"entity_relationships">;
 
 export async function GET(request: NextRequest) {
   const auth = await authenticateRequest(request);
@@ -37,7 +40,7 @@ export async function POST(request: NextRequest) {
   const auth = await authenticateRequest(request);
   if (!auth.authenticated) return unauthorizedResponse(auth.error);
 
-  const body = await request.json();
+  const body = (await request.json()) as Partial<RelationshipInsert>;
 
   if (!body.subject_id || !body.predicate || !body.object_id) {
     return errorResponse("subject_id, predicate, and object_id are required");
@@ -46,7 +49,13 @@ export async function POST(request: NextRequest) {
   const supabase = createAdminClient();
   const { data, error } = await supabase
     .from("entity_relationships")
-    .insert(body)
+    .insert({
+      subject_id: body.subject_id,
+      predicate: body.predicate,
+      object_id: body.object_id,
+      properties: body.properties,
+      weight: body.weight,
+    })
     .select()
     .single();
 

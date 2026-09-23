@@ -11,8 +11,10 @@ import { createAdminClient } from "@/lib/supabase/server";
 import { authenticateRequest, unauthorizedResponse } from "@/lib/api/auth";
 import { jsonResponse, errorResponse, parsePagination, paginatedResponse } from "@/lib/api/response";
 import { VISITOR_COOKIE_NAME } from "@/lib/personalization/visitor";
-import type { Enums } from "@/types/database";
+import type { Enums, InsertTables } from "@/types/database";
 import { checkRateLimit } from "@/lib/api/rate-limit";
+
+type LeadInsert = InsertTables<"leads">;
 
 export async function GET(request: NextRequest) {
   const auth = await authenticateRequest(request);
@@ -44,7 +46,7 @@ export async function POST(request: NextRequest) {
   const limited = await checkRateLimit(request, "WRITE_LIMITER");
   if (limited) return limited;
 
-  const body = await request.json();
+  const body = (await request.json()) as Partial<LeadInsert>;
 
   if (!body.email) {
     return errorResponse("email is required");

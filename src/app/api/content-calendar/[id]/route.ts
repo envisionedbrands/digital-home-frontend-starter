@@ -49,7 +49,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
   if (!auth.authenticated) return unauthorizedResponse(auth.error);
 
   const { id } = await context.params;
-  const body = await request.json();
+  const body: Record<string, unknown> = await request.json();
 
   const supabase = createAdminClient();
 

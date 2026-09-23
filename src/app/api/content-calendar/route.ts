@@ -69,12 +69,12 @@ export async function POST(request: NextRequest) {
   const auth = await authenticateRequest(request);
   if (!auth.authenticated) return unauthorizedResponse(auth.error);
 
-  const body = await request.json();
+  const body: Record<string, unknown> = await request.json();
 
   const supabase = createAdminClient();
 
   // Support batch insert: { entries: [...] } or single object
-  const entries = Array.isArray(body.entries) ? body.entries : [body];
+  const entries: Record<string, unknown>[] = Array.isArray(body.entries) ? body.entries : [body];
 
   if (entries.length === 0) {
     return errorResponse("At least one entry is required");

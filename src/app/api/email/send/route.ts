@@ -18,11 +18,20 @@ import { authenticateRequest, unauthorizedResponse } from "@/lib/api/auth";
 import { jsonResponse, errorResponse } from "@/lib/api/response";
 import { sendEmail } from "@/lib/email/resend";
 
+interface SendEmailBody {
+  lead_id?: string;
+  subject?: string;
+  html?: string;
+  text?: string;
+  sequence_id?: string;
+  step_number?: number;
+}
+
 export async function POST(request: NextRequest) {
   const auth = await authenticateRequest(request);
   if (!auth.authenticated) return unauthorizedResponse(auth.error);
 
-  const body = await request.json();
+  const body = (await request.json()) as SendEmailBody;
 
   if (!body.lead_id || !body.subject || !body.html) {
     return errorResponse("lead_id, subject, and html are required");

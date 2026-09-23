@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
   const auth = await authenticateRequest(request);
   if (!auth.authenticated) return unauthorizedResponse(auth.error);
 
-  const body = await request.json();
+  const body = (await request.json()) as Partial<InsertTables<"agent_logs">>;
 
   if (!body.agent || !body.action) {
     return errorResponse("agent and action are required");

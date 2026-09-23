@@ -16,6 +16,37 @@ import { authenticateRequest, unauthorizedResponse } from "@/lib/api/auth";
 import { jsonResponse, errorResponse, paginatedResponse, parsePagination } from "@/lib/api/response";
 import type { Enums } from "@/types/database";
 
+interface ContentPostBody {
+  slug?: string;
+  title?: string;
+  subtitle?: string;
+  content_type?: Enums<"content_type">;
+  body?: string;
+  excerpt?: string;
+  semantic_tags?: string[];
+  associated_offers?: string[];
+  target_segments?: string[];
+  featured_image_url?: string;
+  featured_video_url?: string;
+  seo_meta_id?: string;
+  status?: Enums<"content_status">;
+  created_by?: string;
+  author_name?: string;
+  add_to_calendar?: boolean;
+  priority?: Enums<"calendar_priority">;
+  calendar_notes?: string;
+  seo?: {
+    title?: string;
+    description?: string;
+    canonical_url?: string;
+    og_image_url?: string;
+    schema_type?: string;
+    target_keyword?: string;
+    secondary_keywords?: string[];
+    keyword_cluster?: string;
+  };
+}
+
 export async function GET(request: NextRequest) {
   const auth = await authenticateRequest(request);
   const isAuthenticated = auth.authenticated;
@@ -60,7 +91,7 @@ export async function POST(request: NextRequest) {
   const auth = await authenticateRequest(request);
   if (!auth.authenticated) return unauthorizedResponse(auth.error);
 
-  const body = await request.json();
+  const body = (await request.json()) as ContentPostBody;
 
   // Validate required fields
   if (!body.slug || !body.title) {

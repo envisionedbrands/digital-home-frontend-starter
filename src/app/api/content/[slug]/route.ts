@@ -8,6 +8,7 @@ import { NextRequest } from "next/server";
 import { createAdminClient } from "@/lib/supabase/server";
 import { authenticateRequest, unauthorizedResponse } from "@/lib/api/auth";
 import { jsonResponse, errorResponse, notFoundResponse } from "@/lib/api/response";
+import type { UpdateTables } from "@/types/database";
 
 export async function GET(
   request: NextRequest,
@@ -41,7 +42,7 @@ export async function PATCH(
   if (!auth.authenticated) return unauthorizedResponse(auth.error);
 
   const { slug } = await params;
-  const body = await request.json();
+  const body = (await request.json()) as UpdateTables<"content_objects">;
 
   const supabase = createAdminClient();
 

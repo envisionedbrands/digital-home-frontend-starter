@@ -91,7 +91,7 @@ export default function BookingFlow({ eventType, ownerTimezone }: Props) {
   useEffect(() => {
     let live = true;
     fetch(`/api/book/${eventType.slug}?days=60`)
-      .then((r) => r.json())
+      .then((r) => r.json() as Promise<{ slots?: string[] }>)
       .then((d) => live && setSlots(d.slots || []))
       .catch(() => live && setSlots([]));
     return () => {
@@ -181,13 +181,14 @@ export default function BookingFlow({ eventType, ownerTimezone }: Props) {
           timezone: tz,
         }),
       });
-      const data = await res.json();
+      const data: { error?: string; starts_at?: string; confirmation_note?: string | null } =
+        await res.json();
       if (!res.ok) throw new Error(data.error || 'Something went wrong.');
-      setDone({ starts_at: data.starts_at, note: data.confirmation_note });
+      setDone({ starts_at: data.starts_at || '', note: data.confirmation_note ?? null });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong.');
       fetch(`/api/book/${eventType.slug}?days=60`)
-        .then((r) => r.json())
+        .then((r) => r.json() as Promise<{ slots?: string[] }>)
         .then((d) => setSlots(d.slots || []));
       setChosen(null);
     } finally {

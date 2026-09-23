@@ -12,6 +12,9 @@ import { createAdminClient } from "@/lib/supabase/server";
 import { authenticateRequest, unauthorizedResponse } from "@/lib/api/auth";
 import { jsonResponse, errorResponse, parsePagination, paginatedResponse } from "@/lib/api/response";
 import { checkRateLimit } from "@/lib/api/rate-limit";
+import type { InsertTables } from "@/types/database";
+
+type VisitorInsert = InsertTables<"visitors">;
 
 export async function GET(request: NextRequest) {
   const auth = await authenticateRequest(request);
@@ -46,7 +49,7 @@ export async function POST(request: NextRequest) {
   const limited = await checkRateLimit(request, "WRITE_LIMITER");
   if (limited) return limited;
 
-  const body = await request.json();
+  const body = (await request.json()) as Partial<VisitorInsert>;
 
   if (!body.anonymous_id) {
     return errorResponse("anonymous_id is required");

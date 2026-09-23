@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
   const limited = await checkRateLimit(request, 'STRICT_LIMITER');
   if (limited) return limited;
 
-  const body = await request.json().catch(() => ({}));
+  const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
   const email = String(body.email || '').trim().toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return Response.json({ error: 'Enter a valid email address.' }, { status: 400 });
