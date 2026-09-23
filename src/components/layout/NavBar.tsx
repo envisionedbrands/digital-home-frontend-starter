@@ -12,8 +12,9 @@ export default function NavBar() {
   const pathname = usePathname();
 
   // The homepage carries its own Chronicle-style masthead (src/app/page.tsx);
-  // rendering this bar too would stack two navs.
-  const isHome = pathname === '/';
+  // rendering this bar too would stack two navs. /team-coppola ships its own header
+  // from the approved handoff page for the same reason.
+  const isHome = pathname === '/' || pathname.startsWith('/team-coppola');
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {

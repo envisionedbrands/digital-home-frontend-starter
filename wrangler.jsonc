@@ -62,6 +62,16 @@
     ]
   },
 
+  // Campaign counters (e.g. Coppola Open Studio founding-seat count) written
+  // by a Lemon Squeezy webhook and read by public pages. Deliberately not
+  // backed by a live Lemon Squeezy API call from a public Worker — the
+  // management key has no scoped/read-only variant, so putting it here would
+  // give a cosmetic counter the same blast radius as full store access.
+  // 2026-09-23.
+  "kv_namespaces": [
+    { "binding": "CAMPAIGN_STATE", "id": "cff36714b14c4974a6ca3a8c82a0df02" }
+  ],
+
   // Runtime duplicates of NEXT_PUBLIC_ vars — Workers can't read NEXT_PUBLIC_ at runtime
   "vars": {
     "SUPABASE_URL": "https://aqylffhuzunpimrebgye.supabase.co",
