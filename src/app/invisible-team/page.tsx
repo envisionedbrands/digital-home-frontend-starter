@@ -1,11 +1,22 @@
 import type { Metadata } from "next";
+import { Fraunces } from "next/font/google";
 import TrainingSeries from "./TrainingSeries";
+import styles from "./invisible-team.module.css";
 
 /**
  * Unlisted training hub for the Buzz onboarding series (not linked from nav
  * or the sitemap — same pattern as /open-studio/prep and /team-coppola).
  * Shared by direct link only, once Maria-Ines decides who gets it.
+ *
+ * Branding here follows the current envisioned.me home (Fraunces display,
+ * magenta accent, oxblood ink), not this repo's older Megante/olive tokens
+ * — invisible-team.module.css scopes the ink/taupe/canvas/hair variables to
+ * the live envisioned.me light theme for this route only, so every existing
+ * text-ink / text-taupe / bg-canvas-soft / border-hair class below already
+ * picks up the correct colour without a rewrite.
  */
+
+const fraunces = Fraunces({ subsets: ["latin"], weight: ["400", "500"] });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.envisioned.me";
 
@@ -24,6 +35,8 @@ const LESSONS = [
     blurb: "Get Buzz onto your laptop. One job today, no detours.",
     src: "/invisible-team/01-download-buzz.mp4",
     poster: "/invisible-team/01-download-buzz.jpg",
+    ctaHref: "https://buzz.xyz/",
+    ctaLabel: "Download Buzz",
   },
   {
     id: "your-key-and-your-ai",
@@ -47,23 +60,51 @@ const LESSONS = [
     src: "/invisible-team/04-say-hello.mp4",
     poster: "/invisible-team/04-say-hello.jpg",
   },
+  {
+    id: "talking-in-a-room",
+    title: "Talking in a room",
+    blurb:
+      "Channels, the @ sign, and where replies land, plus the one setting that decides threads or top level.",
+    src: "/invisible-team/05-talking-in-a-room.mp4",
+    poster: "/invisible-team/05-talking-in-a-room.jpg",
+  },
+  {
+    id: "what-buzz-actually-is",
+    title: "What Buzz actually is",
+    blurb:
+      "Not just an AI, and not just a Slack replacement. The room, the door, and the AI you already pay for.",
+    src: "/invisible-team/06-what-buzz-actually-is.mp4",
+    poster: "/invisible-team/06-what-buzz-actually-is.jpg",
+  },
+  {
+    id: "buzz-on-your-phone",
+    title: "Buzz on your phone",
+    blurb: "Pair your phone to your identity, no second account, no copy of your keys.",
+    src: "/invisible-team/07-buzz-on-your-phone.mp4",
+    poster: "/invisible-team/07-buzz-on-your-phone.jpg",
+  },
 ] as const;
 
 export default function InvisibleTeamPage() {
   return (
-    <main className="min-h-screen px-6 pt-40 pb-32 flex flex-col justify-center">
-      <div className="max-w-[860px] mx-auto w-full">
-        <p className="kicker mb-8">Getting started</p>
+    <main className={`${styles.brand} min-h-screen px-6 pt-40 pb-32 flex flex-col justify-center`}>
+      <div className="max-w-[1180px] mx-auto w-full">
+        <p className="kicker text-[#A80F4C] mb-8">Getting started</p>
 
-        <h1 className="display text-4xl md:text-6xl text-ink mb-8">Your invisible team.</h1>
+        <h1
+          className={`${fraunces.className} text-4xl md:text-6xl text-ink mb-8 leading-[1.08] tracking-[0.005em]`}
+        >
+          Your invisible team.
+        </h1>
 
         <p className="text-xl text-ink-soft max-w-[38em] leading-[1.75] mb-16">
-          Four short lessons. Buzz on your laptop, your key, your community, and your
-          first hello to an agent that already lives there. Each one unlocks once the
+          Seven short lessons. Buzz on your laptop, your key, your community, your
+          first hello to an agent that already lives there, how to talk in a room,
+          what Buzz actually is, and Buzz on your phone. Each one unlocks once the
           one before it is finished — no skipping ahead.
         </p>
 
-        <TrainingSeries lessons={LESSONS} />
+        <TrainingSeries lessons={LESSONS} titleClassName={fraunces.className} />
       </div>
     </main>
   );

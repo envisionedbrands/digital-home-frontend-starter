@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type Lesson = {
   id: string;
@@ -8,6 +8,8 @@ type Lesson = {
   blurb: string;
   src: string;
   poster: string;
+  ctaHref?: string;
+  ctaLabel?: string;
 };
 
 const STORAGE_KEY = "invisible-team:watched";
@@ -32,7 +34,13 @@ function saveWatched(watched: Set<string>) {
   }
 }
 
-export default function TrainingSeries({ lessons }: { lessons: readonly Lesson[] }) {
+export default function TrainingSeries({
+  lessons,
+  titleClassName,
+}: {
+  lessons: readonly Lesson[];
+  titleClassName?: string;
+}) {
   const [watched, setWatched] = useState<Set<string>>(new Set());
   const [hydrated, setHydrated] = useState(false);
 
@@ -52,7 +60,7 @@ export default function TrainingSeries({ lessons }: { lessons: readonly Lesson[]
   }, []);
 
   return (
-    <div className="flex flex-col gap-px border border-hair bg-hair">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-px border border-hair bg-hair">
       {lessons.map((lesson, index) => {
         const previous = lessons[index - 1];
         // Before hydration, assume locked (except lesson one) so the page
@@ -68,6 +76,7 @@ export default function TrainingSeries({ lessons }: { lessons: readonly Lesson[]
             unlocked={unlocked}
             watched={isWatched}
             lockedOn={previous?.title}
+            titleClassName={titleClassName}
             onEnded={() => markWatched(lesson.id)}
           />
         );
@@ -82,6 +91,7 @@ function LessonCard({
   unlocked,
   watched,
   lockedOn,
+  titleClassName,
   onEnded,
 }: {
   number: number;
@@ -89,29 +99,59 @@ function LessonCard({
   unlocked: boolean;
   watched: boolean;
   lockedOn?: string;
+  titleClassName?: string;
   onEnded: () => void;
 }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const goFullSize = useCallback(() => {
+    const el = videoRef.current as (HTMLVideoElement & { webkitEnterFullscreen?: () => void }) | null;
+    if (!el) return;
+    if (el.requestFullscreen) el.requestFullscreen();
+    else if (el.webkitEnterFullscreen) el.webkitEnterFullscreen();
+  }, []);
+
   return (
     <div className="bg-canvas-soft px-8 py-10">
       <div className="flex flex-wrap items-baseline justify-between gap-3 mb-4">
-        <h2 className="text-[1.55rem] font-medium text-ink">
+        <h2 className={`${titleClassName ?? ""} text-[1.55rem] font-medium text-ink`}>
           {number}. {lesson.title}
         </h2>
-        {watched ? <span className="kicker text-olive">Watched</span> : null}
+        {watched ? <span className="kicker text-[#A80F4C]">Watched</span> : null}
       </div>
 
-      <p className="text-[1.08rem] text-taupe leading-[1.75] mb-6">{lesson.blurb}</p>
+      <p className="text-[1.08rem] text-taupe leading-[1.75] mb-6 min-h-[3.8rem]">{lesson.blurb}</p>
 
       {unlocked ? (
-        <video
-          className="w-full border border-hair"
-          controls
-          preload="metadata"
-          poster={lesson.poster}
-          onEnded={onEnded}
-        >
-          <source src={lesson.src} type="video/mp4" />
-        </video>
+        <div className="relative">
+          <video
+            ref={videoRef}
+            className="w-full border border-hair"
+            controls
+            preload="metadata"
+            poster={lesson.poster}
+            onEnded={onEnded}
+          >
+            <source src={lesson.src} type="video/mp4" />
+          </video>
+          <button
+            type="button"
+            onClick={goFullSize}
+            className="kicker absolute top-3 right-3 text-[0.68rem] tracking-[0.2em] text-canvas bg-ink/70 px-3 py-1.5 hover:bg-[#A80F4C] transition-colors"
+          >
+            Full size
+          </button>
+          {lesson.ctaHref ? (
+            <a
+              href={lesson.ctaHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="kicker mt-4 inline-block text-[#A80F4C] hover:text-ink transition-colors"
+            >
+              {lesson.ctaLabel ?? "Get the link"} →
+            </a>
+          ) : null}
+        </div>
       ) : (
         <div
           className="relative w-full aspect-video border border-hair overflow-hidden"
