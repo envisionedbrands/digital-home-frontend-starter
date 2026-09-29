@@ -15,6 +15,11 @@ export default function NavBar() {
   // rendering this bar too would stack two navs. /team-coppola ships its own header
   // from the approved handoff page for the same reason.
   const isHome = pathname === '/' || pathname.startsWith('/team-coppola');
+  // /invisible-team is a private, single-purpose lesson hub shared by direct
+  // link only — the marketing nav (About, Work Together, Clients, the Map
+  // CTA) has nowhere useful to send that visitor, so this route keeps only
+  // the logo, per MI 2026-09-29.
+  const isMinimal = pathname.startsWith('/invisible-team');
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -42,44 +47,46 @@ export default function NavBar() {
           </span>
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((link) =>
-            link.href.startsWith('http') ? (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-[1rem] text-taupe hover:text-ink transition-colors"
-              >
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-[1rem] transition-colors ${
-                  !link.href.includes('#') && pathname.startsWith(link.href)
-                    ? 'text-ink border-b border-olive'
-                    : 'text-taupe hover:text-ink'
-                }`}
-              >
-                {link.label}
-              </Link>
-            )
-          )}
-          <a
-            href={STUDIO.href}
-            className="text-[0.85rem] text-taupe hover:text-ink transition-colors tracking-[0.04em]"
-            title="Client login"
-          >
-            {STUDIO.label}
-          </a>
-          <a
-            href={PRIMARY_CTA.href}
-            className="whitespace-nowrap text-[0.95rem] bg-olive text-canvas px-7 py-2.5 hover:bg-olive-deep transition-colors tracking-[0.04em]"
-          >
-            {PRIMARY_CTA.label}
-          </a>
-        </div>
+        {isMinimal ? null : (
+          <div className="hidden md:flex items-center gap-8">
+            {NAV_LINKS.map((link) =>
+              link.href.startsWith('http') ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-[1rem] text-taupe hover:text-ink transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-[1rem] transition-colors ${
+                    !link.href.includes('#') && pathname.startsWith(link.href)
+                      ? 'text-ink border-b border-olive'
+                      : 'text-taupe hover:text-ink'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
+            <a
+              href={STUDIO.href}
+              className="text-[0.85rem] text-taupe hover:text-ink transition-colors tracking-[0.04em]"
+              title="Client login"
+            >
+              {STUDIO.label}
+            </a>
+            <a
+              href={PRIMARY_CTA.href}
+              className="whitespace-nowrap text-[0.95rem] bg-olive text-canvas px-7 py-2.5 hover:bg-olive-deep transition-colors tracking-[0.04em]"
+            >
+              {PRIMARY_CTA.label}
+            </a>
+          </div>
+        )}
       </div>
     </nav>
   );
