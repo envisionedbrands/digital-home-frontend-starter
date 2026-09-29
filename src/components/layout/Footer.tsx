@@ -14,10 +14,15 @@ import { FOOTER_GROUPS } from '@/lib/nav';
  */
 export default function Footer() {
   // Hidden on the homepage — it ends in its own Chronicle-style footer band.
-  // Also hidden on /team-coppola — the approved handoff page ships its own header
-  // and footer and is not meant to nest inside the main site chrome.
+  // Also hidden on /team-coppola and /coppola — both ship their own header
+  // and footer and are not meant to nest inside the main site chrome.
   const pathname = usePathname();
-  if (pathname === '/' || pathname.startsWith('/team-coppola')) return null;
+  if (
+    pathname === '/' ||
+    pathname.startsWith('/team-coppola') ||
+    pathname.startsWith('/coppola')
+  )
+    return null;
 
   return (
     <footer className="border-t border-hair px-6 py-14 mt-8">

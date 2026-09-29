@@ -13,8 +13,11 @@ export default function NavBar() {
 
   // The homepage carries its own Chronicle-style masthead (src/app/page.tsx);
   // rendering this bar too would stack two navs. /team-coppola ships its own header
-  // from the approved handoff page for the same reason.
-  const isHome = pathname === '/' || pathname.startsWith('/team-coppola');
+  // from the approved handoff page for the same reason. /coppola (the Video
+  // Editing Menu, 2026-09-29) is the same case: a verbatim extraction of an
+  // approved artifact with its own <h1> and footer.
+  const isHome =
+    pathname === '/' || pathname.startsWith('/team-coppola') || pathname.startsWith('/coppola');
   // /invisible-team is a private, single-purpose lesson hub shared by direct
   // link only — the marketing nav (About, Work Together, Clients, the Map
   // CTA) has nowhere useful to send that visitor, so this route keeps only
