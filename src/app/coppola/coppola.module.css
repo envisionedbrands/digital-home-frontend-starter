@@ -1,0 +1,12 @@
+/* Local token override, not a change to the shared repo palette (still
+   Megante/olive everywhere else). Same formula as invisible-team.module.css:
+   ink, taupe and canvas move to the oxblood/mauve family so the page matches
+   the live envisioned.me light theme without touching shared tokens. */
+.brand {
+  --ink: #2d0917;
+  --ink-soft: #6e4b58;
+  --taupe: #6e4b58;
+  --canvas: #f4f0ee;
+  --canvas-soft: color-mix(in oklab, #f4f0ee 92%, #2d0917 8%);
+  --hair: color-mix(in oklab, #2d0917 12%, transparent);
+}
