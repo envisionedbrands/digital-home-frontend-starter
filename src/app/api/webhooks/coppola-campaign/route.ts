@@ -32,11 +32,16 @@ import { signedCrmPost } from "@/lib/crm/backend";
 const COPPOLA_PRODUCT_ID = 1241346;
 const FOUNDING_PRICE_CENTS = 29700; // €297.00 — only the locked/COPPOLA checkout lands here
 const KV_KEY = "coppola-open-studio:founding-redemptions";
-// draft until MI answers Decision 2 (time/format) and the workflow's
-// [[TIME + FORMAT]] placeholder is filled in — see PLANS/COPPOLA_EVERGREEN_SWITCH_CHECKLIST.md.
-// The capture endpoint only enrolls into an *active* workflow, so leaving
-// this as a draft is what keeps the confirmation email from firing early.
-const BOOKING_CONFIRMATION_WORKFLOW_ID = "06eeed63-a856-40bb-b380-02b8a7ee2dee";
+// Two different confirmation emails, picked by price (Carrie, 2026-09-30: the
+// session-dated email must never reach an evergreen buyer — same wrong
+// promise the old eleventh-person copy made). Founding stays draft until MI
+// answers Decision 2 (time/format) and its [[TIME + FORMAT]] placeholder is
+// filled in — see PLANS/COPPOLA_EVERGREEN_SWITCH_CHECKLIST.md. The capture
+// endpoint only enrolls into an *active* workflow, so leaving it draft is
+// what keeps that email from firing early. Evergreen has no dates, so it's
+// active now — safe any time a non-founding-price Coppola order lands.
+const BOOKING_CONFIRMATION_WORKFLOW_ID = "06eeed63-a856-40bb-b380-02b8a7ee2dee"; // draft
+const EVERGREEN_CONFIRMATION_WORKFLOW_ID = "5fa5dba5-77b3-4999-a7fb-5dd3fdbb3ea7"; // active
 
 type KVNamespace = {
   get: (key: string) => Promise<string | null>;
@@ -140,7 +145,7 @@ export async function POST(request: NextRequest) {
           order_id: payload.data?.id ?? "",
           order_total_cents: String(attrs?.total ?? ""),
         },
-        workflow_id: BOOKING_CONFIRMATION_WORKFLOW_ID,
+        workflow_id: isFounding ? BOOKING_CONFIRMATION_WORKFLOW_ID : EVERGREEN_CONFIRMATION_WORKFLOW_ID,
       });
       leadCaptured = res.ok;
       if (!res.ok) {
