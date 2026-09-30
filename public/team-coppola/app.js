@@ -3,6 +3,12 @@ const roles={video:{title:'Hire Coppola',intro:'Your Video Editor starts with yo
 const dialog=document.getElementById('hire-dialog');let lastTrigger=null;let currentRole=null;
 for(const button of document.querySelectorAll('[data-role]'))button.addEventListener('click',()=>{currentRole=roles[button.dataset.role];lastTrigger=button;document.getElementById('hire-title').textContent=currentRole.title;document.getElementById('hire-intro').textContent=currentRole.intro;document.getElementById('license-key').value='';document.getElementById('starter').textContent=currentRole.message;document.getElementById('download-note').textContent=currentRole.note;document.getElementById('notice').textContent='';document.getElementById('copy').textContent='Copy message';dialog.showModal();});
 document.querySelector('.close').addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>lastTrigger?.focus());
+
+// Deep link for a single-purpose flow (e.g. the Open Studio prep page) to open
+// straight to one hire card instead of asking the visitor to find it among the
+// whole team. ?hire=video opens the same dialog the "Hire Coppola" button does.
+const deepLinkRole=new URLSearchParams(location.search).get('hire');
+if(deepLinkRole)document.querySelector(`[data-role="${deepLinkRole}"]`)?.click();
 document.getElementById('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(document.getElementById('starter').textContent);document.getElementById('copy').textContent='Copied';}catch{document.getElementById('notice').textContent='Select and copy the message above, then paste it into Buzz.';}});
 
 document.getElementById('download').addEventListener('click',async()=>{
