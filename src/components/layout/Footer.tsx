@@ -15,12 +15,15 @@ import { FOOTER_GROUPS } from '@/lib/nav';
 export default function Footer() {
   // Hidden on the homepage — it ends in its own Chronicle-style footer band.
   // Also hidden on /team-coppola and /coppola — both ship their own header
-  // and footer and are not meant to nest inside the main site chrome.
+  // and footer and are not meant to nest inside the main site chrome. Same
+  // for /open-studio (2026-09-30): a four-column footer full of links is
+  // another exit on a page that exists to do one thing.
   const pathname = usePathname();
   if (
     pathname === '/' ||
     pathname.startsWith('/team-coppola') ||
-    pathname.startsWith('/coppola')
+    pathname.startsWith('/coppola') ||
+    pathname.startsWith('/open-studio')
   )
     return null;
 

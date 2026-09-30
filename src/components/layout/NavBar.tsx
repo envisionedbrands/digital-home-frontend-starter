@@ -15,9 +15,15 @@ export default function NavBar() {
   // rendering this bar too would stack two navs. /team-coppola ships its own header
   // from the approved handoff page for the same reason. /coppola (the Video
   // Editing Menu, 2026-09-29) is the same case: a verbatim extraction of an
-  // approved artifact with its own <h1> and footer.
+  // approved artifact with its own <h1> and footer. /open-studio (2026-09-30,
+  // Chandler's structural review) is fed entirely by DM/email/ads for one
+  // paid CTA — the marketing nav is five competing exits above the fold on a
+  // page that should have exactly one way forward.
   const isHome =
-    pathname === '/' || pathname.startsWith('/team-coppola') || pathname.startsWith('/coppola');
+    pathname === '/' ||
+    pathname.startsWith('/team-coppola') ||
+    pathname.startsWith('/coppola') ||
+    pathname.startsWith('/open-studio');
   // /invisible-team is a private, single-purpose lesson hub shared by direct
   // link only — the marketing nav (About, Work Together, Clients, the Map
   // CTA) has nowhere useful to send that visitor, so this route keeps only
