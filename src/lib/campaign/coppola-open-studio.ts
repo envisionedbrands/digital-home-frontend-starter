@@ -20,9 +20,15 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
 // Locked checkout: COPPOLA pre-applied (€497 -> €297), discount box hidden.
+// Reissued 2026-09-30 by Miranda (Commerce Manager) with a checkout-level
+// expiry of Thu 8 Oct 2026, 23:59:59 London time (2026-10-08T22:59:59Z) —
+// the old c081f229 link has no expiry and must not be used again. Note the
+// expiry only closes this link; the COPPOLA code itself still needs its own
+// expiry added (pending MI approval) or it keeps working on the plain buy
+// link and on the ten other no-expiry preview checkouts from 2026-09-23.
 // Switch to the fallback below the moment the founding ten sell out.
 export const CURRENT_CHECKOUT_URL =
-  "https://shop.envisioned.me/checkout/custom/c081f229-a685-462e-9d27-0e7c491d6763?signature=feb37fec66d3146ab447002923bf14e748f2fb88aa8a7a2f589ba41c3acb3e45";
+  "https://shop.envisioned.me/checkout/custom/723c83fe-4bec-4181-aea6-aaf2ccc672a3?expires=1791500399&signature=f1aa48f92e0d7958d8f7c760f814b9bb8f201a75062a901844435ff8398c6dbf";
 
 // Fallback: plain €497, no discount code baked in, no discount box to
 // exploit. Built and verified by Ledger 2026-09-23. Swap CURRENT_CHECKOUT_URL
