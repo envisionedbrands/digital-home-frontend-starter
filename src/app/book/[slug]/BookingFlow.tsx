@@ -255,6 +255,52 @@ export default function BookingFlow({ eventType, ownerTimezone }: Props) {
         )}
       </div>
 
+      {/* Timezone — first, before the calendar, so times are never read in the wrong zone */}
+      <div className="mt-8 border-t border-[color:var(--hair)] pt-6">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <label className="text-[1.15rem] font-semibold text-[color:var(--ink)]" htmlFor="bk-tz">
+            Please select your time zone first
+          </label>
+          <div
+            role="group"
+            aria-label="Time format"
+            className="flex border border-[color:var(--stone-deep)]"
+          >
+            {([[false, '24h'], [true, '12h']] as const).map(([mode, label]) => (
+              <button
+                key={label}
+                type="button"
+                aria-pressed={hour12 === mode}
+                onClick={() => setHour12(mode)}
+                className={`kicker px-3.5 py-2 transition-colors ${
+                  hour12 === mode
+                    ? 'bg-[color:var(--ink)] text-[color:var(--canvas)]'
+                    : 'text-[color:var(--taupe)] hover:text-[color:var(--ink)]'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <select
+          id="bk-tz"
+          value={tz}
+          onChange={(e) => {
+            setTz(e.target.value);
+            setDay(null);
+            setChosen(null);
+          }}
+          className="mt-2 w-full max-w-[26em] border border-[color:var(--stone-deep)] bg-transparent px-4 py-3 text-[0.98rem] focus:border-[color:var(--olive)] focus:outline-none"
+        >
+          {Array.from(new Set([tz, ...TZ_CHOICES])).map((z) => (
+            <option key={z} value={z}>
+              {z} ({offsetLabel(z)})
+            </option>
+          ))}
+        </select>
+      </div>
+
       {slots === null && (
         <p className="mt-8 text-[color:var(--taupe)]">Finding openings…</p>
       )}
@@ -356,54 +402,6 @@ export default function BookingFlow({ eventType, ownerTimezone }: Props) {
               </button>
             ))}
           </div>
-        </div>
-      )}
-
-      {/* Timezone */}
-      {(slots?.length ?? 0) > 0 && (
-        <div className="mt-10 border-t border-[color:var(--hair)] pt-5">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <label className="kicker block text-[color:var(--taupe)]" htmlFor="bk-tz">
-              Time zone
-            </label>
-            <div
-              role="group"
-              aria-label="Time format"
-              className="flex border border-[color:var(--stone-deep)]"
-            >
-              {([[false, '24h'], [true, '12h']] as const).map(([mode, label]) => (
-                <button
-                  key={label}
-                  type="button"
-                  aria-pressed={hour12 === mode}
-                  onClick={() => setHour12(mode)}
-                  className={`kicker px-3.5 py-2 transition-colors ${
-                    hour12 === mode
-                      ? 'bg-[color:var(--ink)] text-[color:var(--canvas)]'
-                      : 'text-[color:var(--taupe)] hover:text-[color:var(--ink)]'
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
-          <select
-            id="bk-tz"
-            value={tz}
-            onChange={(e) => {
-              setTz(e.target.value);
-              setDay(null);
-              setChosen(null);
-            }}
-            className="mt-2 w-full max-w-[26em] border border-[color:var(--stone-deep)] bg-transparent px-4 py-3 text-[0.98rem] focus:border-[color:var(--olive)] focus:outline-none"
-          >
-            {Array.from(new Set([tz, ...TZ_CHOICES])).map((z) => (
-              <option key={z} value={z}>
-                {z} ({offsetLabel(z)})
-              </option>
-            ))}
-          </select>
         </div>
       )}
 
