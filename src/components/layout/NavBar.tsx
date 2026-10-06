@@ -1,12 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
-import { NAV_ITEMS, STUDIO, PRIMARY_CTA } from '@/lib/nav';
-
-const NAV_LINKS = NAV_ITEMS.map((i) => ({ href: i.href, label: i.label }));
 
 export default function NavBar() {
   const pathname = usePathname();
@@ -24,11 +19,6 @@ export default function NavBar() {
     pathname.startsWith('/team-coppola') ||
     pathname.startsWith('/coppola') ||
     pathname.startsWith('/open-studio');
-  // /invisible-team is a private, single-purpose lesson hub shared by direct
-  // link only — the marketing nav (About, Work Together, Clients, the Map
-  // CTA) has nowhere useful to send that visitor, so this route keeps only
-  // the logo, per MI 2026-09-29.
-  const isMinimal = pathname.startsWith('/invisible-team');
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -55,47 +45,6 @@ export default function NavBar() {
             Envisioned
           </span>
         </a>
-
-        {isMinimal ? null : (
-          <div className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map((link) =>
-              link.href.startsWith('http') ? (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-[1rem] text-taupe hover:text-ink transition-colors"
-                >
-                  {link.label}
-                </a>
-              ) : (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`text-[1rem] transition-colors ${
-                    !link.href.includes('#') && pathname.startsWith(link.href)
-                      ? 'text-ink border-b border-olive'
-                      : 'text-taupe hover:text-ink'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              )
-            )}
-            <a
-              href={STUDIO.href}
-              className="text-[0.85rem] text-taupe hover:text-ink transition-colors tracking-[0.04em]"
-              title="Client login"
-            >
-              {STUDIO.label}
-            </a>
-            <a
-              href={PRIMARY_CTA.href}
-              className="whitespace-nowrap text-[0.95rem] bg-olive text-canvas px-7 py-2.5 hover:bg-olive-deep transition-colors tracking-[0.04em]"
-            >
-              {PRIMARY_CTA.label}
-            </a>
-          </div>
-        )}
       </div>
     </nav>
   );

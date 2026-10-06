@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import HomeFx from '@/components/home-fx';
-import { NAV_LEFT, NAV_RIGHT, STUDIO, PRIMARY_CTA, FOOTER_GROUPS } from '@/lib/nav';
+import { FOOTER_GROUPS } from '@/lib/nav';
 
 /**
  * Homepage — the Chronicle front page (chronicle.northfolk.co, a Showit
@@ -177,36 +177,12 @@ export default function HomePage() {
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <HomeFx />
 
-      {/* ── Masthead — ink band, numbered nav ───────────────────────── */}
+      {/* ── Masthead — ink band, logo only ──────────────────────────── */}
       <header className="masthead fixed inset-x-0 top-0 z-50 bg-[color:var(--char)] text-[#FBFAF9]">
-        <div className="relative mx-auto grid h-[64px] max-w-[1360px] grid-cols-[1fr_auto_1fr] items-center gap-6 px-6">
-          <nav className="hidden items-center justify-end gap-8 pr-8 lg:flex">
-            {NAV_LEFT.map(({ n, label, href }) => (
-              <a key={label} href={href} className="lbl flex items-baseline gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
-                <span className="text-[0.6rem] text-[#FBFAF9]/50">{n}</span>
-                {label}
-              </a>
-            ))}
-          </nav>
-          <a href="#top" aria-label="Envisioned by Maria-Ines — back to top" className="justify-self-center">
+        <div className="relative mx-auto flex h-[64px] max-w-[1360px] items-center justify-center px-6">
+          <a href="#top" aria-label="Envisioned by Maria-Ines — back to top">
             <Image src="/img/logo-envisioned-white.png" alt="" width={150} height={54} className="h-[36px] w-auto" />
           </a>
-          <div className="flex items-center justify-start gap-6 pl-8">
-            <nav className="hidden items-center gap-6 lg:flex">
-              {NAV_RIGHT.map(({ n, label, href }) => (
-                <a key={label} href={href} className="lbl flex items-baseline gap-2 text-[#FBFAF9]/85 transition-colors hover:text-[#FBFAF9]">
-                  <span className="text-[0.6rem] text-[#FBFAF9]/50">{n}</span>
-                  {label}
-                </a>
-              ))}
-            </nav>
-            <a href={STUDIO.href} title="Client login" className="lbl text-[#FBFAF9]/55 transition-colors hover:text-[#FBFAF9]">
-              {STUDIO.label}
-            </a>
-            <a href={PRIMARY_CTA.href} className="lbl whitespace-nowrap bg-[color:var(--ox)] px-4 py-2.5 text-[#FBFAF9] transition-opacity hover:opacity-90">
-              {PRIMARY_CTA.label}
-            </a>
-          </div>
         </div>
       </header>
 
